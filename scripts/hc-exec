@@ -1,0 +1,38 @@
+#! /bin/bash
+
+if [ a$HIPCHAT_AUTH_TOKEN = "a" ]
+then
+   echo "HIPCHAT_AUTH_TOKEN not set"
+   exit 
+fi
+
+
+API_URL="https://api.hipchat.com/v1"
+
+if [ a$1 = "a" ]
+then
+   echo "usage: $1 target/action [api parameters]"
+   echo "example: hc-exec room/list"
+   echo "example: hc-exec room/message room_id=123&from=test&notify=0"
+   exit
+fi
+
+API_ACTION=$1
+API_QSTRINGS="auth_token=$HIPCHAT_AUTH_TOKEN"
+
+if [ a$2 != "a" ]
+then
+#TODO: Fugly. Clean this up. 
+   if [ $API_ACTION = "rooms/show" ]
+   then
+      API_QSTRINGS=$API_QSTRINGS+"$2"  
+   else
+      API_PARAMETERS="--data $2"
+   fi
+fi
+
+
+
+EXEC_URL=$API_URL/$API_ACTION?$API_QSTRINGS 
+
+curl -k $EXEC_URL $API_PARAMETERS
