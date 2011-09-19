@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using LibHipChat.Entities;
 
-namespace LibHipChat
+namespace LibHipChat.Entities
 {
     public class Room
     {
