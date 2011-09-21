@@ -3,7 +3,10 @@ namespace LibHipChat
 {
     public enum ActionKey
     {
+        CreateRoom,
         ListRooms,
-        ListUsers
+        CreateUser,
+        DeleteUser,
+        ListUsers            
     }
 }

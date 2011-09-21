@@ -13,12 +13,18 @@ namespace LibHipChat
 
             
         }
+
+        public WebClient(HttpWebRequest request)
+        {
+            _webRequest = request;
+        }
         
         public HttpWebRequest CreateWebRequest ()
         {
             //TODO: Append rest url somehow
             var requestUrl = _apiBaseUrl;
             var request = (HttpWebRequest)WebRequest.Create(requestUrl);
+            
             return request;
         }
     }
