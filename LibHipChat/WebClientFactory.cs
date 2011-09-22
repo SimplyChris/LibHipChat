@@ -1,19 +1,21 @@
 ﻿using System;
+using System.Collections;
 using System.Net;
 
 namespace LibHipChat
 {
     public class WebClientFactory
     {
-        public WebClient CreateWebClient(String baseApiUrl, ActionKey action)
-        {
-            var actionUrl = string.Empty;
-            var actionMethod = string.Empty;
-            //TODO: Put this into a domain object
-            string postActionMethod = "POST";
-            string getActionMethod = "GET";
+        public HipChatClient CreateWebClient(String baseApiUrl, ActionKey action, IDictionary queryParams)
+        {                       
+            string actionUrl;
+            string actionMethod;
 
-            //TODO: Don't use switch. Implement a strategy
+            //TODO: Put this into a domain object
+            const string postActionMethod = "POST";
+            const string getActionMethod = "GET";
+
+            //TODO: Don't use switch. Implement a strategy (for get vs post also?)
             switch (action)
             {
                 case ActionKey.ListRooms:
@@ -35,7 +37,7 @@ namespace LibHipChat
             
             var request = (HttpWebRequest) WebRequest.Create(apiUrl);
             request.Method = actionMethod;            
-            return new WebClient(request);
+            return new HipChatClient(request);
         }
     }
 }
