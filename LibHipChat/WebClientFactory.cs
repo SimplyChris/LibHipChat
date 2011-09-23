@@ -10,7 +10,7 @@ namespace LibHipChat
         {                       
             string actionUrl;
             string actionMethod;
-
+                        
             //TODO: Put this into a domain object
             const string postActionMethod = "POST";
             const string getActionMethod = "GET";

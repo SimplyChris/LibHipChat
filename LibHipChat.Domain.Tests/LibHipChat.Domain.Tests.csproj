@@ -46,6 +46,12 @@
     <Compile Include="HipChatClientTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\LibHipChat\LibHipChat.Domain.csproj">
+      <Project>{D0CE025C-BB76-4ED2-98CC-9E47098301E6}</Project>
+      <Name>LibHipChat.Domain</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
