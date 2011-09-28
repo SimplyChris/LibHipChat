@@ -10,7 +10,6 @@ namespace LibHipChat
 
         public HipChatClient ()
         {
-
             
         }
 

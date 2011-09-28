@@ -11,21 +11,21 @@ using NUnit.Framework.Constraints;
 namespace LibHipChat.Domain.Tests
 {
     [TestFixture]
-    public class HipChatClientTests
+    public class HipChatContextTests
     {
         private QueryStringHelper _queryStringHelper;
 
         [SetUp]
         public void Setup ()
-        {
-            _queryStringHelper = new QueryStringHelper();
+        {            
+            _queryStringHelper = new QueryStringHelper();            
         }
 
         [Test]
         public void querystringhelper_should_throw_exception_when_adding_duplicate_key ()
         {
 
-            _queryStringHelper.Add("auth_token", "12345");           
+            _queryStringHelper.Add("auth_token", "12345");                     
                         
             Assert.Throws(typeof(Exception),() => _queryStringHelper.Add("auth_token", "56789"));
         }
@@ -47,6 +47,15 @@ namespace LibHipChat.Domain.Tests
             _queryStringHelper.Add("format", "xml");
 
             Assert.That(_queryStringHelper.HtmlStringValue, Is.EqualTo(expectedValue));
+
+        }
+
+        [Test]
+        public void hipchatcontext_should_build_correct_query_string_suffic ()
+        {
+            const string expectedValue = "?auth_token=12345&format=xml";
+            
+
 
         }
     }
