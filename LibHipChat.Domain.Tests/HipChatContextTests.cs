@@ -14,11 +14,12 @@ namespace LibHipChat.Domain.Tests
     public class HipChatContextTests
     {
         private QueryStringHelper _queryStringHelper;
+        private HipChatContext _context;
 
         [SetUp]
         public void Setup ()
         {            
-            _queryStringHelper = new QueryStringHelper();            
+            _queryStringHelper = new QueryStringHelper();                        
         }
 
         [Test]
@@ -55,7 +56,7 @@ namespace LibHipChat.Domain.Tests
         {
             const string expectedValue = "?auth_token=12345&format=xml";
             
-
+            
 
         }
     }

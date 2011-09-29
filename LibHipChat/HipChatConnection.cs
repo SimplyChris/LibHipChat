@@ -5,13 +5,13 @@ namespace LibHipChat
 {
     public class HipChatConnection
     {
-        private HttpWebRequest _webRequest;   
+        private HttpWebRequest _webRequest;
+
+        public String ConnectionUrl { get { return _webRequest.RequestUri.ToString(); } }
 
         public HipChatConnection (String baseApiUrl, HipChatContext context)
         {
-            _webRequest = CreateWebRequest(baseApiUrl, context);
-
-
+            _webRequest = CreateWebRequest(baseApiUrl, context);            
         }
 
         private HttpWebRequest CreateWebRequest (String baseApiUrl, HipChatContext context)
