@@ -17,6 +17,7 @@ namespace LibHipChat
         public HipChatConnection Create(ActionKey action)
         {
             var connection = new HipChatConnection(_baseUrl, CreateContext(action));
+            
             return connection;
         }
 

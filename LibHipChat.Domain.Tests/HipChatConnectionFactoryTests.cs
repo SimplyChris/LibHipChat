@@ -7,7 +7,7 @@ namespace LibHipChat.Domain.Tests
     {
         private HipChatConnectionFactory _connectionFactory;
         private const string _apiKey = "TheApiKey";
-        private const string _baseApiUrl = "https://api.hipchat.com/v1";
+        private const string _baseApiUrl = "https://api.hipchat.com/v1/";
         [SetUp]
         public void Setup ()
         {
@@ -17,9 +17,13 @@ namespace LibHipChat.Domain.Tests
         [Test]
         public void should_get_valid_complete_api_url_from_connection_factory ()
         {
+            const string expectedUrl = _baseApiUrl + "users/list" + "?format=xml" + "&auth_token=" + _apiKey; 
             var connection = _connectionFactory.Create(ActionKey.ListUsers);
 
+
             var url = connection.ConnectionUrl;
+
+            Assert.That(url, Is.EqualTo(expectedUrl));
         }
 
     }
