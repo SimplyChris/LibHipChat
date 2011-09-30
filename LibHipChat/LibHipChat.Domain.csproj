@@ -31,6 +31,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="nunit.framework">
+      <HintPath>..\lib\nunit.framework.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -46,6 +49,7 @@
     <Compile Include="Helpers\QueryStringHelper.cs" />
     <Compile Include="Helpers\UrlHelper.cs" />
     <Compile Include="HipChatConnection.cs" />
+    <Compile Include="HipChatConnectionTests.cs" />
     <Compile Include="HipChatContext.cs" />
     <Compile Include="HipChatConnectionFactory.cs" />
     <Compile Include="HipChatResponseFormat.cs" />
