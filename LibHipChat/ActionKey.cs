@@ -7,6 +7,7 @@ namespace LibHipChat
         ListRooms,
         CreateUser,
         DeleteUser,
-        ListUsers            
+        ListUsers,
+        MessageRoom    
     }
 }

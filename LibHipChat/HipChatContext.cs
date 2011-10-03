@@ -30,7 +30,5 @@ namespace LibHipChat
             helper.Add("auth_token", _apiKey);
             return helper.HtmlStringValue;
         }
-
-
     }
 }

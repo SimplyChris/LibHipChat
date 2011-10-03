@@ -26,7 +26,17 @@ namespace LibHipChat
             _stream = response.GetResponseStream();
             return _stream;
         }
-                
+
+        public HttpWebRequest GetRequest ()
+        {
+            return _webRequest;
+        }
+
+        public new Stream GetRequestStream ()
+        {            
+            return _webRequest.GetRequestStream();
+        }
+        
         private HttpWebRequest CreateWebRequest (String baseApiUrl, HipChatContext context)
         {
             var apiUrl = new Uri(new Uri(baseApiUrl), UrlHelper.GetActionUrl(context.Action) + context.BuildQueryString());

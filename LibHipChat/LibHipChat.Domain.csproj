@@ -36,6 +36,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -48,13 +49,15 @@
     <Compile Include="Entities\User.cs" />
     <Compile Include="Helpers\QueryStringHelper.cs" />
     <Compile Include="Helpers\UrlHelper.cs" />
+    <Compile Include="HipChatApiExecutor.cs" />
     <Compile Include="HipChatConnection.cs" />
-    <Compile Include="HipChatConnectionReader.cs" />
     <Compile Include="HipChatContext.cs" />
     <Compile Include="HipChatConnectionFactory.cs" />
     <Compile Include="HipChatResponseFormat.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="HipChatClient.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Proxy\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

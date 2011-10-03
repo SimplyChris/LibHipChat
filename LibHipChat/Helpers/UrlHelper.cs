@@ -17,7 +17,11 @@ namespace LibHipChat.Helpers
                 case ActionKey.ListUsers:
                     actionUrl = "users/list";
                     break;
-
+                    
+                case ActionKey.MessageRoom:
+                    actionUrl = "rooms/message";
+                    break;
+                    
                 //TODO: Create a custom HipChapException Type                
                 default:
                     throw new NotImplementedException(String.Format("NotImplementedException: {0}", action.ToString()));
@@ -34,6 +38,10 @@ namespace LibHipChat.Helpers
                 case ActionKey.ListRooms:
                 case ActionKey.ListUsers:
                     actionMethod = "GET";
+                    break;
+
+                case ActionKey.MessageRoom:
+                    actionMethod = "POST";
                     break;
 
                 default:

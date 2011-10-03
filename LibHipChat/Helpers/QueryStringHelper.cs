@@ -18,6 +18,11 @@ namespace LibHipChat.Helpers
             get { return GetHtmlStringValue(); }
         }
 
+        public String PostStringValue
+        {
+            get { return GetPostStringValue(); }
+        }
+
         public QueryStringHelper ()
         {
             _dictionary = new Dictionary<string,string>();
@@ -49,6 +54,23 @@ namespace LibHipChat.Helpers
                     htmlString += "&";
 
                 htmlString += String.Format("{0}={1}", entry.Key, entry.Value);                
+            }
+            return htmlString;
+        }
+
+        private String GetPostStringValue()
+        {
+            if (_dictionary.Count == 0)
+                return String.Empty;
+
+            var htmlString = String.Empty;
+
+            foreach (KeyValuePair<String, String> entry in (Dictionary<String, String>)_dictionary)
+            {
+                if (htmlString.Length > 0)
+                    htmlString += "&";
+
+                htmlString += String.Format("{0}={1}", entry.Key, entry.Value);
             }
             return htmlString;
         }

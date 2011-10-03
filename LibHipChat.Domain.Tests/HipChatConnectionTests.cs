@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using System.Collections.Generic;
+using NUnit.Framework;
 
 namespace LibHipChat
 {
@@ -21,11 +22,9 @@ namespace LibHipChat
         {
             _connection = _connectionFactory.Create(ActionKey.ListUsers);
 
-            var reader = new HipChatConnectionReader(_connection);
-
+            var reader = new HipChatApiExecutor(_connection);
             var response = reader.GetResponseString();
             
-
         }
 
         [Test]
@@ -33,9 +32,32 @@ namespace LibHipChat
         {
             _connection = _connectionFactory.Create(ActionKey.ListRooms);
 
-            var reader = new HipChatConnectionReader(_connection);
+            var reader = new HipChatApiExecutor(_connection);
 
             var response = reader.GetResponseString();            
         }
+
+        [Test]
+        public void should_be_able_to_message_room ()
+        {
+            _connection = _connectionFactory.Create(ActionKey.MessageRoom);
+
+            var actionParms = new Dictionary<string, string>();
+
+            actionParms.Add("room_id", "30937");
+            actionParms.Add("from", "Test");
+            actionParms.Add("message", "Test Message. This is one.");
+
+            var executer = new HipChatApiExecutor(_connection, actionParms);
+
+            executer.WriteActionParms();
+                        
+            var response = executer.GetResponseString();
+
+            Assert.That(response.Contains(">sent<"), Is.True);
+        }
+
+
+
     }
 }
