@@ -19,15 +19,23 @@ namespace LibHipChat
         [Test]
         public void should_be_able_to_execute_listusers ()
         {
-            _connection = _connectionFactory.Create(ActionKey.ListUsers);            
-            var response = _connection.Execute();
+            _connection = _connectionFactory.Create(ActionKey.ListUsers);
+
+            var reader = new HipChatConnectionReader(_connection);
+
+            var response = reader.GetResponseString();
+            
+
         }
 
         [Test]
         public void should_be_able_to_execute_listrooms ()
         {
             _connection = _connectionFactory.Create(ActionKey.ListRooms);
-            var response = _connection.Execute();
+
+            var reader = new HipChatConnectionReader(_connection);
+
+            var response = reader.GetResponseString();            
         }
     }
 }

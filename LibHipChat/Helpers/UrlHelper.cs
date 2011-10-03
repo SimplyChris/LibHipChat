@@ -31,7 +31,6 @@ namespace LibHipChat.Helpers
 
             switch (action)
             {
-
                 case ActionKey.ListRooms:
                 case ActionKey.ListUsers:
                     actionMethod = "GET";

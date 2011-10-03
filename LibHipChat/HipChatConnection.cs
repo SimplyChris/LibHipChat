@@ -10,28 +10,23 @@ namespace LibHipChat
     {
         private HttpWebRequest _webRequest;
         private string _responseString = "";
-        
+        private Stream _stream;
         
         public String ConnectionUrl { get { return _webRequest.RequestUri.ToString(); } }
         public String Response { get { return _responseString; } }
-
+        
         public HipChatConnection (String baseApiUrl, HipChatContext context)
         {
             _webRequest = CreateWebRequest(baseApiUrl, context);
         }
-
-        public XDocument Execute ()
-        {
-            var response =  (HttpWebResponse)_webRequest.GetResponse();                        
-            var responseStream = response.GetResponseStream();
-            var reader = new StreamReader(responseStream);
-            _responseString = reader.ReadToEnd();
-
-            var xDoc = XDocument.Parse(_responseString);
-
-            return xDoc;
-        }
         
+        public Stream GetResponseStream ()
+        {
+            var response = (HttpWebResponse)_webRequest.GetResponse();            
+            _stream = response.GetResponseStream();
+            return _stream;
+        }
+                
         private HttpWebRequest CreateWebRequest (String baseApiUrl, HipChatContext context)
         {
             var apiUrl = new Uri(new Uri(baseApiUrl), UrlHelper.GetActionUrl(context.Action) + context.BuildQueryString());
