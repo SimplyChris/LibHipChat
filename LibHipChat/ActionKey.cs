@@ -8,6 +8,11 @@ namespace LibHipChat
         CreateUser,
         DeleteUser,
         ListUsers,
-        MessageRoom    
+        MessageRoom,
+        ShowRoom,
+        GetRoomHistory,        
+        DeleteRoom,
+        ShowUser,
+        UpdateUser
     }
 }

@@ -14,13 +14,47 @@ namespace LibHipChat.Helpers
                     actionUrl = "rooms/list";
                     break;
 
-                case ActionKey.ListUsers:
-                    actionUrl = "users/list";
+
+                case ActionKey.ShowRoom:
+                    actionUrl = "rooms/show";
                     break;
-                    
+
+                case ActionKey.CreateRoom:
+                    actionUrl = "rooms/create";
+                    break;
+
+                case ActionKey.DeleteRoom:
+                    actionUrl = "rooms/delete";
+                    break;
+                                    
                 case ActionKey.MessageRoom:
                     actionUrl = "rooms/message";
                     break;
+
+                case ActionKey.GetRoomHistory:
+                    actionUrl = "rooms/history";
+                    break;
+
+                case ActionKey.ListUsers:
+                    actionUrl = "users/list";
+                    break;
+
+                case ActionKey.ShowUser:
+                    actionUrl = "users/show";
+                    break;
+
+                case ActionKey.CreateUser:
+                    actionUrl = "users/create";
+                    break;
+
+                case ActionKey.DeleteUser:
+                    actionUrl = "users/delete";
+                    break;
+                    
+                case ActionKey.UpdateUser:
+                    actionUrl = "users/update";
+                    break;
+
                     
                 //TODO: Create a custom HipChapException Type                
                 default:

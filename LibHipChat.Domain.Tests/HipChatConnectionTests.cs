@@ -1,4 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Configuration;
+using System.Diagnostics;
+using LibHipChat.Helpers;
 using NUnit.Framework;
 
 namespace LibHipChat
@@ -8,12 +12,13 @@ namespace LibHipChat
     {
         private HipChatConnection _connection;
         private HipChatConnectionFactory _connectionFactory;
-        private const string apiKey = "fc571e6af2aa7dc9ddd99bc043c3a8";
-        private const string apiUrl = "https://api.hipchat.com/v1/";
+        private string apiKey;// = "fc571e6af2aa7dc9ddd99bc043c3a8";
+        private const string apiUrl = "http://api.hipchat.com/v1/";
 
         [SetUp]
         public void Setup ()
         {
+            apiKey = System.Configuration.ConfigurationSettings.AppSettings["HipChatApiKey"];
             _connectionFactory = new HipChatConnectionFactory(apiKey, apiUrl);
         }
 
@@ -24,7 +29,7 @@ namespace LibHipChat
 
             var reader = new HipChatApiExecutor(_connection);
             var response = reader.GetResponseString();
-            
+            Assert.That(response.ToLower().Contains("<users>"));
         }
 
         [Test]
@@ -33,23 +38,24 @@ namespace LibHipChat
             _connection = _connectionFactory.Create(ActionKey.ListRooms);
 
             var reader = new HipChatApiExecutor(_connection);
-
-            var response = reader.GetResponseString();            
+            var response = reader.GetResponseString();
+            Assert.That(response.ToLower().Contains("<rooms>"));
         }
+        
 
         [Test]
         public void should_be_able_to_message_room ()
         {
             _connection = _connectionFactory.Create(ActionKey.MessageRoom);
 
-            var actionParms = new Dictionary<string, string>();
-
-            actionParms.Add("room_id", "30937");
-            actionParms.Add("from", "Test");
-            actionParms.Add("message", "Test Message. This is one.");
+            var actionParms = new Dictionary<string, string>
+                                  {
+                                      {"room_id", "30937"},
+                                      {"from", "Test"},
+                                      {"message", string.Format("Integration Test Run At: {0}", DateTime.Now.ToString())}
+                                  };
 
             var executer = new HipChatApiExecutor(_connection, actionParms);
-
             executer.WriteActionParms();
                         
             var response = executer.GetResponseString();
@@ -57,7 +63,15 @@ namespace LibHipChat
             Assert.That(response.Contains(">sent<"), Is.True);
         }
 
-
-
+        [Test]
+        public void all_action_keys_should_return_an_action_url ()
+        {            
+            foreach (ActionKey action in Enum.GetValues(typeof(ActionKey)))
+            {                
+                Debug.WriteLine("Asserting Action: {0}", action.ToString());
+                Assert.DoesNotThrow(()=>UrlHelper.GetActionUrl(action), action.ToString());
+            }
+            
+        }
     }
 }
