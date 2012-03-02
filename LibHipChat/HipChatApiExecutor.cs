@@ -28,6 +28,7 @@ namespace LibHipChat
             var responseString = reader.ReadToEnd();
             return responseString;
         }
+       
 
         public void WriteActionParms ()
         {

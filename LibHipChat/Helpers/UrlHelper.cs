@@ -74,6 +74,7 @@ namespace LibHipChat.Helpers
                     actionMethod = "GET";
                     break;
 
+                case ActionKey.CreateUser:
                 case ActionKey.MessageRoom:
                     actionMethod = "POST";
                     break;

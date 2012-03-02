@@ -22,8 +22,21 @@ namespace LibHipChat
         
         public Stream GetResponseStream ()
         {
-            var response = (HttpWebResponse)_webRequest.GetResponse();            
-            _stream = response.GetResponseStream();
+            try
+            {
+               
+                var response = (HttpWebResponse)_webRequest.GetResponse();
+                _stream = response.GetResponseStream();
+            }
+            catch (WebException ex)
+            {
+                if (ex.Status == WebExceptionStatus.ProtocolError) {
+                    var response = (HttpWebResponse)ex.Response;
+
+                    _stream = response.GetResponseStream();
+                }                
+            }
+
             return _stream;
         }
 
