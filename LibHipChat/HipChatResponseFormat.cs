@@ -2,7 +2,7 @@
 {
     public enum HipChatResponseFormat
     {
-        XML,
-        JSON
+        Xml,
+        Json
     }
 }

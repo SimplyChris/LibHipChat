@@ -14,7 +14,7 @@ namespace LibHipChat
         public String BaseUrl { get; set; }
         public ActionKey Action { get; set; }
         
-        public HipChatContext (String baseApiUrl, String apiKey, ActionKey action, HipChatResponseFormat responseFormat = HipChatResponseFormat.XML  )
+        public HipChatContext (String baseApiUrl, String apiKey, ActionKey action, HipChatResponseFormat responseFormat = HipChatResponseFormat.Xml  )
         {
             _action = action;   
             _apiKey = apiKey;
