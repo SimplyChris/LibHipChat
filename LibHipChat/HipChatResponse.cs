@@ -1,8 +1,12 @@
-﻿namespace LibHipChat
+﻿using System;
+
+namespace LibHipChat
 {
     public class HipChatResponse
     {
-        private string _stringResponse;
+        public String ResponseString { get; set; }
+
+
 
     }
 }

@@ -29,20 +29,27 @@ namespace LibHipChat
             return responseString;
         }
        
-
-        public void WriteActionParms ()
+        
+        public HipChatResponse Execute ()
         {
-            var request = _connection.GetRequest();
+            WriteActionParms(_connection, _actionParms);
+            var response = new HipChatResponse() {ResponseString = GetResponseString()};
+            return response;
+        }
 
-            var helper = new QueryStringHelper();
-            
+        private void WriteActionParms (HipChatConnection connection, IEnumerable<KeyValuePair<string, string>> actionParms )
+        {
+            var request = connection.GetRequest();
 
-            foreach (var kvPair in _actionParms)
+            var queryStringHelper = new QueryStringHelper();
+
+
+            foreach (var kvPair in actionParms)
             {
-                helper.Add(kvPair.Key, HttpUtility.UrlEncode(kvPair.Value));
+                queryStringHelper.Add(kvPair.Key, HttpUtility.UrlEncode(kvPair.Value));
             }
 
-            var postString = helper.PostStringValue;
+            var postString = queryStringHelper.PostStringValue;
             var bytes = System.Text.Encoding.UTF8.GetBytes(postString);
 
             request.ContentType = "application/x-www-form-urlencoded";

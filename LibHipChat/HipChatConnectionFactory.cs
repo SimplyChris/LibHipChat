@@ -23,7 +23,7 @@ namespace LibHipChat
 
         private HipChatContext CreateContext (ActionKey action)
         {
-            return new HipChatContext(_baseUrl, _apiKey, action);
+            return new HipChatContext(_baseUrl, _apiKey, action, HipChatResponseFormat.Json);
         }
     }
 }               

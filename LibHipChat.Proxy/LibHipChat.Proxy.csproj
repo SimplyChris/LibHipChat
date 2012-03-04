@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{477BFC1E-D093-4984-8543-2CE57AFBDFD2}</ProjectGuid>
+    <ProjectGuid>{2E3F02F7-C1B3-4F0F-A59D-72DB4CBD8889}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>LibHipChat.Domain.Tests</RootNamespace>
-    <AssemblyName>LibHipChat.Domain.Tests</AssemblyName>
+    <RootNamespace>LipHipChat.Proxy</RootNamespace>
+    <AssemblyName>LipHipChat.Proxy</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -31,15 +31,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\packages\Newtonsoft.Json.4.0.8\lib\net40\Newtonsoft.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="nunit.framework">
-      <HintPath>..\lib\nunit.framework.dll</HintPath>
-    </Reference>
-    <Reference Include="Rhino.Mocks">
-      <HintPath>..\lib\Rhino.Mocks.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -49,26 +40,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="HipChatConnectionFactoryTests.cs" />
-    <Compile Include="HipChatConnectionTests.cs" />
-    <Compile Include="HipChatContextTests.cs" />
+    <Compile Include="Contracts\IHipChatProxy.cs" />
+    <Compile Include="HipChatProxy.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\LibHipChat.Proxy\LibHipChat.Proxy.csproj">
-      <Project>{2E3F02F7-C1B3-4F0F-A59D-72DB4CBD8889}</Project>
-      <Name>LibHipChat.Proxy</Name>
-    </ProjectReference>
     <ProjectReference Include="..\LibHipChat\LibHipChat.Domain.csproj">
       <Project>{D0CE025C-BB76-4ED2-98CC-9E47098301E6}</Project>
       <Name>LibHipChat.Domain</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.config">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -22,7 +22,7 @@ namespace LibHipChat.Domain.Tests
         public void Setup ()
         {            
             _queryStringHelper = new QueryStringHelper();
-            _context = new HipChatContext(_baseApiUrl, _apiKey, ActionKey.ListUsers);
+            _context = new HipChatContext(_baseApiUrl, _apiKey, ActionKey.ListUsers, HipChatResponseFormat.Json);
         }
 
         [Test]
@@ -39,7 +39,7 @@ namespace LibHipChat.Domain.Tests
         {
 
             _queryStringHelper.Add("auth_token", "TheApiKey");
-            _queryStringHelper.Add("format", "xml");
+            _queryStringHelper.Add("format", "json");
         }
 
         [Test]
@@ -48,7 +48,7 @@ namespace LibHipChat.Domain.Tests
             const string expectedValue = "?auth_token=TheApiKey&format=xml";
 
             _queryStringHelper.Add("auth_token","TheApiKey");
-            _queryStringHelper.Add("format", "xml");
+            _queryStringHelper.Add("format", "json");
 
             Assert.That(_queryStringHelper.HtmlStringValue, Is.EqualTo(expectedValue));
 
@@ -57,7 +57,7 @@ namespace LibHipChat.Domain.Tests
         [Test]
         public void hipchatcontext_should_build_correct_query_string_suffic ()
         {
-            const string expectedValue = "?format=xml&auth_token=TheApiKey";
+            const string expectedValue = "?format=json&auth_token=TheApiKey";
 
             var queryString = _context.BuildQueryString();
             Assert.That(queryString, Is.EqualTo(expectedValue));
