@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Web;
 using LibHipChat.Helpers;
 
@@ -9,20 +10,20 @@ namespace LibHipChat
     public class HipChatApiExecutor
     {
         private HipChatConnection _connection;
-        private IDictionary<string, string> _actionParms;
+        private IEnumerable<KeyValuePair<string, string>> _actionParms;
 
-        public HipChatApiExecutor (HipChatConnection connection)
-        {
-            _connection = connection;            
+        public HipChatApiExecutor (HipChatConnection connection) : this (connection, new Dictionary<string,string>())
+        {                                                                                         
+                    
         }
 
-        public HipChatApiExecutor (HipChatConnection connection, IDictionary<string,string> actionParms)
+        public HipChatApiExecutor(HipChatConnection connection, IEnumerable<KeyValuePair<string, string>> actionParms)
         {
             _connection = connection;
             _actionParms = actionParms;
         }
 
-        public String GetResponseString ()
+        private String GetResponseString ()
         {
             var reader = new StreamReader(_connection.GetResponseStream());
             var responseString = reader.ReadToEnd();
@@ -39,6 +40,9 @@ namespace LibHipChat
 
         private void WriteActionParms (HipChatConnection connection, IEnumerable<KeyValuePair<string, string>> actionParms )
         {
+            if (!actionParms.Any())
+                return;
+
             var request = connection.GetRequest();
 
             var queryStringHelper = new QueryStringHelper();

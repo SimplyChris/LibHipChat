@@ -43,5 +43,13 @@ namespace LibHipChat.Proxy
 
             return executor.Execute();
         }
+        
+        public HipChatResponse GetUsers()
+        {
+            var connection = _factory.Create(ActionKey.ListUsers);
+
+            var apiExecutor = new HipChatApiExecutor(connection);
+            return (apiExecutor.Execute());
+        }
     }
 }

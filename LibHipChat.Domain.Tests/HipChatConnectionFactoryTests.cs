@@ -11,7 +11,7 @@ namespace LibHipChat.Domain.Tests
         [SetUp]
         public void Setup ()
         {
-            _connectionFactory = new HipChatConnectionFactory(_apiKey, _baseApiUrl);
+            _connectionFactory = new HipChatConnectionFactory(new HipChatConnectionSettings(_baseApiUrl, _apiKey));
         }
 
         [Test]

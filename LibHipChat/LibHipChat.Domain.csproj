@@ -38,6 +38,7 @@
       <HintPath>..\lib\nunit.framework.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Web" />
@@ -55,6 +56,7 @@
     <Compile Include="Helpers\UrlHelper.cs" />
     <Compile Include="HipChatApiExecutor.cs" />
     <Compile Include="HipChatConnection.cs" />
+    <Compile Include="HipChatConnectionSettings.cs" />
     <Compile Include="HipChatContext.cs" />
     <Compile Include="HipChatConnectionFactory.cs" />
     <Compile Include="HipChatResponse.cs" />

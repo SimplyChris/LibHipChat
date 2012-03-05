@@ -14,24 +14,23 @@ namespace LibHipChat
     {
         private HipChatConnection _connection;
         private HipChatConnectionFactory _connectionFactory;
-        private string apiKey;// = "fc571e6af2aa7dc9ddd99bc043c3a8";
-        private const string apiUrl = "http://api.hipchat.com/v1/";
+        private string apiKey;
+        private string apiUrl;
 
         [SetUp]
         public void Setup ()
         {
-            apiKey = System.Configuration.ConfigurationSettings.AppSettings["HipChatApiKey"];
-            _connectionFactory = new HipChatConnectionFactory(apiKey, apiUrl);
+            apiKey = ConfigurationManager.AppSettings["HipChatApiKey"];            
+            apiUrl = ConfigurationManager.AppSettings["HipChatApiUrl"];
+            _connectionFactory = new HipChatConnectionFactory(new HipChatConnectionSettings(apiUrl, apiKey));
         }
 
         [Test]
         public void should_be_able_to_execute_listusers ()
         {
-            _connection = _connectionFactory.Create(ActionKey.ListUsers);
-
-            var reader = new HipChatApiExecutor(_connection);
-            var response = reader.GetResponseString();
-            Assert.That(response.ToLower().Contains("<users>"));
+            var proxy = new HipChatProxy(_connectionFactory);
+            var response = proxy.GetUsers();
+            Assert.That(response.ResponseString.ToLower().Contains("<users>"));
         }
 
         [Test]
@@ -39,9 +38,9 @@ namespace LibHipChat
         {
             _connection = _connectionFactory.Create(ActionKey.ListRooms);
 
-            var reader = new HipChatApiExecutor(_connection);
-            var response = reader.GetResponseString();
-            Assert.That(response.ToLower().Contains("<rooms>"));
+            var apiExecutor = new HipChatApiExecutor(_connection);
+            var response = apiExecutor.Execute();
+            Assert.That(response.ResponseString.ToLower().Contains("<rooms>"));
         }
         
 
@@ -75,9 +74,9 @@ namespace LibHipChat
                                 };
 
             var executer = new HipChatApiExecutor(_connection, actionParms);
-            executer.Execute();
-            var response = executer.GetResponseString();
-            Assert.That(response.Contains("\"name\": \"Auto Created User\","), Is.True);
+            var response = executer.Execute();            
+
+            Assert.That(response.ResponseString.Contains("\"name\": \"Auto Created User\","), Is.True);
         }
 
         [Test]
@@ -90,9 +89,9 @@ namespace LibHipChat
                                   };
             var executer = new HipChatApiExecutor(_connection, actionParms);
 
-            executer.Execute();
-            var response = executer.GetResponseString();
-            Assert.That(response.Contains(""), Is.True);
+            var response = executer.Execute();
+            
+            Assert.That(response.ResponseString.Contains(""), Is.True);
         }
 
         [Test]

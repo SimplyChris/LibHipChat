@@ -11,15 +11,17 @@ namespace LibHipChat
         private HttpWebRequest _webRequest;
         private string _responseString = "";
         private Stream _stream;
-        
+        private HipChatConnectionSettings _connectionSettings;
         public String ConnectionUrl { get { return _webRequest.RequestUri.ToString(); } }
         public String Response { get { return _responseString; } }
         
-        public HipChatConnection (String baseApiUrl, HipChatContext context)
+
+        public HipChatConnection (HipChatConnectionSettings settings, HipChatContext context)
         {
-            _webRequest = CreateWebRequest(baseApiUrl, context);
+
+            _webRequest = CreateWebRequest(settings, context);
         }
-        
+                
         public Stream GetResponseStream ()
         {
             try
@@ -50,10 +52,10 @@ namespace LibHipChat
             return _webRequest.GetRequestStream();
         }
         
-        private HttpWebRequest CreateWebRequest (String baseApiUrl, HipChatContext context)
+        private HttpWebRequest CreateWebRequest (HipChatConnectionSettings settings, HipChatContext context)
         {
-            var apiUrl = new Uri(new Uri(baseApiUrl), UrlHelper.GetActionUrl(context.Action) + context.BuildQueryString());
-            var webRequest = _webRequest = (HttpWebRequest)Create(apiUrl);
+            var apiCallUrl = new Uri(new Uri(settings.BaseApiUrl), UrlHelper.GetActionUrl(context.Action) + context.BuildQueryString());
+            var webRequest = _webRequest = (HttpWebRequest)Create(apiCallUrl);
             webRequest.Method = UrlHelper.GetActionMethod(context.Action);
 
             return (webRequest);

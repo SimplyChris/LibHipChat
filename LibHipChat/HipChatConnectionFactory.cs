@@ -1,29 +1,30 @@
 ﻿using System;
+using System.Configuration;
 
 namespace LibHipChat
 {
     public class HipChatConnectionFactory
     {
+        private HipChatConnectionSettings connectionSettings;
 
-        private readonly string _apiKey;
-        private readonly string _baseUrl;
-
-        public HipChatConnectionFactory (String apiKey, String baseUrl)
+        public HipChatConnectionFactory (HipChatConnectionSettings settings)
         {
-            _apiKey = apiKey;
-            _baseUrl = baseUrl;
+//            var apiKey = ConfigurationManager.AppSettings["HipChatApiKey"];
+//            var apiUrl = ConfigurationManager.AppSettings["HipChatApiUrl"];
+            connectionSettings = settings;
         }
+        
 
         public HipChatConnection Create(ActionKey action)
         {
-            var connection = new HipChatConnection(_baseUrl, CreateContext(action));
+            var connection = new HipChatConnection(connectionSettings, CreateContext(action));
             
             return connection;
         }
 
         private HipChatContext CreateContext (ActionKey action)
         {
-            return new HipChatContext(_baseUrl, _apiKey, action, HipChatResponseFormat.Json);
+            return new HipChatContext(connectionSettings.BaseApiUrl, connectionSettings.AuthKey, action, HipChatResponseFormat.Json);
         }
     }
 }               
