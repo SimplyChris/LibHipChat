@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Diagnostics;
+using System.Linq;
+using LibHipChat.Entities;
 using LibHipChat.Helpers;
 using LibHipChat.Proxy;
 using NUnit.Framework;
@@ -27,7 +29,7 @@ namespace LibHipChat
 
         [Test]
         public void should_be_able_to_execute_listusers ()
-        {
+        {   
             var proxy = new HipChatProxy(_connectionFactory);
             var response = proxy.GetUsers();
             Assert.That(response.ResponseString.ToLower().Contains("<users>"));
@@ -36,11 +38,12 @@ namespace LibHipChat
         [Test]
         public void should_be_able_to_execute_listrooms ()
         {
-            _connection = _connectionFactory.Create(ActionKey.ListRooms);
+            var proxy = new HipChatProxy(_connectionFactory);
+            var response = proxy.GetRooms();
 
-            var apiExecutor = new HipChatApiExecutor(_connection);
-            var response = apiExecutor.Execute();
-            Assert.That(response.ResponseString.ToLower().Contains("<rooms>"));
+            var rooms = (List<Room>) response.Model;
+
+            Assert.That(rooms.Count(), Is.GreaterThan(1));
         }
         
 

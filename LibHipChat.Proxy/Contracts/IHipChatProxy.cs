@@ -7,6 +7,7 @@
         HipChatResponse AddUser(string userId);
         HipChatResponse MessageRoom(string roomId, string from, string message);
         HipChatResponse GetUsers();
+        HipChatResponse GetRooms();
     }
 
 }

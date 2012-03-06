@@ -9,8 +9,6 @@ namespace LibHipChat
 
         public HipChatConnectionFactory (HipChatConnectionSettings settings)
         {
-//            var apiKey = ConfigurationManager.AppSettings["HipChatApiKey"];
-//            var apiUrl = ConfigurationManager.AppSettings["HipChatApiUrl"];
             connectionSettings = settings;
         }
         

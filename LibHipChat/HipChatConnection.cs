@@ -18,8 +18,13 @@ namespace LibHipChat
 
         public HipChatConnection (HipChatConnectionSettings settings, HipChatContext context)
         {
+            _connectionSettings = settings;
+            _webRequest = CreateWebRequest(_connectionSettings, context);
+        }
 
-            _webRequest = CreateWebRequest(settings, context);
+        public HipChatConnectionSettings GetHipChatConnectionSettings ()
+        {
+            return _connectionSettings;
         }
                 
         public Stream GetResponseStream ()

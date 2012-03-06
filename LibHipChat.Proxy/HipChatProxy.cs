@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using LibHipChat;
+using LibHipChat.Entities;
 using LibHipChat.Proxy.Contracts;
 
 namespace LibHipChat.Proxy
@@ -50,6 +53,24 @@ namespace LibHipChat.Proxy
 
             var apiExecutor = new HipChatApiExecutor(connection);
             return (apiExecutor.Execute());
+        }
+
+        public HipChatResponse GetRooms()
+        {
+
+            var connection = _factory.Create(ActionKey.ListRooms);
+            var executor = new HipChatApiExecutor(connection);
+
+            var response = executor.Execute();
+            var textStream = new MemoryStream(UTF8Encoding.UTF8.GetBytes(response.ResponseString));
+            
+            var serializer = new DataContractSerializer(typeof (List<Room>));
+
+            var rooms = serializer.ReadObject(textStream);
+
+            response.Model = rooms;
+
+            return response;
         }
     }
 }
