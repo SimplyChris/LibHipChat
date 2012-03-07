@@ -3,34 +3,35 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
+using Newtonsoft.Json;
 
 namespace LibHipChat.Entities
-{
-    [DataContract]
+{   
+    [JsonObject (MemberSerialization.OptIn)]
     public  class User
     {
-        [DataMember]
+        [JsonProperty ("user_id")]
         public Int32 UserId { get; set; }
 
-        [DataMember]
+        [JsonProperty ("name")]
         public String Name { get; set; }
-        
-        [DataMember]
+
+        [JsonProperty("email")]
         public String Email { get; set; }
 
-        [DataMember]
+        [JsonProperty("title")]
         public String Title { get; set; }
 
-        [DataMember]
+        [JsonProperty("photo_url")]
         public String PhotoUrl { get; set; }
 
-        [DataMember]
+        [JsonProperty("status")]
         public String Status { get; set; }
 
-        [DataMember]
+        [JsonProperty("status_message")] 
         public String StatusMessage { get; set; }
-        
-        [DataMember]
+
+        [JsonProperty("is_group_admin")]
         public Int32 IsGroupAdmin { get; set; }
     }
 }

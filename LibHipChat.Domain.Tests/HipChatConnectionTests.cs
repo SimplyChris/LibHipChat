@@ -32,7 +32,8 @@ namespace LibHipChat
         {   
             var proxy = new HipChatProxy(_connectionFactory);
             var response = proxy.GetUsers();
-            Assert.That(response.ResponseString.ToLower().Contains("<users>"));
+            var users = response.Model as User;
+            //Assert.That(users.Count(), Is.GreaterThan(1));
         }
 
         [Test]

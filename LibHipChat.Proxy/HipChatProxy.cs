@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.Serialization;
+using System.Runtime.Serialization.Json;
 using System.Text;
 using LibHipChat;
 using LibHipChat.Entities;
 using LibHipChat.Proxy.Contracts;
+using Newtonsoft.Json;
 
 namespace LibHipChat.Proxy
 {
@@ -50,9 +52,21 @@ namespace LibHipChat.Proxy
         public HipChatResponse GetUsers()
         {
             var connection = _factory.Create(ActionKey.ListUsers);
-
             var apiExecutor = new HipChatApiExecutor(connection);
-            return (apiExecutor.Execute());
+
+            var response = apiExecutor.Execute();
+            //var anon_model = JsonConvert.DeserializeAnonymousType(response.ResponseString, new {user_id = "", email = "", name = ""});
+            var settings = new JsonSerializerSettings();
+
+            settings.MissingMemberHandling = MissingMemberHandling.Ignore;
+            
+
+            var model = JsonConvert.DeserializeObject <Dictionary<String, Object>>(response.ResponseString,settings) ;
+
+            response.Model = model;
+            
+            //TODO: Set the model response
+            return (response);
         }
 
         public HipChatResponse GetRooms()
@@ -62,11 +76,11 @@ namespace LibHipChat.Proxy
             var executor = new HipChatApiExecutor(connection);
 
             var response = executor.Execute();
-            var textStream = new MemoryStream(UTF8Encoding.UTF8.GetBytes(response.ResponseString));
+            var memoryStream = new MemoryStream(UTF8Encoding.UTF8.GetBytes(response.ResponseString));
             
             var serializer = new DataContractSerializer(typeof (List<Room>));
 
-            var rooms = serializer.ReadObject(textStream);
+            var rooms = serializer.ReadObject(memoryStream);
 
             response.Model = rooms;
 

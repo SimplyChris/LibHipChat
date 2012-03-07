@@ -27,7 +27,7 @@ namespace LibHipChat
         {
             var reader = new StreamReader(_connection.GetResponseStream());
             var responseString = reader.ReadToEnd();
-            return responseString;
+            return HttpUtility.UrlDecode(responseString);
         }
        
         
