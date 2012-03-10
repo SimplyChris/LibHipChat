@@ -5,8 +5,7 @@ using LibHipChat.Contracts;
 using Newtonsoft.Json;
 
 namespace LibHipChat.Entities
-{
-    [DataContract]
+{ 
     public class JsonUserDeserializer : IJsonDeserializer
     {                
         public IJsonModel Deserialize(string jsonString)
