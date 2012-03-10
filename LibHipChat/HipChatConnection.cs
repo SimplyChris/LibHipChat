@@ -2,6 +2,7 @@
 using System.IO;
 using System.Net;
 using System.Xml.Linq;
+using LibHipChat.Contracts;
 using LibHipChat.Helpers;
 
 namespace LibHipChat

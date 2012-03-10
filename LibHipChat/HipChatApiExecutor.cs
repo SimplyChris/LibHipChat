@@ -3,7 +3,10 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Web;
+using LibHipChat.Contracts;
+using LibHipChat.Entities;
 using LibHipChat.Helpers;
+using Newtonsoft.Json;
 
 namespace LibHipChat
 {
@@ -11,22 +14,28 @@ namespace LibHipChat
     {
         private HipChatConnection _connection;
         private IEnumerable<KeyValuePair<string, string>> _actionParms;
+        private IJsonDeserializer _deserializer;
 
-        public HipChatApiExecutor (HipChatConnection connection) : this (connection, new Dictionary<string,string>())
+        public HipChatApiExecutor (HipChatConnection connection, IJsonDeserializer deserializer) : this (connection, deserializer, new Dictionary<string,string>())
         {                                                                                         
-                    
+            
         }
 
-        public HipChatApiExecutor(HipChatConnection connection, IEnumerable<KeyValuePair<string, string>> actionParms)
+        public HipChatApiExecutor(HipChatConnection connection, IJsonDeserializer deserializer, IEnumerable<KeyValuePair<string, string>> actionParms)
         {
             _connection = connection;
             _actionParms = actionParms;
+            _deserializer = deserializer;
         }
 
         private String GetResponseString ()
         {
             var reader = new StreamReader(_connection.GetResponseStream());
             var responseString = reader.ReadToEnd();
+//            responseString = responseString.Replace('"', '\'');
+            
+            
+            
             return HttpUtility.UrlDecode(responseString);
         }
        
@@ -34,7 +43,9 @@ namespace LibHipChat
         public HipChatResponse Execute ()
         {
             WriteActionParms(_connection, _actionParms);
-            var response = new HipChatResponse() {ResponseString = GetResponseString()};
+            var responseString = GetResponseString();            
+                       
+            var response = new HipChatResponse() {Model = _deserializer.Deserialize(responseString)};
             return response;
         }
 

@@ -50,6 +50,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ActionKey.cs" />
+    <Compile Include="Contracts\IJsonDeserializer.cs" />
+    <Compile Include="Contracts\IJsonModel.cs" />
+    <Compile Include="Entities\JsonUserDeserializer.cs" />
+    <Compile Include="Entities\JsonUserModel.cs" />
     <Compile Include="Entities\Room.cs" />
     <Compile Include="Entities\User.cs" />
     <Compile Include="Helpers\QueryStringHelper.cs" />

@@ -1,22 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
+using LibHipChat.Contracts;
 using LibHipChat.Helpers;
 
 namespace LibHipChat
 {
     public class HipChatContext
     {
-        private ActionKey _action;
         private HipChatResponseFormat _responseFormat;
 
-        private string _apiKey;
-
+        private string _apiKey;      
         public String BaseUrl { get; set; }
         public ActionKey Action { get; set; }
         
         public HipChatContext (String baseApiUrl, String apiKey, ActionKey action, HipChatResponseFormat responseFormat = HipChatResponseFormat.Xml  )
         {
-            _action = action;   
             _apiKey = apiKey;
             Action = action;
             BaseUrl = baseApiUrl;

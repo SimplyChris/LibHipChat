@@ -31,9 +31,9 @@ namespace LibHipChat
         public void should_be_able_to_execute_listusers ()
         {   
             var proxy = new HipChatProxy(_connectionFactory);
-            var response = proxy.GetUsers();
-            var users = response.Model as User;
-            //Assert.That(users.Count(), Is.GreaterThan(1));
+            var users = proxy.GetUsers();
+            
+            Assert.That(users[0].Email, Is.EqualTo("family@losmorgans.com"));
         }
 
         [Test]
@@ -77,7 +77,7 @@ namespace LibHipChat
                                     {"password","password"}
                                 };
 
-            var executer = new HipChatApiExecutor(_connection, actionParms);
+            var executer = new HipChatApiExecutor(_connection, new JsonUserDeserializer(), actionParms);
             var response = executer.Execute();            
 
             Assert.That(response.ResponseString.Contains("\"name\": \"Auto Created User\","), Is.True);
@@ -91,7 +91,7 @@ namespace LibHipChat
                                   {
                                       {"user_id", "testing@losmorgans.com"}                                      
                                   };
-            var executer = new HipChatApiExecutor(_connection, actionParms);
+            var executer = new HipChatApiExecutor(_connection, new JsonUserDeserializer(), actionParms);
 
             var response = executer.Execute();
             

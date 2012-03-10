@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Configuration;
+using LibHipChat.Contracts;
 
 namespace LibHipChat
 {
     public class HipChatConnectionFactory
     {
         private HipChatConnectionSettings connectionSettings;
+        private IJsonDeserializer _jsonDeserializer;
 
         public HipChatConnectionFactory (HipChatConnectionSettings settings)
         {
@@ -15,7 +17,7 @@ namespace LibHipChat
 
         public HipChatConnection Create(ActionKey action)
         {
-            var connection = new HipChatConnection(connectionSettings, CreateContext(action));
+            var connection = new HipChatConnection (connectionSettings, CreateContext(action));
             
             return connection;
         }
