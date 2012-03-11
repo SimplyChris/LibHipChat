@@ -6,6 +6,6 @@ namespace LibHipChat
     public class HipChatResponse
     {
         public String ResponseString { get; set; }
-        public IJsonModel Model { get; set; }
+        public object Model { get; set; }
     }
 }

@@ -2,16 +2,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Runtime.Serialization;
-using System.Runtime.Serialization.Json;
 using System.Text;
-using System.Xml;
-using LibHipChat;
 using LibHipChat.Entities;
 using LibHipChat.Proxy.Contracts;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 
 namespace LibHipChat.Proxy
 {
@@ -57,33 +51,10 @@ namespace LibHipChat.Proxy
             var connection = _factory.Create(ActionKey.ListUsers);
             var apiExecutor = new HipChatApiExecutor(connection, new JsonUserDeserializer());
 
-            var response = apiExecutor.Execute();            
-                       
-            var userList = new List<User>();
-            foreach (var dictionary in response.Model.Data)
-            {
-                var user = DeserializeUser(dictionary);
-                userList.Add(user);
-            }
-            return (userList);
-        }
+            var response = apiExecutor.Execute();
 
-        //TODO: Refactor Me
-        private User DeserializeUser (Dictionary<string,string> dictionary)
-        {
-
-            var user = new User()
-                           {
-                               Email = dictionary["email"].ToString(),
-                               Name = dictionary["name"].ToString(),
-                               Title = dictionary["title"].ToString(),
-                               UserId = Convert.ToInt32(dictionary["user_id"].ToString()),
-                               Status = dictionary["status"].ToString(),
-                               PhotoUrl = dictionary["photo_url"].ToString(),
-                               StatusMessage = dictionary["status_message"].ToString()
-                           };
-
-            return user;
+            
+            return (List<User>) (response.Model);
         }
 
         public HipChatResponse GetRooms()

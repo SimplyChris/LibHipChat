@@ -1,9 +1,11 @@
 ﻿using System;
+using LibHipChat.Contracts;
+
 
 namespace LibHipChat.Entities
 {   
     
-    public  class User
+    public  class User : IHipChatModel 
     {
         
         public Int32 UserId { get; set; }

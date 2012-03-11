@@ -6,6 +6,8 @@ namespace LibHipChat.Contracts
     public interface IJsonModel
     {
         [JsonProperty]
-        IList<Dictionary<string, string>> Data { get; }         
+        IList<Dictionary<string, string>> Data { get; }
+
+        IList<IHipChatModel> DeserializeList();
     }
 }
