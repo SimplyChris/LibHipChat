@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using LibHipChat.Entities;
 using Newtonsoft.Json;
 
 namespace LibHipChat.Contracts
@@ -8,6 +9,6 @@ namespace LibHipChat.Contracts
         [JsonProperty]
         IList<Dictionary<string, string>> Data { get; }
 
-        IList<IHipChatModel> DeserializeList();
+        void DeserializeList();
     }
 }

@@ -8,13 +8,13 @@ using Newtonsoft.Json;
 
 namespace LibHipChat.Entities
 { 
-    public class JsonUserDeserializer : IJsonDeserializer
+    public class JsonUserDeserializer <T> : IJsonDeserializer <IList<T>>
     {                
-        public IList<IHipChatModel> Deserialize(string jsonString)
+        public IList<T> Deserialize(string jsonString)
         {
             var jsonUserModel = (JsonConvert.DeserializeObject<JsonUserModel>(jsonString));
-            var users = jsonUserModel.DeserializeList();
-            return users;
+            jsonUserModel.DeserializeList();
+            return (IList<T>) jsonUserModel.Model;
         }
     }
 }

@@ -33,7 +33,7 @@ namespace LibHipChat
         public void should_be_able_to_execute_listusers ()
         {   
             var users = _proxy.GetUsers();            
-            Assert.That(users[0].Email, Is.EqualTo("family@losmorgans.com"));
+            Assert.That(users.Count(x => x.Email == "family@losmorgans.com") == 1);            
         }
 
         [Test]

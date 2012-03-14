@@ -6,8 +6,7 @@ namespace LibHipChat
 {
     public class HipChatConnectionFactory
     {
-        private HipChatConnectionSettings connectionSettings;
-        private IJsonDeserializer _jsonDeserializer;
+        private HipChatConnectionSettings connectionSettings;        
 
         public HipChatConnectionFactory (HipChatConnectionSettings settings)
         {

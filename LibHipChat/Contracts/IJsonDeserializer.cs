@@ -3,10 +3,8 @@ using LibHipChat.Entities;
 
 namespace LibHipChat.Contracts
 {
-    public interface IJsonDeserializer
+    public interface IJsonDeserializer <T>
     {        
-        IList<IHipChatModel> Deserialize(string jsonString);
-
-        
+        T Deserialize(string jsonString);        
     }
 }

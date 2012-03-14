@@ -13,8 +13,7 @@ namespace LibHipChat
     public class HipChatApiExecutor
     {
         private HipChatConnection _connection;
-        private IEnumerable<KeyValuePair<string, string>> _actionParms;
-        private IJsonDeserializer _deserializer;
+        private IEnumerable<KeyValuePair<string, string>> _actionParms;       
 
         public HipChatApiExecutor (HipChatConnection connection) : this (connection, new Dictionary<string,string>())
         {                                                                                         

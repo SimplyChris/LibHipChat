@@ -12,17 +12,19 @@ namespace LibHipChat.Entities
         [JsonProperty("users")]
         public IList<Dictionary<string, string>> Data { get; set; }
 
-        public IList<IHipChatModel> DeserializeList()
+        public IList<User> Model { get; set; }
+
+        public void DeserializeList()
         {
-            List<IHipChatModel> list = new List<IHipChatModel>();
-            foreach (IHipChatModel model in Data.Select(DeserializeListItem))
+            IList<User> list = new List<User>();
+            foreach (User model in Data.Select(DeserializeListItem))
             {
                 list.Add(model);
             }
-            return (list);
+            Model = list;
         }
 
-        private IHipChatModel DeserializeListItem(Dictionary<string, string> dictionary)
+        private User DeserializeListItem(Dictionary<string, string> dictionary)
         {
             return new User()
             {

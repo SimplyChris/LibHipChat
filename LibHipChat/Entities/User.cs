@@ -5,7 +5,7 @@ using LibHipChat.Contracts;
 namespace LibHipChat.Entities
 {   
     
-    public  class User : IHipChatModel 
+    public  class User : HipChatModel
     {
         
         public Int32 UserId { get; set; }
