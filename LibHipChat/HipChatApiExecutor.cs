@@ -16,26 +16,23 @@ namespace LibHipChat
         private IEnumerable<KeyValuePair<string, string>> _actionParms;
         private IJsonDeserializer _deserializer;
 
-        public HipChatApiExecutor (HipChatConnection connection, IJsonDeserializer deserializer) : this (connection, deserializer, new Dictionary<string,string>())
+        public HipChatApiExecutor (HipChatConnection connection) : this (connection, new Dictionary<string,string>())
         {                                                                                         
             
         }
 
-        public HipChatApiExecutor(HipChatConnection connection, IJsonDeserializer deserializer, IEnumerable<KeyValuePair<string, string>> actionParms)
+        public HipChatApiExecutor(HipChatConnection connection, IEnumerable<KeyValuePair<string, string>> actionParms)
         {
             _connection = connection;
-            _actionParms = actionParms;
-            _deserializer = deserializer;
+            _actionParms = actionParms;            
         }
 
         private String GetResponseString ()
         {
             var reader = new StreamReader(_connection.GetResponseStream());
             var responseString = reader.ReadToEnd();
-//            responseString = responseString.Replace('"', '\'');
             
-            
-            
+                       
             return HttpUtility.UrlDecode(responseString);
         }
        
@@ -45,7 +42,7 @@ namespace LibHipChat
             WriteActionParms(_connection, _actionParms);
             var responseString = GetResponseString();            
                        
-            var response = new HipChatResponse() {Model = _deserializer.Deserialize(responseString)};
+            var response = new HipChatResponse() {ResponseString = responseString};
             return response;
         }
 

@@ -73,7 +73,7 @@ namespace LibHipChat
                                     {"password","password"}
                                 };
 
-            var executer = new HipChatApiExecutor(_connection, new JsonUserDeserializer(), actionParms);
+            var executer = new HipChatApiExecutor(_connection, actionParms);
             var response = executer.Execute();            
 
             Assert.That(response.ResponseString.Contains("\"name\": \"Auto Created User\","), Is.True);
@@ -87,7 +87,7 @@ namespace LibHipChat
                                   {
                                       {"user_id", "testing@losmorgans.com"}                                      
                                   };
-            var executer = new HipChatApiExecutor(_connection, new JsonUserDeserializer(), actionParms);
+            var executer = new HipChatApiExecutor(_connection, actionParms);
 
             var response = executer.Execute();
             

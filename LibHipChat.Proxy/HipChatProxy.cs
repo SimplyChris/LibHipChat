@@ -41,7 +41,7 @@ namespace LibHipChat.Proxy
                                       {"message", message}
                                   };
 
-            var executor = new HipChatApiExecutor(connection, new JsonUserDeserializer(), actionParms);
+            var executor = new HipChatApiExecutor(connection, actionParms);
 
             return executor.Execute();
         }
@@ -49,19 +49,23 @@ namespace LibHipChat.Proxy
         public IList<User> GetUsers()
         {
             var connection = _factory.Create(ActionKey.ListUsers);
-            var apiExecutor = new HipChatApiExecutor(connection, new JsonUserDeserializer());
+            
+            var apiExecutor = new HipChatApiExecutor(connection);            
 
             var response = apiExecutor.Execute();
 
+            var deserializer = new JsonUserDeserializer();
+
+            var model = deserializer.Deserialize(response.ResponseString);
             
-            return (List<User>) (response.Model);
+            return (List<User>) (model);
         }
 
         public HipChatResponse GetRooms()
         {
 
             var connection = _factory.Create(ActionKey.ListRooms);
-            var executor = new HipChatApiExecutor(connection, new JsonUserDeserializer());
+            var executor = new HipChatApiExecutor(connection);
 
             var response = executor.Execute();
             var memoryStream = new MemoryStream(UTF8Encoding.UTF8.GetBytes(response.ResponseString));
