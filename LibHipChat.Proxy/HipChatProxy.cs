@@ -11,7 +11,6 @@ namespace LibHipChat.Proxy
 {
     public class HipChatProxy : IHipChatProxy
     {
-        private HipChatContext _context;
         private HipChatConnectionFactory _factory;
 
         public HipChatProxy (HipChatConnectionFactory factory)
@@ -29,7 +28,7 @@ namespace LibHipChat.Proxy
             throw new NotImplementedException();
         }
 
-        public HipChatResponse MessageRoom(string roomId, string from, string message)
+        public HipChatStatus MessageRoom(string roomId, string from, string message)
         {
             var connection = _factory.Create(ActionKey.MessageRoom);
 
@@ -43,7 +42,15 @@ namespace LibHipChat.Proxy
 
             var executor = new HipChatApiExecutor(connection, actionParms);
 
-            return executor.Execute();
+            var response = executor.Execute();
+
+            var deserializer = new JsonModelDeserializer<HipChatStatus>();
+
+            var model = deserializer.Deserialize(response.ResponseString);
+
+            response.Model = model;
+
+            return (HipChatStatus) response.Model;
         }
         
         public IList<User> GetUsers()

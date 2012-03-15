@@ -54,9 +54,12 @@ namespace LibHipChat
             var message = string.Format("Integration Test [should_be_able_to_message_room] Run At: {0}",
                                         DateTime.Now.ToString());
             
-            var response = _proxy.MessageRoom("52400", "Automation", message);
+            var status = _proxy.MessageRoom("52400", "Automation", message);
 
-            Assert.That(response.ResponseString, Is.EqualTo("{\"status\":\"sent\"}"));
+            //Assert.That(response.ResponseString, Is.EqualTo("{\"status\":\"sent\"}"));
+            
+
+            Assert.That(status.Status, Is.EqualTo("sent"));
         }
 
         [Test]

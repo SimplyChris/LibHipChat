@@ -7,10 +7,10 @@ using Newtonsoft.Json;
 
 namespace LibHipChat.Entities
 {
-    public class JsonUserModel : IJsonModel
+    public class JsonUserModel : IJsonModel <IList<Dictionary<string,string>>> 
     {
         [JsonProperty("users")]
-        public IList<Dictionary<string, string>> Data { get; set; }
+        public IList<Dictionary<string, string>> Data { get; set; }  
 
         public IList<User> Model { get; set; }
 

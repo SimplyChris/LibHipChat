@@ -4,11 +4,11 @@ using Newtonsoft.Json;
 
 namespace LibHipChat.Contracts
 {
-    public interface IJsonModel
+    public interface IJsonModel <T>
     {
         [JsonProperty]
-        IList<Dictionary<string, string>> Data { get; }
+        T Data { get; }
 
-        void DeserializeList();
+        void DeserializeList ();
     }
 }
