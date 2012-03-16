@@ -51,7 +51,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="HipChatConnectionFactoryTests.cs" />
-    <Compile Include="HipChatConnectionTests.cs" />
     <Compile Include="HipChatContextTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

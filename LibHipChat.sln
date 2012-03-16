@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibHipChat.Domain.Tests", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibHipChat.Proxy", "LibHipChat.Proxy\LibHipChat.Proxy.csproj", "{2E3F02F7-C1B3-4F0F-A59D-72DB4CBD8889}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LipHipChat.Proxy.Tests", "LipHipChat.Proxy.Tests\LipHipChat.Proxy.Tests.csproj", "{676DC4DE-522B-4ED9-B94D-08A17620BD8E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibHipChat.Proxy.Tests", "LibHipChat.Proxy.Tests\LibHipChat.Proxy.Tests.csproj", "{D1F85E3D-67EE-42F4-A1D5-3038BB961592}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,10 +27,10 @@ Global
 		{2E3F02F7-C1B3-4F0F-A59D-72DB4CBD8889}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2E3F02F7-C1B3-4F0F-A59D-72DB4CBD8889}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2E3F02F7-C1B3-4F0F-A59D-72DB4CBD8889}.Release|Any CPU.Build.0 = Release|Any CPU
-		{676DC4DE-522B-4ED9-B94D-08A17620BD8E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{676DC4DE-522B-4ED9-B94D-08A17620BD8E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{676DC4DE-522B-4ED9-B94D-08A17620BD8E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{676DC4DE-522B-4ED9-B94D-08A17620BD8E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D1F85E3D-67EE-42F4-A1D5-3038BB961592}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D1F85E3D-67EE-42F4-A1D5-3038BB961592}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D1F85E3D-67EE-42F4-A1D5-3038BB961592}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D1F85E3D-67EE-42F4-A1D5-3038BB961592}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

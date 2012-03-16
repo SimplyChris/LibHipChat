@@ -8,12 +8,11 @@ using LibHipChat.Helpers;
 using LibHipChat.Proxy;
 using LibHipChat.Proxy.Contracts;
 using NUnit.Framework;
-using Rhino.Mocks;
 
-namespace LibHipChat
+namespace LibHipChat.Proxy.Tests
 {
     [TestFixture]
-    public class HipChatConnectionTests
+    public class HipChatProxyTests
     {
         private HipChatConnection _connection;
         private HipChatConnectionFactory _connectionFactory;

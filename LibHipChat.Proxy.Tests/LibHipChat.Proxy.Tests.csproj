@@ -5,7 +5,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{676DC4DE-522B-4ED9-B94D-08A17620BD8E}</ProjectGuid>
+    <ProjectGuid>{D1F85E3D-67EE-42F4-A1D5-3038BB961592}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>LipHipChat.Proxy.Tests</RootNamespace>
@@ -31,7 +31,11 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="nunit.framework">
+      <HintPath>..\lib\nunit.framework.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -40,7 +44,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="HipChatProxyTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\LibHipChat.Proxy\LibHipChat.Proxy.csproj">
+      <Project>{2E3F02F7-C1B3-4F0F-A59D-72DB4CBD8889}</Project>
+      <Name>LibHipChat.Proxy</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LibHipChat\LibHipChat.Domain.csproj">
+      <Project>{D0CE025C-BB76-4ED2-98CC-9E47098301E6}</Project>
+      <Name>LibHipChat.Domain</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
