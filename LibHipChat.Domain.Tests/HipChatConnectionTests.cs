@@ -67,19 +67,11 @@ namespace LibHipChat
         {
             _connection = _connectionFactory.Create(ActionKey.CreateUser);
 
-            var actionParms = new Dictionary<string, string>
-                                {
-                                    {"email", "testing@losmorgans.com"},
-                                    {"name", "Auto Created User"},
-                                    {"title", string.Format("Created By Integration Test Run At: {0}", DateTime.Now.ToString())},
-                                    {"is_group_admin","0"},
-                                    {"password","password"}
-                                };
-
-            var executer = new HipChatApiExecutor(_connection, actionParms);
-            var response = executer.Execute();            
-
-            Assert.That(response.ResponseString.Contains("\"name\": \"Auto Created User\","), Is.True);
+            var newUser = _proxy.AddUser("testing@losmorgans.com", "Auto Created User.", "TESTER","0");
+         
+            
+            Assert.That(newUser.Title, Is.EqualTo("TESTER"));
+            Assert.That(newUser.Password.Length, Is.GreaterThan(0));
         }
 
         [Test]

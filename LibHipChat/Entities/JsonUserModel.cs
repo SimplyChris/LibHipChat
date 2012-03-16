@@ -1,43 +1,29 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using LibHipChat.Contracts;
 using Newtonsoft.Json;
 
 namespace LibHipChat.Entities
 {
-    public class JsonUserModel : IJsonModel <IList<Dictionary<string,string>>> 
+    public class JsonUserModel : IJsonModel <IDictionary<string,string>>
     {
-        [JsonProperty("users")]
-        public IList<Dictionary<string, string>> Data { get; set; }  
+        [JsonProperty("user")]
+        public IDictionary<string, string> Data { get; set; }
 
-        public IList<User> Model { get; set; }
-
+        public NewUser User { get; set; }
         public void DeserializeList()
         {
-            IList<User> list = new List<User>();
-            foreach (User model in Data.Select(DeserializeListItem))
+            User = new NewUser ()
             {
-                list.Add(model);
-            }
-            Model = list;
-        }
-
-        private User DeserializeListItem(Dictionary<string, string> dictionary)
-        {
-            return new User()
-            {
-                Email = dictionary["email"],
-                Name = dictionary["name"],
-                Title = dictionary["title"],
-                UserId = Convert.ToInt32(dictionary["user_id"]),
-                Status = dictionary["status"],
-                PhotoUrl = dictionary["photo_url"],
-                StatusMessage = dictionary["status_message"]
+                Email = Data["email"],
+                Name =Data["name"],
+                Title = Data["title"],
+                UserId = Convert.ToInt32(Data["user_id"]),
+                Status = Data["status"],
+                PhotoUrl = Data["photo_url"],
+                StatusMessage = Data["status_message"],
+                Password = Data["password"]
             };
         }
     }
-
-
 }

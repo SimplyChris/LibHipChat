@@ -6,6 +6,7 @@ using System.Runtime.Serialization;
 using System.Text;
 using LibHipChat.Entities;
 using LibHipChat.Proxy.Contracts;
+using Newtonsoft.Json;
 
 namespace LibHipChat.Proxy
 {
@@ -23,9 +24,30 @@ namespace LibHipChat.Proxy
             throw new NotImplementedException();
         }
 
-        public HipChatResponse AddUser(string userId)
+        public NewUser AddUser(string email, string name, string title, string is_group_admin = "0")
         {
-            throw new NotImplementedException();
+            var connection = _factory.Create(ActionKey.CreateUser);
+
+            var actionParms = new Dictionary<string, string>
+                                  {
+                                      {"email", email},
+                                      {"name", name},
+                                      {"title", title},
+                                      {"is_group_admin", is_group_admin}
+                                  };
+
+            var executor = new HipChatApiExecutor(connection, actionParms);
+
+            var response = executor.Execute();
+
+//            var user = (JsonConvert.DeserializeObject<User>(response.ResponseString));
+//            var model = user; 
+            var deserializer = new JsonModelDeserializer<JsonUserModel>();
+
+            var model = deserializer.Deserialize(response.ResponseString);            
+            model.DeserializeList();
+
+            return model.User;
         }
 
         public HipChatStatus MessageRoom(string roomId, string from, string message)
@@ -65,7 +87,7 @@ namespace LibHipChat.Proxy
 
             var model = deserializer.Deserialize(response.ResponseString);
             
-            return (IList<User>) (model);
+            return model;
         }
 
         public HipChatResponse GetRooms()

@@ -7,7 +7,7 @@ namespace LibHipChat.Proxy.Contracts
     public interface IHipChatProxy
     {        
         HipChatResponse DeleteUser(string userId);
-        HipChatResponse AddUser(string userId);
+        NewUser AddUser(string email, string name, string title, string is_group_admin);
         HipChatStatus MessageRoom(string roomId, string from, string message);
         IList<User> GetUsers();
         HipChatResponse GetRooms();
