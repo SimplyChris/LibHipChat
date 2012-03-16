@@ -45,7 +45,7 @@ namespace LibHipChat.Domain.Tests
         [Test]
         public void querystringhelper_should_return_correct_query_string_suffix ()
         {
-            const string expectedValue = "?auth_token=TheApiKey&format=xml";
+            const string expectedValue = "?auth_token=TheApiKey&format=json";
 
             _queryStringHelper.Add("auth_token","TheApiKey");
             _queryStringHelper.Add("format", "json");
