@@ -81,11 +81,12 @@ namespace LibHipChat.Proxy
 
             var response = apiExecutor.Execute();
 
-            var deserializer = new JsonUserDeserializer <User>();
+            var deserializer = new JsonModelDeserializer <JsonUsersModel>();
 
             var model = deserializer.Deserialize(response.ResponseString);
-            
-            return model;
+            model.DeserializeModel();
+
+            return model.Model;
         }
 
         public IList<Room> GetRooms()

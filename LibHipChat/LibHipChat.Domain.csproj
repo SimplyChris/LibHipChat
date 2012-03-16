@@ -56,7 +56,6 @@
     <Compile Include="Entities\JsonRoomsModel.cs" />
     <Compile Include="Entities\NewUser.cs" />
     <Compile Include="Entities\HipChatModel.cs" />
-    <Compile Include="Entities\JsonUserDeserializer.cs" />
     <Compile Include="Entities\JsonUserModel.cs" />
     <Compile Include="Entities\JsonUsersModel.cs" />
     <Compile Include="Entities\Room.cs" />
