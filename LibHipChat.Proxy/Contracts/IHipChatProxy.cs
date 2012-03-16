@@ -10,7 +10,7 @@ namespace LibHipChat.Proxy.Contracts
         NewUser AddUser(string email, string name, string title, string is_group_admin);
         HipChatStatus MessageRoom(string roomId, string from, string message);
         IList<User> GetUsers();
-        HipChatResponse GetRooms();
+        IList<Room> GetRooms();
     }
 
 }

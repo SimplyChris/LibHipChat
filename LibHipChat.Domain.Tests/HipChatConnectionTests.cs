@@ -41,9 +41,10 @@ namespace LibHipChat
         {            
             var response = _proxy.GetRooms();
 
-            var rooms = (List<Room>) response.Model;
+            var dt = response[0].CreatedAt;
 
-            Assert.That(rooms.Count(), Is.GreaterThan(1));
+            Assert.That(response.Count(), Is.GreaterThan(1));
+            Assert.That(response.Count(x => x.Name == "ZenCode"), Is.EqualTo(1));
         }
         
 

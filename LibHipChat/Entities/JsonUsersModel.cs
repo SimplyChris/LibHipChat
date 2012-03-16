@@ -14,7 +14,7 @@ namespace LibHipChat.Entities
 
         public IList<User> Model { get; set; }
 
-        public void DeserializeList()
+        public void DeserializeModel()
         {
             IList<User> list = new List<User>();
             foreach (User model in Data.Select(DeserializeListItem))

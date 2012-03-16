@@ -53,12 +53,14 @@
     <Compile Include="Contracts\IHipChatModel.cs" />
     <Compile Include="Contracts\IJsonDeserializer.cs" />
     <Compile Include="Contracts\IJsonModel.cs" />
+    <Compile Include="Entities\JsonRoomsModel.cs" />
     <Compile Include="Entities\NewUser.cs" />
     <Compile Include="Entities\HipChatModel.cs" />
     <Compile Include="Entities\JsonUserDeserializer.cs" />
     <Compile Include="Entities\JsonUserModel.cs" />
     <Compile Include="Entities\JsonUsersModel.cs" />
     <Compile Include="Entities\Room.cs" />
+    <Compile Include="Entities\RoomDetail.cs" />
     <Compile Include="Entities\User.cs" />
     <Compile Include="Helpers\QueryStringHelper.cs" />
     <Compile Include="Helpers\UrlHelper.cs" />

@@ -10,7 +10,7 @@ namespace LibHipChat.Proxy
     {
         public T Data { get; set; }
 
-        public void DeserializeList ()
+        public void DeserializeModel ()
         {
             
         }

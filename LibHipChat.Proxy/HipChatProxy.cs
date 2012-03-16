@@ -40,12 +40,10 @@ namespace LibHipChat.Proxy
 
             var response = executor.Execute();
 
-//            var user = (JsonConvert.DeserializeObject<User>(response.ResponseString));
-//            var model = user; 
             var deserializer = new JsonModelDeserializer<JsonUserModel>();
 
             var model = deserializer.Deserialize(response.ResponseString);            
-            model.DeserializeList();
+            model.DeserializeModel();
 
             return model.User;
         }
@@ -90,22 +88,24 @@ namespace LibHipChat.Proxy
             return model;
         }
 
-        public HipChatResponse GetRooms()
+        public IList<Room> GetRooms()
         {
 
             var connection = _factory.Create(ActionKey.ListRooms);
             var executor = new HipChatApiExecutor(connection);
 
             var response = executor.Execute();
-            var memoryStream = new MemoryStream(UTF8Encoding.UTF8.GetBytes(response.ResponseString));
-            
-            var serializer = new DataContractSerializer(typeof (List<Room>));
 
-            var rooms = serializer.ReadObject(memoryStream);
+            var deserializer = new JsonModelDeserializer<JsonRoomsModel>();
+
+            var model = deserializer.Deserialize(response.ResponseString);
+
+            model.DeserializeModel();
+            
 
             //response.Model = rooms;
 
-            return response;
+            return model.Model;
         }
     }
 }

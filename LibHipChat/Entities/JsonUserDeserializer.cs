@@ -9,7 +9,7 @@ namespace LibHipChat.Entities
         public IList<T> Deserialize(string jsonString)
         {
             var jsonUserModel = (JsonConvert.DeserializeObject<JsonUsersModel>(jsonString));
-            jsonUserModel.DeserializeList();
+            jsonUserModel.DeserializeModel();
             return (IList<T>) jsonUserModel.Model;
         }
     }

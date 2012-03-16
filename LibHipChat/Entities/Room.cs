@@ -1,29 +1,52 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
+using Newtonsoft.Json;
 
 namespace LibHipChat.Entities
 {
     public class Room
     {
+        [JsonProperty ("room_id")]
         public Int32 Id { get; set; }
 
+        [JsonProperty ("name")]
         public String Name { get; set; }
 
+        [JsonProperty ("topic")]
         public String Topic { get; set; }
 
-        public DateTime? LastActiveAt { get; set; }
+        [JsonProperty("last_active")]
+        public long LastActiveLong { get; set; }
+        
+        [JsonProperty("created")]
+        public long CreatedLong { get; set; }
 
-        public DateTime? CreatedAt { get; set; }
+        public DateTime? LastActiveAt { get { return GetTimeFromUnixLong(LastActiveLong); } }
+        public DateTime? CreatedAt { get { return GetTimeFromUnixLong(CreatedLong); } }
 
-        public IList<User> Participants { get; set; }
-
+        [JsonProperty("owner_user_id")]
         public Int32 OwnerUserId { get; set; }
+
+        [JsonProperty("is_archived")]
+        public Boolean IsArvhived { get; set; }
+        
+        [JsonProperty("is_private")]
+        public Boolean IsPrivate { get; set; }
+
+        [JsonProperty("xmpp_jid")]
+        public String JabberId { get; set; }
+
+//xmpp_jid
+
+
 
         //TODO: Move out to helper class
         public DateTime GetTimeFromUnixLong(long ticks)
         {
-            return new DateTime(ticks);
+            var dtDateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0);
+            dtDateTime = dtDateTime.AddSeconds(ticks).ToLocalTime();
+            return dtDateTime;
         }
     }
 }

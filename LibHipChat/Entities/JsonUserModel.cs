@@ -9,9 +9,9 @@ namespace LibHipChat.Entities
     {
         [JsonProperty("user")]
         public IDictionary<string, string> Data { get; set; }
-
         public NewUser User { get; set; }
-        public void DeserializeList()
+
+        public void DeserializeModel()
         {
             User = new NewUser ()
             {

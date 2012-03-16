@@ -9,6 +9,6 @@ namespace LibHipChat.Contracts
         [JsonProperty]
         T Data { get; }
 
-        void DeserializeList ();
+        void DeserializeModel ();
     }
 }
