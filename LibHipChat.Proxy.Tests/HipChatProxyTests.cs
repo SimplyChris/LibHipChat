@@ -31,14 +31,14 @@ namespace LibHipChat.Proxy.Tests
         [Test]
         public void should_be_able_to_execute_listusers ()
         {   
-            var users = _proxy.GetUsers();            
+            var users = _proxy.GetUserList();            
             Assert.That(users.Count(x => x.Email == "family@losmorgans.com") == 1);            
         }
 
         [Test]
         public void should_be_able_to_execute_listrooms ()
         {            
-            var response = _proxy.GetRooms();
+            var response = _proxy.GetRoomList();
 
             var dt = response[0].CreatedAt;
 
@@ -65,7 +65,7 @@ namespace LibHipChat.Proxy.Tests
         {
             _connection = _connectionFactory.Create(ActionKey.CreateUser);
 
-            var newUser = _proxy.AddUser("testing@losmorgans.com", "Auto Created User.", "TESTER","0");
+            var newUser = _proxy.CreateUser("testing@losmorgans.com", "Auto Created User.", "TESTER","0");
          
             
             Assert.That(newUser.Title, Is.EqualTo("TESTER"));

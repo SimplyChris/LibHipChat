@@ -24,7 +24,7 @@ namespace LibHipChat.Proxy
             throw new NotImplementedException();
         }
 
-        public NewUser AddUser(string email, string name, string title, string is_group_admin = "0")
+        public NewUser CreateUser(string email, string name, string title, string is_group_admin = "0")
         {
             var connection = _factory.Create(ActionKey.CreateUser);
 
@@ -73,7 +73,7 @@ namespace LibHipChat.Proxy
             return (HipChatStatus) response.Model;
         }
         
-        public IList<User> GetUsers()
+        public IList<User> GetUserList()
         {
             var connection = _factory.Create(ActionKey.ListUsers);
             
@@ -89,7 +89,7 @@ namespace LibHipChat.Proxy
             return model.Model;
         }
 
-        public IList<Room> GetRooms()
+        public IList<Room> GetRoomList()
         {
 
             var connection = _factory.Create(ActionKey.ListRooms);
