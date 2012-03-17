@@ -119,7 +119,6 @@ namespace LibHipChat.Proxy
 
             var response = executor.Execute();
 
-            var testModel =(JsonConvert.DeserializeObject(response.ResponseString));           
             var deserializer = new JsonModelDeserializer<JsonRoomDetailModel>();
             var model = deserializer.Deserialize(response.ResponseString);
             model.DeserializeModel();

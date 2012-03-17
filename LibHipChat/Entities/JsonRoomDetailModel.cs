@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using LibHipChat.Contracts;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace LibHipChat.Entities
 {
@@ -15,6 +16,9 @@ namespace LibHipChat.Entities
 
         public void DeserializeModel()
         {
+            var participants = (JArray) Data["participants"];
+            
+
             RoomInfo = new RoomDetail()
                            {
                                Id = Convert.ToInt32(Data["room_id"]),
@@ -28,6 +32,15 @@ namespace LibHipChat.Entities
                                GuestAccessURL = (string) Data["guest_access_url"],
                                JabberId = (string) Data["xmpp_jid"]
                            };
+
+            foreach (var participant in participants)
+            {
+                RoomInfo.Participants.Add(new User()
+                                              {
+                                                  UserId = (int) participant["user_id"],
+                                                  Name = participant["name"].ToString()
+                                              });
+            }
         }
     }
 }

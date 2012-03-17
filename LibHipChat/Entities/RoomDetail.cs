@@ -9,6 +9,12 @@ namespace LibHipChat.Entities
         public IList<User> Participants { get; set; }
 
         [JsonProperty ("guest_access_url") ]
-        public string GuestAccessURL { get; set; }
+        public string GuestAccessURL { get; set; }        
+
+
+        public RoomDetail ()
+        {
+            Participants = new List<User>();
+        }
     }
 }

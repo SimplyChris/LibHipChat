@@ -56,8 +56,6 @@ namespace LibHipChat.Proxy.Tests
             
             var status = _proxy.MessageRoom("52400", "Automation", message);
 
-            //Assert.That(response.ResponseString, Is.EqualTo("{\"status\":\"sent\"}"));
-            
 
             Assert.That(status.Status, Is.EqualTo("sent"));
         }
@@ -97,6 +95,7 @@ namespace LibHipChat.Proxy.Tests
             var result = _proxy.GetRoomInfo(roomId);
 
             Assert.That(result.Name, Is.EqualTo(expectedName));
+            Assert.That(result.Participants.Count(x => x.Name == "Dharma Soft"), Is.EqualTo(1));
         }
 
         [Test]
