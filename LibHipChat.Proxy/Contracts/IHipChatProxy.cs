@@ -11,6 +11,7 @@ namespace LibHipChat.Proxy.Contracts
         HipChatStatus MessageRoom(string roomId, string from, string message);
         IList<User> GetUsers();
         IList<Room> GetRooms();
+        RoomDetail GetRoomInfo(string roomId);
     }
 
 }

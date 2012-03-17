@@ -5,6 +5,7 @@ using Newtonsoft.Json;
 
 namespace LibHipChat.Entities
 {
+    [JsonObject("room", MemberSerialization = MemberSerialization.OptIn)]   
     public class Room
     {
         [JsonProperty ("room_id")]

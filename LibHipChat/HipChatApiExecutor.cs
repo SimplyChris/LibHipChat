@@ -47,7 +47,7 @@ namespace LibHipChat
 
         private void WriteActionParms (HipChatConnection connection, IEnumerable<KeyValuePair<string, string>> actionParms )
         {
-            if (!actionParms.Any())
+            if (!actionParms.Any() || connection.Method.ToUpper() == "GET")
                 return;
 
             var request = connection.GetRequest();
@@ -59,7 +59,7 @@ namespace LibHipChat
             {
                 queryStringHelper.Add(kvPair.Key, HttpUtility.UrlEncode(kvPair.Value));
             }
-
+            
             var postString = queryStringHelper.PostStringValue;
             var bytes = System.Text.Encoding.UTF8.GetBytes(postString);
 

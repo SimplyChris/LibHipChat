@@ -22,7 +22,7 @@ namespace LibHipChat.Domain.Tests
         public void Setup ()
         {            
             _queryStringHelper = new QueryStringHelper();
-            _context = new HipChatContext(_baseApiUrl, _apiKey, ActionKey.ListUsers, HipChatResponseFormat.Json);
+            _context = new HipChatContext(_baseApiUrl, _apiKey, ActionKey.ListUsers,new Dictionary<string, string>());
         }
 
         [Test]

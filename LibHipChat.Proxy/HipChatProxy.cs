@@ -108,5 +108,23 @@ namespace LibHipChat.Proxy
 
             return model.Model;
         }
+
+        public RoomDetail GetRoomInfo(string roomId)
+        {
+            var actionParms = new Dictionary<string, string>() { { "room_id", roomId } };
+
+            var connection = _factory.Create(ActionKey.ShowRoom,actionParms);
+
+            var executor = new HipChatApiExecutor(connection,actionParms);
+
+            var response = executor.Execute();
+
+            var testModel =(JsonConvert.DeserializeObject(response.ResponseString));           
+            var deserializer = new JsonModelDeserializer<JsonRoomDetailModel>();
+            var model = deserializer.Deserialize(response.ResponseString);
+            model.DeserializeModel();
+
+            return model.RoomInfo;
+        }
     }
 }

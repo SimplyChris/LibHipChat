@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Configuration;
 using LibHipChat.Contracts;
+using LibHipChat.Helpers;
 
 namespace LibHipChat
 {
@@ -14,16 +16,20 @@ namespace LibHipChat
         }
         
 
-        public HipChatConnection Create(ActionKey action)
+        public HipChatConnection Create (ActionKey action, IDictionary<string,string> actionParms)
         {
-            var connection = new HipChatConnection (connectionSettings, CreateContext(action));
-            
+            var connection = new HipChatConnection(connectionSettings, CreateContext(action,actionParms));
             return connection;
         }
 
-        private HipChatContext CreateContext (ActionKey action)
+        public HipChatConnection Create(ActionKey action)
         {
-            return new HipChatContext(connectionSettings.BaseApiUrl, connectionSettings.AuthKey, action, HipChatResponseFormat.Json);
+            return Create(action, null);            
+        }
+
+        private HipChatContext CreateContext (ActionKey action, IDictionary<string,string> actionParms )
+        {
+            return new HipChatContext(connectionSettings.BaseApiUrl, connectionSettings.AuthKey, action, actionParms);
         }
     }
 }               

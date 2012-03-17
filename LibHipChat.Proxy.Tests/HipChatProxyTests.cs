@@ -90,6 +90,16 @@ namespace LibHipChat.Proxy.Tests
         }
 
         [Test]
+        public void should_be_able_to_get_room_info ()
+        {
+            var roomId = "52403";
+            var expectedName = "Notifications";
+            var result = _proxy.GetRoomInfo(roomId);
+
+            Assert.That(result.Name, Is.EqualTo(expectedName));
+        }
+
+        [Test]
         public void all_action_keys_should_return_an_action_url ()
         {            
             foreach (ActionKey action in Enum.GetValues(typeof(ActionKey)))

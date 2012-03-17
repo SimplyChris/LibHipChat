@@ -15,8 +15,8 @@ namespace LibHipChat
         private HipChatConnectionSettings _connectionSettings;
         public String ConnectionUrl { get { return _webRequest.RequestUri.ToString(); } }
         public String Response { get { return _responseString; } }
-        
 
+        public String Method { get { return _webRequest.Method; } }
         public HipChatConnection (HipChatConnectionSettings settings, HipChatContext context)
         {
             _connectionSettings = settings;

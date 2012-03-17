@@ -53,6 +53,7 @@
     <Compile Include="Contracts\IHipChatModel.cs" />
     <Compile Include="Contracts\IJsonDeserializer.cs" />
     <Compile Include="Contracts\IJsonModel.cs" />
+    <Compile Include="Entities\JsonRoomDetailModel.cs" />
     <Compile Include="Entities\JsonRoomsModel.cs" />
     <Compile Include="Entities\NewUser.cs" />
     <Compile Include="Entities\HipChatModel.cs" />
