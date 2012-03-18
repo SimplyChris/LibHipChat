@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Net;
 using System.Runtime.Serialization;
 using System.Text;
 using LibHipChat.Entities;
@@ -28,14 +29,21 @@ namespace LibHipChat.Proxy
                                   };
             var executer = new HipChatApiExecutor(_connection, actionParms);
 
-            var response = executer.Execute();
+            try
+            {
+                var response = executer.Execute();
 
-            var deserializer = new JsonModelDeserializer<HipChatDeleteResponse>();
+                var deserializer = new JsonModelDeserializer<HipChatDeleteResponse>();
 
-            var model = deserializer.Deserialize(response.ResponseString);
-
-            return model;
-
+                var model = deserializer.Deserialize(response.ResponseString);
+                return model;
+            }
+                
+            catch(WebException ex)
+            {
+                var model = new HipChatDeleteResponse() {WasDeleted = false};
+                return model;
+            }            
         }
 
         public NewUser CreateUser(string email, string name, string title, string is_group_admin = "0")

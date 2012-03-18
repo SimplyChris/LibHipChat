@@ -51,8 +51,8 @@ namespace LibHipChat
                     var response = (HttpWebResponse)ex.Response;
 
                     _stream = response.GetResponseStream();
-                }
-                throw;
+                    throw;
+                }                
             }
 
             return _stream;
