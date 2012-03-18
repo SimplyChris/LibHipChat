@@ -19,9 +19,23 @@ namespace LibHipChat.Proxy
             _factory = factory;
         }
       
-        public HipChatResponse DeleteUser(string userId)
+        public HipChatDeleteResponse DeleteUser(string userId)
         {
-            throw new NotImplementedException();
+            var _connection = _factory.Create(ActionKey.DeleteUser);
+            var actionParms = new Dictionary<string, string>
+                                  {
+                                      {"user_id", userId}                                      
+                                  };
+            var executer = new HipChatApiExecutor(_connection, actionParms);
+
+            var response = executer.Execute();
+
+            var deserializer = new JsonModelDeserializer<HipChatDeleteResponse>();
+
+            var model = deserializer.Deserialize(response.ResponseString);
+
+            return model;
+
         }
 
         public NewUser CreateUser(string email, string name, string title, string is_group_admin = "0")
@@ -66,11 +80,9 @@ namespace LibHipChat.Proxy
 
             var deserializer = new JsonModelDeserializer<HipChatStatus>();
 
-            var model = deserializer.Deserialize(response.ResponseString);
+            var model = deserializer.Deserialize(response.ResponseString);            
 
-            response.Model = model;
-
-            return (HipChatStatus) response.Model;
+            return model;
         }
         
         public IList<User> GetUserList()

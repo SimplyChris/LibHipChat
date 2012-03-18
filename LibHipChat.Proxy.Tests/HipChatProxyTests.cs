@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Diagnostics;
 using System.Linq;
+using System.Net;
 using LibHipChat.Entities;
 using LibHipChat.Helpers;
 using LibHipChat.Proxy;
@@ -62,9 +63,7 @@ namespace LibHipChat.Proxy.Tests
 
         [Test]
         public void should_be_able_to_create_user()
-        {
-            _connection = _connectionFactory.Create(ActionKey.CreateUser);
-
+        {            
             var newUser = _proxy.CreateUser("testing@losmorgans.com", "Auto Created User.", "TESTER","0");
          
             
@@ -75,16 +74,43 @@ namespace LibHipChat.Proxy.Tests
         [Test]
         public void should_be_able_to_delete_user ()
         {
-            _connection = _connectionFactory.Create(ActionKey.DeleteUser);
-            var actionParms = new Dictionary<string, string>
-                                  {
-                                      {"user_id", "testing@losmorgans.com"}                                      
-                                  };
-            var executer = new HipChatApiExecutor(_connection, actionParms);
+            var response = _proxy.DeleteUser("testing@losmorgans.com");
 
-            var response = executer.Execute();
-            
-            Assert.That(response.ResponseString.Contains(""), Is.True);
+            Assert.That(response.WasDeleted, Is.EqualTo(true));
+        }
+
+        [Test]
+        public void should_get_proper_repsonse_for_delete_of_invalid_user ()
+        {
+            var response = _proxy.DeleteUser("invalid_user@losmorgans.com");
+            Assert.That(response.WasDeleted, Is.EqualTo(false));
+        }
+
+        [Test]
+        public void should_throw_web_exception_on_create_of_duplicate_user ()
+        {
+            try
+            {
+                var result = _proxy.CreateUser("duptest@tzoc.org", "Duplicate User", "Minion", "0");
+
+                Assert.Throws<WebException>(CreateDuplicateUser);
+            }
+            catch (WebException ex)
+            {
+                                    
+            }
+            finally
+            {
+                var userList = _proxy.GetUserList();
+
+                var dupUserId = userList.SingleOrDefault(x => x.Email == "duptest@tzoc.org").UserId.ToString();
+                _proxy.DeleteUser(dupUserId);
+            }
+        }
+
+        private void CreateDuplicateUser ()
+        {
+            _proxy.CreateUser("duptest@tzoc.org", "Duplicate User", "Minion", "0");
         }
 
         [Test]

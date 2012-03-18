@@ -72,6 +72,7 @@
     <Compile Include="HipChatResponse.cs" />
     <Compile Include="HipChatResponseFormat.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Proxy\HipChatDeleteResponse.cs" />
     <Compile Include="Proxy\HipChatStatus.cs" />
     <Compile Include="Proxy\JsonModel.cs" />
     <Compile Include="Proxy\JsonModelDeserializer.cs" />

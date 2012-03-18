@@ -6,7 +6,7 @@ namespace LibHipChat
     public enum ResultCode
     {
         OK,
-        BadRequest,
+        BadRequest = 400,
         Unauthorized,
         Forbidden,
         NotFound,

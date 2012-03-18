@@ -10,12 +10,14 @@ namespace LibHipChat
     public class HipChatConnection : WebRequest
     {
         private HttpWebRequest _webRequest;
+        private HttpWebResponse _webResponse;
         private string _responseString = "";
         private Stream _stream;
+        private string _responseCode = "";
         private HipChatConnectionSettings _connectionSettings;
         public String ConnectionUrl { get { return _webRequest.RequestUri.ToString(); } }
         public String Response { get { return _responseString; } }
-
+        public String ResponseCode { get { return _webResponse.StatusCode.ToString(); } }
         public String Method { get { return _webRequest.Method; } }
         public HipChatConnection (HipChatConnectionSettings settings, HipChatContext context)
         {
@@ -33,8 +35,15 @@ namespace LibHipChat
             try
             {
                
-                var response = (HttpWebResponse)_webRequest.GetResponse();
-                _stream = response.GetResponseStream();
+                _webResponse = (HttpWebResponse)_webRequest.GetResponse();                
+                if (_webResponse.StatusCode.ToString() == ResultCode.BadRequest.ToString())
+                {
+                    throw (new WebException(
+                        String.Format("WebException: {0} - {1}", _webResponse.StatusCode.ToString(),
+                                      _webResponse.StatusDescription), new Exception(), WebExceptionStatus.ProtocolError,
+                        _webResponse));
+                }
+                _stream = _webResponse.GetResponseStream();
             }
             catch (WebException ex)
             {
@@ -42,7 +51,8 @@ namespace LibHipChat
                     var response = (HttpWebResponse)ex.Response;
 
                     _stream = response.GetResponseStream();
-                }                
+                }
+                throw;
             }
 
             return _stream;
