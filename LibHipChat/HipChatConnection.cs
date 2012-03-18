@@ -48,9 +48,9 @@ namespace LibHipChat
             catch (WebException ex)
             {
                 if (ex.Status == WebExceptionStatus.ProtocolError) {
-                    var response = (HttpWebResponse)ex.Response;
+                    _webResponse = (HttpWebResponse)ex.Response;
 
-                    _stream = response.GetResponseStream();
+                    _stream = _webResponse.GetResponseStream();
                     throw;
                 }                
             }

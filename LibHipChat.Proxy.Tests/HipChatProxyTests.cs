@@ -87,17 +87,19 @@ namespace LibHipChat.Proxy.Tests
         }
 
         [Test]
-        public void should_throw_web_exception_on_create_of_duplicate_user ()
+        public void should_set_proper_error_model_when_creating_a_duplicate_user ()
         {
             try
             {
                 var result = _proxy.CreateUser("duptest@tzoc.org", "Duplicate User", "Minion", "0");
-
-                Assert.Throws<WebException>(CreateDuplicateUser);
+                _proxy.CreateUser("duptest@tzoc.org", "Duplicate User", "Minion", "0");
+                Assert.That(_proxy.LastError.ErrorResult, Is.EqualTo(ResultCode.BadRequest));
             }
             catch (WebException ex)
             {
-                                    
+                var lastError = _proxy.LastError;
+
+                Assert.That(lastError.ErrorResult, Is.EqualTo(ResultCode.BadRequest));
             }
             finally
             {

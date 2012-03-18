@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System;using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Net;
@@ -14,6 +13,8 @@ namespace LibHipChat.Proxy
     public class HipChatProxy : IHipChatProxy
     {
         private HipChatConnectionFactory _factory;
+
+        public ErrorModel LastError { get; set; }
 
         public HipChatProxy (HipChatConnectionFactory factory)
         {
@@ -34,10 +35,12 @@ namespace LibHipChat.Proxy
                 var response = executer.Execute();
 
                 var deserializer = new JsonModelDeserializer<HipChatDeleteResponse>();
-
+                
                 var model = deserializer.Deserialize(response.ResponseString);
+                
                 return model;
             }
+
                 
             catch(WebException ex)
             {
@@ -60,14 +63,29 @@ namespace LibHipChat.Proxy
 
             var executor = new HipChatApiExecutor(connection, actionParms);
 
-            var response = executor.Execute();
 
-            var deserializer = new JsonModelDeserializer<JsonUserModel>();
+            try
+            {
+                var response = executor.Execute();
 
-            var model = deserializer.Deserialize(response.ResponseString);            
-            model.DeserializeModel();
+                var deserializer = new JsonModelDeserializer<JsonUserModel>();
 
-            return model.User;
+                var model = deserializer.Deserialize(response.ResponseString);
+                model.DeserializeModel();
+
+                return model.User;
+            }
+
+            catch (WebException ex)
+            {
+                ResultCode resultCode;
+
+
+                ResultCode.TryParse(connection.ResponseCode.ToString(), out resultCode);
+
+                LastError = new ErrorModel() {ErrorResult = resultCode};    
+                return new NewUser() {UserId = -1};   
+            }
         }
 
         public HipChatStatus MessageRoom(string roomId, string from, string message)
@@ -121,10 +139,7 @@ namespace LibHipChat.Proxy
 
             var model = deserializer.Deserialize(response.ResponseString);
 
-            model.DeserializeModel();
-            
-
-            //response.Model = rooms;
+            model.DeserializeModel();                        
 
             return model.Model;
         }
@@ -145,5 +160,7 @@ namespace LibHipChat.Proxy
 
             return model.RoomInfo;
         }
+
+        
     }
 }
