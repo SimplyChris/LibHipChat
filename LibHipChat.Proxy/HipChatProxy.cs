@@ -78,14 +78,29 @@ namespace LibHipChat.Proxy
 
             catch (WebException ex)
             {
-                ResultCode resultCode;
-
-
-                ResultCode.TryParse(connection.ResponseCode.ToString(), out resultCode);
-
-                LastError = new ErrorModel() {ErrorResult = resultCode};    
+                LastError = GetError(connection);
                 return new NewUser() {UserId = -1};   
             }
+        }
+
+        ErrorModel GetError (HipChatConnection _connection)
+        {
+            ResultCode resultCode;
+
+            ResultCode.TryParse(_connection.ResponseCode, out resultCode);
+
+            if (resultCode == ResultCode.BadRequest)
+            {
+                var responseString = new StreamReader(_connection.ErrorStream).ReadToEnd();
+                var deserializer = new JsonModelDeserializer<JsonErrorModel>();
+
+                var model = deserializer.Deserialize(responseString);
+                model.DeserializeModel();
+
+                LastError = model.ErrorModel;
+            }
+
+            return LastError;
         }
 
         public HipChatStatus MessageRoom(string roomId, string from, string message)

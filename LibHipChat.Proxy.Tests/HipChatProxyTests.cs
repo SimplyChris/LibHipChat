@@ -91,9 +91,11 @@ namespace LibHipChat.Proxy.Tests
         {
             try
             {
-                var result = _proxy.CreateUser("duptest@tzoc.org", "Duplicate User", "Minion", "0");
-                _proxy.CreateUser("duptest@tzoc.org", "Duplicate User", "Minion", "0");
+                CreateDuplicateUser();
+                CreateDuplicateUser();
+                                
                 Assert.That(_proxy.LastError.ErrorResult, Is.EqualTo(ResultCode.BadRequest));
+                Assert.That(_proxy.LastError.Message, Is.EqualTo("Email already in use"));
             }
             catch (WebException ex)
             {

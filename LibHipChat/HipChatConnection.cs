@@ -13,12 +13,14 @@ namespace LibHipChat
         private HttpWebResponse _webResponse;
         private string _responseString = "";
         private Stream _stream;
+        private Stream _errorStream;
         private string _responseCode = "";
         private HipChatConnectionSettings _connectionSettings;
         public String ConnectionUrl { get { return _webRequest.RequestUri.ToString(); } }
         public String Response { get { return _responseString; } }
         public String ResponseCode { get { return _webResponse.StatusCode.ToString(); } }
         public String Method { get { return _webRequest.Method; } }
+        public Stream ErrorStream { get { return _errorStream; } }
         public HipChatConnection (HipChatConnectionSettings settings, HipChatContext context)
         {
             _connectionSettings = settings;
@@ -50,7 +52,7 @@ namespace LibHipChat
                 if (ex.Status == WebExceptionStatus.ProtocolError) {
                     _webResponse = (HttpWebResponse)ex.Response;
 
-                    _stream = _webResponse.GetResponseStream();
+                    _errorStream = _webResponse.GetResponseStream();
                     throw;
                 }                
             }
