@@ -1,6 +1,7 @@
 ﻿using System;using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Runtime.Serialization;
 using System.Text;
@@ -15,6 +16,18 @@ namespace LibHipChat.Proxy
         private HipChatConnectionFactory _factory;
 
         public ErrorModel LastError { get; set; }
+        
+        
+        public int GetUserId(string email)
+        {
+            var list = GetUserList();
+
+
+            if (!list.Any())
+                return -1;
+
+            return list.SingleOrDefault(x => x.Email == email).UserId;
+        }
 
         public HipChatProxy (HipChatConnectionFactory factory)
         {
@@ -83,7 +96,36 @@ namespace LibHipChat.Proxy
             }
         }
 
-        ErrorModel GetError (HipChatConnection _connection)
+        public User GetUser(int userId)
+        {
+            var _connection = _factory.Create(ActionKey.ShowUser);
+            var actionParms = new Dictionary<string, string>
+                                  {
+                                      {"user_id", userId.ToString()}                                      
+                                  };
+            var executer = new HipChatApiExecutor(_connection, actionParms);
+
+            try
+            {
+                var response = executer.Execute();
+
+                var deserializer = new JsonModelDeserializer<JsonUserModel>();
+
+                var model = deserializer.Deserialize(response.ResponseString);
+               
+
+                return model.User;
+            }
+
+
+            catch (WebException ex)
+            {
+                //var model = new HipChatDeleteResponse() { WasDeleted = false };
+                return null;
+            }            
+        }
+
+        private ErrorModel GetError (HipChatConnection _connection)
         {
             ResultCode resultCode;
 

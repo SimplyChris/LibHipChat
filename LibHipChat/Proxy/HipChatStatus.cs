@@ -7,6 +7,6 @@ namespace LibHipChat.Proxy
     public class HipChatStatus : IHipChatModel 
     {
         [JsonProperty ("Status")]
-        public String Status { get; set; }     
+        public String Status { get; set; } 
     }
 }

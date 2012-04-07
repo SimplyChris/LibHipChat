@@ -129,6 +129,30 @@ namespace LibHipChat.Proxy.Tests
         }
 
         [Test]
+        public void should_be_able_to_get_user ()
+        {            
+            var expectedEmail = "testing@losmorgans.com";            
+
+            var result = _proxy.GetUser(80300);
+
+            
+
+            Assert.That(result.Email, Is.EqualTo(expectedEmail));
+        }
+
+        [Test]
+        public void should_get_correct_user_id ()
+        {
+            var expectedUserId = 80295;
+
+
+            var id = _proxy.GetUserId("family@losmorgans.com");
+
+            Assert.That(id, Is.EqualTo(expectedUserId));
+
+        }
+
+        [Test]
         public void all_action_keys_should_return_an_action_url ()
         {            
             foreach (ActionKey action in Enum.GetValues(typeof(ActionKey)))
