@@ -64,17 +64,17 @@ namespace LibHipChat.Proxy.Tests
         [Test]
         public void should_be_able_to_create_user()
         {            
-            var newUser = _proxy.CreateUser("testing@losmorgans.com", "Auto Created User.", "TESTER","0");
+            var newUser = _proxy.CreateUser("user_call_testing@losmorgans.com", "Auto Created User.", "TESTER","0");
          
             
             Assert.That(newUser.Title, Is.EqualTo("TESTER"));
-            Assert.That(newUser.Password.Length, Is.GreaterThan(0));
+            Assert.That(newUser.Password.Length, Is.GreaterThan(1));
         }
 
         [Test]
         public void should_be_able_to_delete_user ()
         {
-            var response = _proxy.DeleteUser("testing@losmorgans.com");
+            var response = _proxy.DeleteUser("user_call_testing@losmorgans.com");
 
             Assert.That(response.WasDeleted, Is.EqualTo(true));
         }
@@ -137,7 +137,7 @@ namespace LibHipChat.Proxy.Tests
 
             
 
-            Assert.That(result.Email, Is.EqualTo(expectedEmail));
+            Assert.That(result.Email, Is.EqualTo(expectedEmail));           
         }
 
         [Test]

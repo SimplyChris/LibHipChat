@@ -22,7 +22,7 @@ namespace LibHipChat.Entities
                 Status = Data["status"],
                 PhotoUrl = Data["photo_url"],
                 StatusMessage = Data["status_message"],
-                Password = Data["password"]
+                Password = Data.ContainsKey("password") ? Data["password"] : String.Empty
             };
         }
     }

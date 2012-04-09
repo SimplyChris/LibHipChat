@@ -98,11 +98,13 @@ namespace LibHipChat.Proxy
 
         public User GetUser(int userId)
         {
-            var _connection = _factory.Create(ActionKey.ShowUser);
+            
             var actionParms = new Dictionary<string, string>
                                   {
                                       {"user_id", userId.ToString()}                                      
                                   };
+            
+            var _connection = _factory.Create(ActionKey.ShowUser, actionParms);
             var executer = new HipChatApiExecutor(_connection, actionParms);
 
             try
@@ -112,7 +114,7 @@ namespace LibHipChat.Proxy
                 var deserializer = new JsonModelDeserializer<JsonUserModel>();
 
                 var model = deserializer.Deserialize(response.ResponseString);
-               
+                model.DeserializeModel();
 
                 return model.User;
             }
