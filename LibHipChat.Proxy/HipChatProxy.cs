@@ -96,6 +96,19 @@ namespace LibHipChat.Proxy
             }
         }
 
+        public User UpdateUser (NewUser user)
+        {
+            var currentUserState = GetUser(user.UserId);
+
+            if (currentUserState.UserId != user.UserId)
+                return new User() {UserId = -1};
+
+            var updatedUser = new User() {UserId = -1};
+
+            return updatedUser;
+
+        }
+
         public User GetUser(int userId)
         {
             
