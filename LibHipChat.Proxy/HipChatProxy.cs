@@ -15,8 +15,7 @@ namespace LibHipChat.Proxy
     {
         private HipChatConnectionFactory _factory;
 
-        public ErrorModel LastError { get; set; }
-        
+        public ErrorModel LastError { get; set; }        
         
         public int GetUserId(string email)
         {
@@ -75,7 +74,7 @@ namespace LibHipChat.Proxy
                                   };
 
             var executor = new HipChatApiExecutor(connection, actionParms);
-
+            
 
             try
             {

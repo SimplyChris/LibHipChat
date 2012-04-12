@@ -13,7 +13,8 @@ namespace LibHipChat
     public class HipChatApiExecutor
     {
         private HipChatConnection _connection;
-        private IEnumerable<KeyValuePair<string, string>> _actionParms;       
+        private IEnumerable<KeyValuePair<string, string>> _actionParms;
+        private int _apiCallsRemaining;
 
         public HipChatApiExecutor (HipChatConnection connection) : this (connection, new Dictionary<string,string>())
         {                                                                                         
@@ -39,9 +40,14 @@ namespace LibHipChat
         public HipChatResponse Execute ()
         {
             WriteActionParms(_connection, _actionParms);
-            var responseString = GetResponseString();            
-                       
-            var response = new HipChatResponse() {ResponseString = responseString};
+            var responseString = GetResponseString();
+
+            var headers = _connection.GetWebHeaders();
+
+            Int32.TryParse(headers.Get("X-RateLimit-Remaining"), out _apiCallsRemaining);
+            
+            var response = new HipChatResponse() {ResponseString = responseString, ApiCallsRemaining = _apiCallsRemaining};
+            
             return response;
         }
 

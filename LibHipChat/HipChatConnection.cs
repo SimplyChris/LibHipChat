@@ -21,6 +21,7 @@ namespace LibHipChat
         public String ResponseCode { get { return _webResponse.StatusCode.ToString(); } }
         public String Method { get { return _webRequest.Method; } }
         public Stream ErrorStream { get { return _errorStream; } }
+
         public HipChatConnection (HipChatConnectionSettings settings, HipChatContext context)
         {
             _connectionSettings = settings;
@@ -68,6 +69,11 @@ namespace LibHipChat
         public new Stream GetRequestStream ()
         {            
             return _webRequest.GetRequestStream();
+        }
+
+        public WebHeaderCollection GetWebHeaders ()
+        {
+            return _webResponse.Headers;
         }
         
         private HttpWebRequest CreateWebRequest (HipChatConnectionSettings settings, HipChatContext context)

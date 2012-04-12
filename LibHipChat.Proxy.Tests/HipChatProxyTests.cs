@@ -153,6 +153,12 @@ namespace LibHipChat.Proxy.Tests
         }
 
         [Test]
+        public void api_calls_remaning_should_decrease ()
+        {            
+            var roomList = _proxy.GetRoomList();
+        }
+
+        [Test]
         public void all_action_keys_should_return_an_action_url ()
         {            
             foreach (ActionKey action in Enum.GetValues(typeof(ActionKey)))
