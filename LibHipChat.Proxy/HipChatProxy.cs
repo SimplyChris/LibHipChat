@@ -14,9 +14,10 @@ namespace LibHipChat.Proxy
     public class HipChatProxy : IHipChatProxy
     {
         private HipChatConnectionFactory _factory;
+        private HipChatApiExecutor _executor;
 
-        public ErrorModel LastError { get; set; }        
-        
+        public ErrorModel LastError { get; set; }
+        public Int32 ApiCallsRemaining { get { return _executor.ApiCallsRemaining; } }
         public int GetUserId(string email)
         {
             var list = GetUserList();
@@ -31,6 +32,8 @@ namespace LibHipChat.Proxy
         public HipChatProxy (HipChatConnectionFactory factory)
         {
             _factory = factory;
+
+            _executor = new HipChatApiExecutor();
         }
       
         public HipChatDeleteResponse DeleteUser(string userId)
@@ -40,11 +43,10 @@ namespace LibHipChat.Proxy
                                   {
                                       {"user_id", userId}                                      
                                   };
-            var executer = new HipChatApiExecutor(_connection, actionParms);
-
+           
             try
             {
-                var response = executer.Execute();
+                var response = _executor.Execute(_connection, actionParms);
 
                 var deserializer = new JsonModelDeserializer<HipChatDeleteResponse>();
                 
@@ -72,13 +74,10 @@ namespace LibHipChat.Proxy
                                       {"title", title},
                                       {"is_group_admin", is_group_admin}
                                   };
-
-            var executor = new HipChatApiExecutor(connection, actionParms);
-            
-
+                      
             try
             {
-                var response = executor.Execute();
+                var response = _executor.Execute(connection, actionParms);
 
                 var deserializer = new JsonModelDeserializer<JsonUserModel>();
 
@@ -117,11 +116,10 @@ namespace LibHipChat.Proxy
                                   };
             
             var _connection = _factory.Create(ActionKey.ShowUser, actionParms);
-            var executer = new HipChatApiExecutor(_connection, actionParms);
 
             try
             {
-                var response = executer.Execute();
+                var response = _executor.Execute(_connection, actionParms);
 
                 var deserializer = new JsonModelDeserializer<JsonUserModel>();
 
@@ -171,9 +169,9 @@ namespace LibHipChat.Proxy
                                       {"message", message}
                                   };
 
-            var executor = new HipChatApiExecutor(connection, actionParms);
+            
 
-            var response = executor.Execute();
+            var response = _executor.Execute(connection, actionParms);
 
             var deserializer = new JsonModelDeserializer<HipChatStatus>();
 
@@ -184,11 +182,9 @@ namespace LibHipChat.Proxy
         
         public IList<User> GetUserList()
         {
-            var connection = _factory.Create(ActionKey.ListUsers);
-            
-            var apiExecutor = new HipChatApiExecutor(connection);            
+            var connection = _factory.Create(ActionKey.ListUsers);                       
 
-            var response = apiExecutor.Execute();
+            var response = _executor.Execute(connection, null);
 
             var deserializer = new JsonModelDeserializer <JsonUsersModel>();
 
@@ -202,9 +198,9 @@ namespace LibHipChat.Proxy
         {
 
             var connection = _factory.Create(ActionKey.ListRooms);
-            var executor = new HipChatApiExecutor(connection);
+            
 
-            var response = executor.Execute();
+            var response = _executor.Execute(connection,null);
 
             var deserializer = new JsonModelDeserializer<JsonRoomsModel>();
 
@@ -219,11 +215,9 @@ namespace LibHipChat.Proxy
         {
             var actionParms = new Dictionary<string, string>() { { "room_id", roomId } };
 
-            var connection = _factory.Create(ActionKey.ShowRoom,actionParms);
+            var connection = _factory.Create(ActionKey.ShowRoom,actionParms);            
 
-            var executor = new HipChatApiExecutor(connection,actionParms);
-
-            var response = executor.Execute();
+            var response = _executor.Execute(connection, actionParms);
 
             var deserializer = new JsonModelDeserializer<JsonRoomDetailModel>();
             var model = deserializer.Deserialize(response.ResponseString);

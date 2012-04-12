@@ -156,6 +156,11 @@ namespace LibHipChat.Proxy.Tests
         public void api_calls_remaning_should_decrease ()
         {            
             var roomList = _proxy.GetRoomList();
+            var beforeCallsRemaining = _proxy.ApiCallsRemaining;
+
+            var room = _proxy.GetRoomInfo(roomList[0].Id.ToString());
+
+            Assert.That(beforeCallsRemaining, Is.GreaterThan(_proxy.ApiCallsRemaining));
         }
 
         [Test]

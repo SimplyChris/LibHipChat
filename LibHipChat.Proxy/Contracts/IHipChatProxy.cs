@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using LibHipChat.Entities;
 
 namespace LibHipChat.Proxy.Contracts
@@ -17,7 +18,7 @@ namespace LibHipChat.Proxy.Contracts
         RoomDetail GetRoomInfo(string roomId);
 
         ErrorModel LastError { get; set; }
-
+        Int32 ApiCallsRemaining { get; }
         int GetUserId(string email);
     }
 

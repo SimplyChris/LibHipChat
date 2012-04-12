@@ -16,17 +16,7 @@ namespace LibHipChat
         private IEnumerable<KeyValuePair<string, string>> _actionParms;
         private int _apiCallsRemaining;
 
-        public HipChatApiExecutor (HipChatConnection connection) : this (connection, new Dictionary<string,string>())
-        {                                                                                         
-            
-        }
-
-        public HipChatApiExecutor(HipChatConnection connection, IEnumerable<KeyValuePair<string, string>> actionParms)
-        {
-            _connection = connection;
-            _actionParms = actionParms;            
-        }
-
+        public Int32 ApiCallsRemaining { get { return _apiCallsRemaining; } }
         private String GetResponseString ()
         {
             var reader = new StreamReader(_connection.GetResponseStream());
@@ -34,23 +24,26 @@ namespace LibHipChat
             
                        
             return HttpUtility.UrlDecode(responseString);
-        }
-       
-        
-        public HipChatResponse Execute ()
+        }       
+
+        public HipChatResponse Execute (HipChatConnection connection, IEnumerable<KeyValuePair<string,string>> actionParms)
         {
+            _connection = connection;
+            _actionParms = actionParms ?? new Dictionary<string, string>();
+
             WriteActionParms(_connection, _actionParms);
             var responseString = GetResponseString();
 
             var headers = _connection.GetWebHeaders();
 
             Int32.TryParse(headers.Get("X-RateLimit-Remaining"), out _apiCallsRemaining);
-            
-            var response = new HipChatResponse() {ResponseString = responseString, ApiCallsRemaining = _apiCallsRemaining};
-            
+
+            var response = new HipChatResponse() { ResponseString = responseString, ApiCallsRemaining = _apiCallsRemaining };
+
             return response;
         }
-
+       
+        
         private void WriteActionParms (HipChatConnection connection, IEnumerable<KeyValuePair<string, string>> actionParms )
         {
             if (!actionParms.Any() || connection.Method.ToUpper() == "GET")
