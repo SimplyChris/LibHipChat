@@ -62,7 +62,9 @@
     <Compile Include="Entities\JsonUsersModel.cs" />
     <Compile Include="Entities\Room.cs" />
     <Compile Include="Entities\RoomDetail.cs" />
+    <Compile Include="Entities\RoomAction.cs" />
     <Compile Include="Entities\User.cs" />
+    <Compile Include="Entities\UserMessage.cs" />
     <Compile Include="Helpers\QueryStringHelper.cs" />
     <Compile Include="Helpers\UrlHelper.cs" />
     <Compile Include="HipChatApiExecutor.cs" />

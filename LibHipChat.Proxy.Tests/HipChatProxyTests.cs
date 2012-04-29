@@ -122,10 +122,12 @@ namespace LibHipChat.Proxy.Tests
         {
             var roomId = "52403";
             var expectedName = "Notifications";
+            var expectedTopic = "Room For Test Notifications";
+            
             var result = _proxy.GetRoomInfo(roomId);
 
-            Assert.That(result.Name, Is.EqualTo(expectedName));
-            Assert.That(result.Participants.Count(x => x.Name == "Dharma Soft"), Is.EqualTo(1));
+            Assert.That(result.Name, Is.EqualTo(expectedName));            
+            Assert.That(result.Topic, Is.EqualTo(expectedTopic));            
         }
 
         [Test]
