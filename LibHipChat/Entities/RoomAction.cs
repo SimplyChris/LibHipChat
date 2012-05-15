@@ -6,7 +6,7 @@ namespace LibHipChat.Entities
     {
         public DateTime Date { get; set; }
         public User From { get; set; }
-        //public ActionType {}
+        public ActionType Type { get; set; }
     }
 
     public enum ActionType 

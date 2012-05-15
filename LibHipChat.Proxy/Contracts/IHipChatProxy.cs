@@ -16,7 +16,7 @@ namespace LibHipChat.Proxy.Contracts
         IList<User> GetUserList();
         IList<Room> GetRoomList();
         RoomDetail GetRoomInfo(string roomId);
-        
+        IList<RoomAction> GetRecentRoomHistory(string roomid);
 
         ErrorModel LastError { get; set; }
         Int32 ApiCallsRemaining { get; }

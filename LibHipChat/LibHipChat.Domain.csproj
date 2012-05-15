@@ -63,6 +63,7 @@
     <Compile Include="Entities\Room.cs" />
     <Compile Include="Entities\RoomDetail.cs" />
     <Compile Include="Entities\RoomAction.cs" />
+    <Compile Include="Entities\RoomMessage.cs" />
     <Compile Include="Entities\User.cs" />
     <Compile Include="Entities\UserMessage.cs" />
     <Compile Include="Helpers\QueryStringHelper.cs" />

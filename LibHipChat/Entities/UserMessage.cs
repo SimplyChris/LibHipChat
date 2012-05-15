@@ -1,7 +1,14 @@
-﻿namespace LibHipChat.Entities
+﻿using LibHipChat.Contracts;
+
+namespace LibHipChat.Entities
 {
-    public class UserMessage
+    public class UserMessage : RoomMessage
     {
         private RoomAction _roomAction;
+            
+        public ActionType GetActionType()
+        {
+            return _roomAction.Type;
+        }
     }
 }

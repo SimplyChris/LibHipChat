@@ -17,7 +17,9 @@ namespace LibHipChat.Proxy
         private HipChatApiExecutor _executor;
 
         public ErrorModel LastError { get; set; }
+
         public Int32 ApiCallsRemaining { get { return _executor.ApiCallsRemaining; } }
+
         public int GetUserId(string email)
         {
             var list = GetUserList();
@@ -35,7 +37,7 @@ namespace LibHipChat.Proxy
 
             _executor = new HipChatApiExecutor();
         }
-      
+
         public HipChatDeleteResponse DeleteUser(string userId)
         {
             var _connection = _factory.Create(ActionKey.DeleteUser);
@@ -47,11 +49,8 @@ namespace LibHipChat.Proxy
             try
             {
                 var response = _executor.Execute(_connection, actionParms);
-
-                var deserializer = new JsonModelDeserializer<HipChatDeleteResponse>();
-                
-                var model = deserializer.Deserialize(response.ResponseString);
-                
+                var deserializer = new JsonModelDeserializer<HipChatDeleteResponse>();                
+                var model = deserializer.Deserialize(response.ResponseString);                
                 return model;
             }
 
@@ -78,12 +77,10 @@ namespace LibHipChat.Proxy
             try
             {
                 var response = _executor.Execute(connection, actionParms);
-
                 var deserializer = new JsonModelDeserializer<JsonUserModel>();
-
                 var model = deserializer.Deserialize(response.ResponseString);
-                model.DeserializeModel();
 
+                model.DeserializeModel();
                 return model.User;
             }
 
@@ -179,7 +176,7 @@ namespace LibHipChat.Proxy
 
             return model;
         }
-        
+
         public IList<User> GetUserList()
         {
             var connection = _factory.Create(ActionKey.ListUsers);                       
@@ -226,6 +223,15 @@ namespace LibHipChat.Proxy
             return model.RoomInfo;
         }
 
-        
+        public IList<RoomAction> GetRecentRoomHistory(string roomid)
+        {
+            var actionParms = new Dictionary<string, string>() {{"room_id", roomid}, {"date", "recent"}};
+            var connection = _factory.Create(ActionKey.GetRoomHistory, actionParms);
+            var response = _executor.Execute(connection, actionParms);
+
+            //var deserializer = new JsonModelDeserializer<Json>
+            
+            return new List<RoomAction>();
+        }
     }
 }
