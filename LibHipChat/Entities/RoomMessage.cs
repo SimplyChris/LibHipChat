@@ -1,8 +1,13 @@
 ﻿namespace LibHipChat.Entities
 {
-    public class RoomMessage
+    public abstract class RoomMessage
     {
-        
-     
+        private RoomAction _roomAction;
+
+
+        public ActionType GetActionType()
+        {
+            return _roomAction.Type;
+        }
     }
 }

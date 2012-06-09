@@ -83,7 +83,9 @@
     <Compile Include="Proxy\JsonModelDeserializer.cs" />
     <Compile Include="ResultCode.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Entities\Abstract\" />
+  </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>

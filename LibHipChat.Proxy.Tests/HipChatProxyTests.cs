@@ -116,7 +116,7 @@ namespace LibHipChat.Proxy.Tests
         {
             _proxy.CreateUser("duptest@tzoc.org", "Duplicate User", "Minion", "0");
         }
-
+        
         [Test]
         public void should_be_able_to_get_room_info ()
         {
@@ -136,9 +136,7 @@ namespace LibHipChat.Proxy.Tests
             var expectedEmail = "testing@losmorgans.com";            
 
             var result = _proxy.GetUser(80300);
-
-            
-
+          
             Assert.That(result.Email, Is.EqualTo(expectedEmail));           
         }
 

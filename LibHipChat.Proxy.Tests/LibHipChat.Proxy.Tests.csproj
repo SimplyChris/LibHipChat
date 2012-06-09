@@ -8,8 +8,8 @@
     <ProjectGuid>{D1F85E3D-67EE-42F4-A1D5-3038BB961592}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>LipHipChat.Proxy.Tests</RootNamespace>
-    <AssemblyName>LipHipChat.Proxy.Tests</AssemblyName>
+    <RootNamespace>LibHipChat.Proxy.Tests</RootNamespace>
+    <AssemblyName>LibHipChat.Proxy.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

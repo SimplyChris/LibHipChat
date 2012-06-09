@@ -16,6 +16,7 @@ namespace LibHipChat
         }
         
 
+        //TODO: Factory vs Builder
         public HipChatConnection Create (ActionKey action, IDictionary<string,string> actionParms)
         {
             var connection = new HipChatConnection(connectionSettings, CreateContext(action,actionParms));
