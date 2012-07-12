@@ -9,7 +9,7 @@ namespace LibHipChat.Entities
     public  class User : HipChatModel
     {
         [JsonProperty ("user_id")]
-        public Int32 UserId { get; set; }
+        public String UserId { get; set; }
 
         [JsonProperty ("name")]
         public String Name { get; set; }

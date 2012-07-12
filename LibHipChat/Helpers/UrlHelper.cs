@@ -73,6 +73,7 @@ namespace LibHipChat.Helpers
                 case ActionKey.ListUsers:
                 case ActionKey.ShowRoom:
                 case ActionKey.ShowUser:
+                case ActionKey.GetRoomHistory:
                     actionMethod = "GET";
                     break;
 

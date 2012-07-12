@@ -1,9 +1,20 @@
-﻿namespace LibHipChat.Entities
+﻿using LibHipChat.Entities;
+using Newtonsoft.Json;
+
+namespace LibHipChat.Entities
 {
-    public abstract class RoomMessage
+    [JsonObject (MemberSerialization = MemberSerialization.OptIn)]
+    public class RoomMessage
     {
         private RoomAction _roomAction;
 
+        
+        public string Message { get; set; }
+
+        [JsonProperty("from")]
+        public User User { get; set; }
+
+        
 
         public ActionType GetActionType()
         {

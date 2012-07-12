@@ -31,7 +31,7 @@ namespace LibHipChat.Entities
                 Email = dictionary["email"],
                 Name = dictionary["name"],
                 Title = dictionary["title"],
-                UserId = Convert.ToInt32(dictionary["user_id"]),
+                UserId = dictionary["user_id"],
                 Status = dictionary["status"],
                 PhotoUrl = dictionary["photo_url"],
                 StatusMessage = dictionary["status_message"]

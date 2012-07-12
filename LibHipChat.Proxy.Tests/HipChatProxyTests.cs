@@ -62,6 +62,19 @@ namespace LibHipChat.Proxy.Tests
         }
 
         [Test]
+        public void should_be_able_to_send_mention_message ()
+        {
+            string.Format("Integration Test Run At: {0}", DateTime.Now.ToString());
+            var message = string.Format("@DharmaSoft :-) -- Integration Test [should_be_able_to_send_mention_message] Run At: {0}",
+                                        DateTime.Now.ToString());
+
+            var status = _proxy.MessageRoom("52400", "Automation", message, MessageFormat.Text);
+
+
+            Assert.That(status.Status, Is.EqualTo("sent"));
+        }
+
+        [Test]
         public void should_be_able_to_create_user()
         {            
             var newUser = _proxy.CreateUser("user_call_testing@losmorgans.com", "Auto Created User.", "TESTER","0");
@@ -135,7 +148,7 @@ namespace LibHipChat.Proxy.Tests
         {            
             var expectedEmail = "testing@losmorgans.com";            
 
-            var result = _proxy.GetUser(80300);
+            var result = _proxy.GetUser("80300");
           
             Assert.That(result.Email, Is.EqualTo(expectedEmail));           
         }
@@ -143,7 +156,7 @@ namespace LibHipChat.Proxy.Tests
         [Test]
         public void should_get_correct_user_id ()
         {
-            var expectedUserId = 80295;
+            var expectedUserId = "80295";
 
 
             var id = _proxy.GetUserId("family@losmorgans.com");
@@ -152,6 +165,21 @@ namespace LibHipChat.Proxy.Tests
 
         }
 
+        [Test]
+        public void test_api_user ()
+        {
+            var user = _proxy.GetUser("api");
+            Assert.Pass();
+        }
+
+        [Test]
+        public void 
+            should_get_room_history ()
+        {
+            var roomId = "52403";
+            var response = _proxy.GetRecentRoomHistory(roomId);
+        }
+        
         [Test]
         public void api_calls_remaning_should_decrease ()
         {            

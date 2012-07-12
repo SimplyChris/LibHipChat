@@ -11,16 +11,16 @@ namespace LibHipChat.Proxy.Contracts
     {        
         HipChatDeleteResponse DeleteUser(string userId);
         NewUser CreateUser(string email, string name, string title, string is_group_admin);
-        User GetUser(int userId);
-        HipChatStatus MessageRoom(string roomId, string from, string message);
+        User GetUser (string userId);
+        HipChatStatus MessageRoom(string roomId, string from, string message, MessageFormat format = MessageFormat.Html);
         IList<User> GetUserList();
         IList<Room> GetRoomList();
         RoomDetail GetRoomInfo(string roomId);
-        IList<RoomAction> GetRecentRoomHistory(string roomid);
+        IList<RoomMessage> GetRecentRoomHistory(string roomid);
 
         ErrorModel LastError { get; set; }
         Int32 ApiCallsRemaining { get; }
-        int GetUserId(string email);
+        String GetUserId(string email);
     }
 
 }

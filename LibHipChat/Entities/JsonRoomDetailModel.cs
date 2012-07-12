@@ -37,7 +37,7 @@ namespace LibHipChat.Entities
             {
                 RoomInfo.Participants.Add(new User()
                                               {
-                                                  UserId = (int) participant["user_id"],
+                                                  UserId = participant["user_id"].ToString(),
                                                   Name = participant["name"].ToString()
                                               });
             }

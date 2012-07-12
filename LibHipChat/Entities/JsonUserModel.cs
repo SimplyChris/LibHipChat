@@ -18,7 +18,7 @@ namespace LibHipChat.Entities
                 Email = Data["email"],
                 Name =Data["name"],
                 Title = Data["title"],
-                UserId = Convert.ToInt32(Data["user_id"]),
+                UserId = Data["user_id"],
                 Status = Data["status"],
                 PhotoUrl = Data["photo_url"],
                 StatusMessage = Data["status_message"],

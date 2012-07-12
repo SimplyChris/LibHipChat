@@ -20,13 +20,13 @@ namespace LibHipChat.Proxy
 
         public Int32 ApiCallsRemaining { get { return _executor.ApiCallsRemaining; } }
 
-        public int GetUserId(string email)
+        public String GetUserId(string email)
         {
             var list = GetUserList();
 
 
             if (!list.Any())
-                return -1;
+                return null;
 
             return list.SingleOrDefault(x => x.Email == email).UserId;
         }
@@ -87,7 +87,7 @@ namespace LibHipChat.Proxy
             catch (WebException ex)
             {
                 LastError = GetError(connection);
-                return new NewUser() {UserId = -1};   
+                return new NewUser() {UserId = null};   
             }
         }
 
@@ -96,20 +96,20 @@ namespace LibHipChat.Proxy
             var currentUserState = GetUser(user.UserId);
 
             if (currentUserState.UserId != user.UserId)
-                return new User() {UserId = -1};
+                return new User() {UserId = null};
 
-            var updatedUser = new User() {UserId = -1};
+            var updatedUser = new User() {UserId = null};
 
             return updatedUser;
 
         }
 
-        public User GetUser(int userId)
+        public User GetUser(String userId)
         {
             
             var actionParms = new Dictionary<string, string>
                                   {
-                                      {"user_id", userId.ToString()}                                      
+                                      {"user_id", userId}                
                                   };
             
             var _connection = _factory.Create(ActionKey.ShowUser, actionParms);
@@ -154,7 +154,7 @@ namespace LibHipChat.Proxy
             return LastError;
         }
 
-        public HipChatStatus MessageRoom(string roomId, string from, string message)
+        public HipChatStatus MessageRoom(string roomId, string from, string message, MessageFormat format = MessageFormat.Html)
         {
             var connection = _factory.Create(ActionKey.MessageRoom);
 
@@ -163,7 +163,8 @@ namespace LibHipChat.Proxy
                                   {
                                       {"room_id", roomId},
                                       {"from", from},
-                                      {"message", message}
+                                      {"message", message},
+                                      {"message_format", format.ToString()}
                                   };
 
             
@@ -223,15 +224,17 @@ namespace LibHipChat.Proxy
             return model.RoomInfo;
         }
 
-        public IList<RoomAction> GetRecentRoomHistory(string roomid)
+        public IList<RoomMessage> GetRecentRoomHistory(string roomid)
         {
             var actionParms = new Dictionary<string, string>() {{"room_id", roomid}, {"date", "recent"}};
             var connection = _factory.Create(ActionKey.GetRoomHistory, actionParms);
             var response = _executor.Execute(connection, actionParms);
 
-            //var deserializer = new JsonModelDeserializer<Json>
-            
-            return new List<RoomAction>();
+            var deserializer = new JsonModelDeserializer<JsonRoomHistoryModel>();
+            var model = deserializer.Deserialize(response.ResponseString);
+            model.DeserializeModel();
+
+            return model.Model;
         }
     }
 }
