@@ -53,6 +53,8 @@
     <Compile Include="Contracts\IHipChatModel.cs" />
     <Compile Include="Contracts\IJsonDeserializer.cs" />
     <Compile Include="Contracts\IJsonModel.cs" />
+    <Compile Include="Entities\Abstract\MessageProcessorBase.cs" />
+    <Compile Include="Entities\FileUploadInformation.cs" />
     <Compile Include="Entities\JsonErrorModel.cs" />
     <Compile Include="Entities\JsonRoomDetailModel.cs" />
     <Compile Include="Entities\JsonRoomHistoryModel.cs" />
@@ -69,6 +71,7 @@
     <Compile Include="Entities\User.cs" />
     <Compile Include="Entities\UserMessage.cs" />
     <Compile Include="Helpers\QueryStringHelper.cs" />
+    <Compile Include="Helpers\RoomMessageTypeIdentifier.cs" />
     <Compile Include="Helpers\UrlHelper.cs" />
     <Compile Include="HipChatApiExecutor.cs" />
     <Compile Include="HipChatConnection.cs" />
@@ -85,10 +88,9 @@
     <Compile Include="Proxy\JsonModel.cs" />
     <Compile Include="Proxy\JsonModelDeserializer.cs" />
     <Compile Include="ResultCode.cs" />
+    <Compile Include="RoomMessageType.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Entities\Abstract\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>

@@ -6,6 +6,7 @@ using System.Net;
 using System.Runtime.Serialization;
 using System.Text;
 using LibHipChat.Entities;
+using LibHipChat.Helpers;
 using LibHipChat.Proxy.Contracts;
 using Newtonsoft.Json;
 
@@ -234,6 +235,10 @@ namespace LibHipChat.Proxy
             var model = deserializer.Deserialize(response.ResponseString);
             model.DeserializeModel();
 
+            foreach (var message in model.Model)
+            {
+                message.MessageType = RoomMessageTypeIdentifier.GetMessageType(message);
+            }
             return model.Model;
         }
     }
