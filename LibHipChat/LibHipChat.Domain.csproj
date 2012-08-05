@@ -85,7 +85,7 @@
     <Compile Include="Proxy\ErrorModel.cs" />
     <Compile Include="Proxy\HipChatDeleteResponse.cs" />
     <Compile Include="Proxy\HipChatStatus.cs" />
-    <Compile Include="Proxy\JsonModel.cs" />
+    <None Include="Proxy\JsonModel.cs" />
     <Compile Include="Proxy\JsonModelDeserializer.cs" />
     <Compile Include="ResultCode.cs" />
     <Compile Include="RoomMessageType.cs" />
