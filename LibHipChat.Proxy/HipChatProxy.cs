@@ -1,5 +1,6 @@
 ﻿using System;using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -225,9 +226,21 @@ namespace LibHipChat.Proxy
             return model.RoomInfo;
         }
 
+        public IList<RoomMessage> GetRoomHistory(string roomid, DateTime date)
+        {
+            string formattedDate = date.ToString ("yyyy-MM-dd");
+
+            return GetRoomHistory(roomid, formattedDate);
+        }
+
         public IList<RoomMessage> GetRecentRoomHistory(string roomid)
         {
-            var actionParms = new Dictionary<string, string>() {{"room_id", roomid}, {"date", "recent"}};
+            return GetRoomHistory(roomid, "recent");
+        }
+
+        private IList<RoomMessage> GetRoomHistory (string roomid, string rangeSpecification)
+        {
+            var actionParms = new Dictionary<string, string>() { { "room_id", roomid }, { "date", rangeSpecification } };
             var connection = _factory.Create(ActionKey.GetRoomHistory, actionParms);
             var response = _executor.Execute(connection, actionParms);
 

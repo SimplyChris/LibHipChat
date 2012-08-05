@@ -173,7 +173,7 @@ namespace LibHipChat.Proxy.Tests
         }
 
         [Test]
-        public void should_get_room_history ()
+        public void should_get_recent_room_history ()
         {
             var roomId = "52403";
             
@@ -181,6 +181,16 @@ namespace LibHipChat.Proxy.Tests
             Assert.That(response.Count, Is.GreaterThan(0));
             Assert.That(response[0].Message != null, Is.EqualTo(true));
             Assert.That(response[0].Message.Length, Is.GreaterThan(0));
+        }
+
+        [Test]
+        public void should_get_room_history_by_date ()
+        {
+            var roomId = "52400";
+
+            var response = _proxy.GetRoomHistory(roomId, new DateTime(2012, 8, 5));
+
+            Assert.That(response.Count, Is.GreaterThan(0));
         }
 
         [Test]
