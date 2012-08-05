@@ -19,11 +19,5 @@ namespace LibHipChat.Entities
             Model = RoomMessageData;
 
         }
-
-        private RoomMessage DeserializeListItem (Dictionary<string,string> messageItem)
-        {
-            return new UserMessage() {Message = messageItem["message"]};
-
-        }
     }
 }

@@ -41,10 +41,10 @@ namespace LibHipChat.Proxy.Tests
         {            
             var response = _proxy.GetRoomList();
 
-            var dt = response[0].CreatedAt;
-
+            
             Assert.That(response.Count(), Is.GreaterThan(1));
             Assert.That(response.Count(x => x.Name == "ZenCode"), Is.EqualTo(1));
+            Assert.That(response[0].LastActiveAt > response[0].CreatedAt);
         }
         
 

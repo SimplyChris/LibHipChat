@@ -26,6 +26,15 @@ namespace LibHipChat.Domain.Tests
         }
 
         [Test]
+        public void querystringhelper_should_have_count_set ()
+        {
+            _queryStringHelper.Add("auth_token", "ApiKey");
+            _queryStringHelper.Add("action", "FakeAction");
+
+            Assert.That(_queryStringHelper.Count, Is.EqualTo(2));
+        }
+
+        [Test]
         public void querystringhelper_should_throw_exception_when_adding_duplicate_key ()
         {
 
