@@ -162,7 +162,12 @@ namespace LibHipChat.Proxy.Tests
             var id = _proxy.GetUserId("family@losmorgans.com");
 
             Assert.That(id, Is.EqualTo(expectedUserId));
+        }
 
+        [Test]
+        public void should_return_empty_string_when_asking_for_invalid_user_id ()
+        {
+            Assert.That(_proxy.GetUserId("invalid@invalid.com"), Is.EqualTo(""));
         }
 
         [Test]

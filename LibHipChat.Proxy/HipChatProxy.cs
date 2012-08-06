@@ -28,9 +28,11 @@ namespace LibHipChat.Proxy
 
 
             if (!list.Any())
-                return null;
+                return "";
 
-            return list.SingleOrDefault(x => x.Email == email).UserId;
+            var user = list.SingleOrDefault(x => x.Email == email);
+
+            return user != null ? list.SingleOrDefault(x => x.Email == email).UserId : "";
         }
 
         public HipChatProxy (HipChatConnectionFactory factory)
