@@ -6,7 +6,7 @@ namespace LibHipChat.Contracts
     public interface IMessageProcessor
     {        
         void SetMessageTypeFilter (IList<RoomMessageType> messageTypes);
-        IList<RoomMessageType> GetMessageTypeFilter ();
-        void ProcessMessage(RoomMessage message);
+        bool IsRegisteredMessageType(RoomMessageType messageType);
+        void ProcessMessage (RoomMessage message);
     }
 }

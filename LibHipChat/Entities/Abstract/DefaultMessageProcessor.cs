@@ -3,11 +3,11 @@ using LibHipChat.Contracts;
 
 namespace LibHipChat.Entities.Abstract
 {
-    public abstract class MessageProcessorBase : IMessageProcessor
+    public class DefaultMessageProcessor : IMessageProcessor
     {
         private IList<RoomMessageType> _messageTypeFilter;
 
-        public MessageProcessorBase ()
+        public DefaultMessageProcessor ()
         {
             _messageTypeFilter  = new List<RoomMessageType>();
         }
@@ -17,10 +17,10 @@ namespace LibHipChat.Entities.Abstract
             _messageTypeFilter = messageTypes;
         }
 
-        public IList<RoomMessageType> GetMessageTypeFilter ()
+        public bool IsRegisteredMessageType(RoomMessageType messageType)
         {
-            return _messageTypeFilter;
-        }
+            return _messageTypeFilter.Contains(messageType);
+        }        
 
         public void ProcessMessage(RoomMessage message)
         {

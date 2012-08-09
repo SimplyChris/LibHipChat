@@ -53,8 +53,9 @@
     <Compile Include="Contracts\IHipChatModel.cs" />
     <Compile Include="Contracts\IJsonDeserializer.cs" />
     <Compile Include="Contracts\IJsonModel.cs" />
+    <Compile Include="Contracts\IMessageDispatcher.cs" />
     <Compile Include="Contracts\IMessageProcessor.cs" />
-    <Compile Include="Entities\Abstract\MessageProcessorBase.cs" />
+    <Compile Include="Entities\Abstract\DefaultMessageProcessor.cs" />
     <Compile Include="Entities\FileUploadInformation.cs" />
     <Compile Include="Entities\JsonErrorModel.cs" />
     <Compile Include="Entities\JsonRoomDetailModel.cs" />
