@@ -21,5 +21,10 @@ namespace LibHipChat.Entities.Abstract
         {
             return _messageTypeFilter;
         }
+
+        public void ProcessMessage(RoomMessage message)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }
