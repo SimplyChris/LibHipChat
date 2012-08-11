@@ -1,11 +1,10 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using LibHipChat.Contracts;
+using LibHipChat.Domain.Contracts;
 using Newtonsoft.Json;
 
-namespace LibHipChat.Entities
+namespace LibHipChat.Domain.Entities
 {
     public class JsonRoomsModel : IJsonModel<IList<IDictionary<string,string>>>
     {

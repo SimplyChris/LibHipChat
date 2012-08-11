@@ -1,7 +1,7 @@
 using System.Collections.Generic;
-using LibHipChat.Entities;
+using LibHipChat.Domain.Entities;
 
-namespace LibHipChat.Contracts
+namespace LibHipChat.Domain.Contracts
 {
     public interface IMessageProcessor
     {        

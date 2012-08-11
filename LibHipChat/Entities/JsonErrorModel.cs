@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using LibHipChat.Contracts;
-using LibHipChat.Proxy;
+﻿using System.Collections.Generic;
+using LibHipChat.Domain.Contracts;
+using LibHipChat.Domain.Proxy;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 
-namespace LibHipChat.Entities
+namespace LibHipChat.Domain.Entities
 {
     public class JsonErrorModel : IJsonModel <IDictionary<string, string>>
     {

@@ -1,11 +1,9 @@
 ﻿using System;
 using System.IO;
 using System.Net;
-using System.Xml.Linq;
-using LibHipChat.Contracts;
-using LibHipChat.Helpers;
+using LibHipChat.Domain.Helpers;
 
-namespace LibHipChat
+namespace LibHipChat.Domain
 {
     public class HipChatConnection : WebRequest
     {

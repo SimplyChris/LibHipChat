@@ -1,7 +1,6 @@
 ﻿using System;
-using LibHipChat.Contracts;
 
-namespace LibHipChat
+namespace LibHipChat.Domain
 {
     public class HipChatResponse
     {

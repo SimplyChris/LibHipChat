@@ -1,7 +1,6 @@
-﻿using LibHipChat.Entities;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
-namespace LibHipChat.Entities
+namespace LibHipChat.Domain.Entities
 {
     [JsonObject (MemberSerialization = MemberSerialization.OptIn)]
     public class RoomMessage

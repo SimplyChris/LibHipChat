@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics;
-using LibHipChat;
-using LibHipChat.Contracts;
-using LibHipChat.Entities;
+using LibHipChat.Domain.Contracts;
+using LibHipChat.Domain.Entities;
+using LibHipChat.Domain;
+
 
 namespace HipChatMessageProcessor.Processors
 {

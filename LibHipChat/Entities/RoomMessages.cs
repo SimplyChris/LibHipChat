@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace LibHipChat.Entities
+namespace LibHipChat.Domain.Entities
 {
 
     public class RoomMessages

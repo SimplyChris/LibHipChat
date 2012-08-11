@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using LibHipChat.Entities;
+using LibHipChat.Domain;
+using LibHipChat.Domain.Entities;
+using LibHipChat.Domain.Proxy;
 
 namespace LibHipChat.Proxy.Contracts
 {

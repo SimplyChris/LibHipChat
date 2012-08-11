@@ -1,7 +1,7 @@
 ﻿using System;
 using Newtonsoft.Json;
 
-namespace LibHipChat.Entities
+namespace LibHipChat.Domain.Entities
 {
     [JsonObject ("file", MemberSerialization = MemberSerialization.OptIn)]    
     public class FileUploadInformation

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using LibHipChat.Helpers;
+using LibHipChat.Domain.Helpers;
 using NUnit;
 using NUnit.Framework;
 using NUnit.Framework.Constraints;

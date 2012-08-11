@@ -1,5 +1,5 @@
 ﻿//TODO: Move to a different namespace. Common? Enums? Constants? New Project? 
-namespace LibHipChat
+namespace LibHipChat.Domain
 {
     public enum ActionKey
     {

@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using LibHipChat.Contracts;
+using LibHipChat.Domain.Contracts;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace LibHipChat.Entities
+namespace LibHipChat.Domain.Entities
 {
     [JsonObject (MemberSerialization.OptIn)]
     public class JsonRoomDetailModel : IJsonModel<IDictionary<string,object>>

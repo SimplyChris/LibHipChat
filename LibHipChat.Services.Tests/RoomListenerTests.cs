@@ -1,4 +1,4 @@
-﻿using LibHipChat.Contracts;
+﻿using LibHipChat.Domain.Contracts;
 using LibHipChat.Services.Interfaces;
 using NUnit.Framework;
 using Rhino.Mocks;

@@ -1,9 +1,7 @@
 ﻿using System;
-using LibHipChat.Contracts;
 using Newtonsoft.Json;
 
-
-namespace LibHipChat.Entities
+namespace LibHipChat.Domain.Entities
 {   
     [JsonObject ("user", MemberSerialization = MemberSerialization.OptIn)]
     public  class User : HipChatModel

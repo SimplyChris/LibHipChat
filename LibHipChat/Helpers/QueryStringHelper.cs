@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-namespace LibHipChat.Helpers
+namespace LibHipChat.Domain.Helpers
 {
     public class QueryStringHelper
     {

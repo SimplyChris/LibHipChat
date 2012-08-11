@@ -8,7 +8,7 @@
     <ProjectGuid>{D0CE025C-BB76-4ED2-98CC-9E47098301E6}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>LibHipChat</RootNamespace>
+    <RootNamespace>LibHipChat.Domain</RootNamespace>
     <AssemblyName>LibHipChat</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>

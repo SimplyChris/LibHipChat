@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace LibHipChat
+namespace LibHipChat.Domain
 {
     public class HipChatConnectionSettings
     {

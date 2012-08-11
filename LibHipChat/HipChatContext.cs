@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using LibHipChat.Contracts;
-using LibHipChat.Helpers;
+using LibHipChat.Domain.Helpers;
 
-namespace LibHipChat
+namespace LibHipChat.Domain
 {
     public class HipChatContext
     {

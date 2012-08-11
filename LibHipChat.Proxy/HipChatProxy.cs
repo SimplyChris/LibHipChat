@@ -6,8 +6,10 @@ using System.Linq;
 using System.Net;
 using System.Runtime.Serialization;
 using System.Text;
-using LibHipChat.Entities;
-using LibHipChat.Helpers;
+using LibHipChat.Domain;
+using LibHipChat.Domain.Entities;
+using LibHipChat.Domain.Helpers;
+using LibHipChat.Domain.Proxy;
 using LibHipChat.Proxy.Contracts;
 using Newtonsoft.Json;
 

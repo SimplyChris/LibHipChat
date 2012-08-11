@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using LibHipChat.Contracts;
+using LibHipChat.Domain.Contracts;
 using Newtonsoft.Json;
 
-namespace LibHipChat.Entities
+namespace LibHipChat.Domain.Entities
 {
     public class JsonUsersModel : IJsonModel <IList<Dictionary<string,string>>> 
     {

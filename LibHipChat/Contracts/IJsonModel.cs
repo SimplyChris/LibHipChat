@@ -1,8 +1,6 @@
-﻿using System.Collections.Generic;
-using LibHipChat.Entities;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
-namespace LibHipChat.Contracts
+namespace LibHipChat.Domain.Contracts
 {
     public interface IJsonModel <T>
     {

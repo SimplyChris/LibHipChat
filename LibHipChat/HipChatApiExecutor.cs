@@ -3,12 +3,9 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Web;
-using LibHipChat.Contracts;
-using LibHipChat.Entities;
-using LibHipChat.Helpers;
-using Newtonsoft.Json;
+using LibHipChat.Domain.Helpers;
 
-namespace LibHipChat
+namespace LibHipChat.Domain
 {
     public class HipChatApiExecutor
     {

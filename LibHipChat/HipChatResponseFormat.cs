@@ -1,4 +1,4 @@
-﻿namespace LibHipChat
+﻿namespace LibHipChat.Domain
 {
     public enum HipChatResponseFormat
     {

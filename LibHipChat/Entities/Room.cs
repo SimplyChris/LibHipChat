@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Runtime.Serialization;
 using Newtonsoft.Json;
 
-namespace LibHipChat.Entities
+namespace LibHipChat.Domain.Entities
 {
     [JsonObject("room", MemberSerialization = MemberSerialization.OptIn)]   
     public class Room

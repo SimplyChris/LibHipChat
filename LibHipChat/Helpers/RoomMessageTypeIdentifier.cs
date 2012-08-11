@@ -1,7 +1,7 @@
 ﻿using System;
-using LibHipChat.Entities;
+using LibHipChat.Domain.Entities;
 
-namespace LibHipChat.Helpers
+namespace LibHipChat.Domain.Helpers
 {
     public static class RoomMessageTypeIdentifier
     {

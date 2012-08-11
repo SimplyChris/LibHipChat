@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace LibHipChat.Entities
+namespace LibHipChat.Domain.Entities
 {
     public class RoomAction
     {

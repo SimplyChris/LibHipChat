@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace LibHipChat.Helpers
+namespace LibHipChat.Domain.Helpers
 {
     public static class UrlHelper
     {

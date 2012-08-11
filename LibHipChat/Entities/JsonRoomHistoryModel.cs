@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
-using LibHipChat.Contracts;
+using LibHipChat.Domain.Contracts;
 using Newtonsoft.Json;
 
-namespace LibHipChat.Entities
+namespace LibHipChat.Domain.Entities
 {
     public class JsonRoomHistoryModel : IJsonModel<IList<IDictionary<string,string>>>
     {

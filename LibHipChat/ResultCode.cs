@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace LibHipChat
+﻿namespace LibHipChat.Domain
 {
     public enum ResultCode
     {

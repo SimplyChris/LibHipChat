@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using LibHipChat.Contracts;
-using LibHipChat.Helpers;
+﻿using System.Collections.Generic;
 
-namespace LibHipChat
+namespace LibHipChat.Domain
 {
     public class HipChatConnectionFactory
     {

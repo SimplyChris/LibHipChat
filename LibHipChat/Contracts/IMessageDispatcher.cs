@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace LibHipChat.Contracts
+namespace LibHipChat.Domain.Contracts
 {
     public interface IMessageDispatcher
     {

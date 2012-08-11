@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using LibHipChat.Entities;
-
-namespace LibHipChat.Contracts
+﻿namespace LibHipChat.Domain.Contracts
 {
     public interface IJsonDeserializer <T>
     {        

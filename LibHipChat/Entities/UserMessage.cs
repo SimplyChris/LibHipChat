@@ -1,6 +1,4 @@
-﻿using LibHipChat.Contracts;
-
-namespace LibHipChat.Entities
+﻿namespace LibHipChat.Domain.Entities
 {
     public class UserMessage : RoomMessage
     {

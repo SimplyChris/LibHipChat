@@ -1,8 +1,8 @@
 ﻿using System;
-using LibHipChat.Contracts;
+using LibHipChat.Domain.Contracts;
 using Newtonsoft.Json;
 
-namespace LibHipChat.Proxy
+namespace LibHipChat.Domain.Proxy
 {    
     public class HipChatStatus : IHipChatModel 
     {
