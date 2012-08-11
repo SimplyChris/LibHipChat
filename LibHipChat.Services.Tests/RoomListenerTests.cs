@@ -14,14 +14,14 @@ namespace LibHipChat.Services.Tests
         private MockRepository _mockRepository;
 
         [TestFixtureSetUp]
-        void FixtureSetup ()
+        public void FixtureSetup ()
         {
             _mockRepository= new MockRepository();
 
         }
 
         [SetUp]
-        void Setup ()
+        public void Setup ()
         {
             _roomListener = new RoomListener();
         }
