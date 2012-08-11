@@ -1,6 +1,6 @@
 ﻿namespace HipChatMessageProcessor
 {
-    partial class HipChatProcessorService
+    partial class MessageProcessor
     {
         /// <summary> 
         /// Required designer variable.

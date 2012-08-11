@@ -55,7 +55,6 @@
     <Compile Include="Contracts\IJsonModel.cs" />
     <Compile Include="Contracts\IMessageDispatcher.cs" />
     <Compile Include="Contracts\IMessageProcessor.cs" />
-    <Compile Include="Entities\Abstract\DefaultMessageProcessor.cs" />
     <Compile Include="Entities\FileUploadInformation.cs" />
     <Compile Include="Entities\JsonErrorModel.cs" />
     <Compile Include="Entities\JsonRoomDetailModel.cs" />

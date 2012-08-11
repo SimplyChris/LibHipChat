@@ -9,9 +9,9 @@ using System.Text;
 
 namespace HipChatMessageProcessor
 {
-    public partial class HipChatProcessorService : ServiceBase
+    public partial class MessageProcessor : ServiceBase
     {
-        public HipChatProcessorService()
+        public MessageProcessor()
         {
             InitializeComponent();
         }
