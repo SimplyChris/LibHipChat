@@ -11,11 +11,12 @@ namespace LibHipChat.Services
 
         private string _roomId;
         private IHipChatProxy _proxy;
+        private IList<RoomMessage> _previousRoomMessages; 
+        private IList<RoomMessage> _roomMessages; 
 
 
 
-
-
+        
         public IList<IMessageProcessor> MessageProcessors { get; set; }
 
         public RoomListener ()
@@ -40,7 +41,9 @@ namespace LibHipChat.Services
 
         public IList<RoomMessage> RetrieveRecentMessages()
         {
-            return _proxy.GetRecentRoomHistory(_roomId);
+            _previousRoomMessages = _roomMessages;
+            _roomMessages = _proxy.GetRecentRoomHistory(_roomId);
+            return _roomMessages;
         }
 
         public void AddProcessor(IMessageProcessor processor)

@@ -15,7 +15,6 @@ namespace LibHipChat.Proxy.Tests
     [TestFixture]
     public class HipChatProxyTests
     {
-        private HipChatConnection _connection;
         private HipChatConnectionFactory _connectionFactory;
         private string apiKey;
         private string apiUrl;
@@ -189,6 +188,14 @@ namespace LibHipChat.Proxy.Tests
         }
 
         [Test]
+        public void should_set_proper_date_on_room_messages ()
+        {
+            var roomId = "52403";
+            var response = _proxy.GetRoomHistory(roomId, new DateTime(2012, 8, 5));
+            Assert.That(response[0].TimeStamp, Is.EqualTo(new DateTime(2012, 8, 5,5,6,0)));
+        }
+
+        [Test]
         public void should_get_room_history_by_date ()
         {
             var roomId = "52400";
@@ -203,7 +210,7 @@ namespace LibHipChat.Proxy.Tests
         {
             var roomId = "52403";
 
-            var response = _proxy.GetRecentRoomHistory(roomId);
+            var response = _proxy.GetRoomHistory(roomId, new DateTime(2012, 08, 05));
             var fileUploadMessage = response.SingleOrDefault(x => x.Message == "File Upload 1");
 
             Assert.That(fileUploadMessage.Message == "File Upload 1", Is.True);
@@ -215,7 +222,8 @@ namespace LibHipChat.Proxy.Tests
         {
             var roomId = "52400";
 
-            var response = _proxy.GetRecentRoomHistory(roomId);
+
+            var response = _proxy.GetRoomHistory(roomId, new DateTime(2012, 08, 05));
             var fileUploadMessage = response.SingleOrDefault(x => x.Message == "IT Test Upload 1");
             
             Assert.That(fileUploadMessage.MessageType, Is.EqualTo(RoomMessageType.FileUpload));
@@ -226,7 +234,7 @@ namespace LibHipChat.Proxy.Tests
         {
             var roomId = "52400";
 
-            var response = _proxy.GetRecentRoomHistory(roomId);
+            var response = _proxy.GetRoomHistory(roomId, new DateTime(2012,08, 05));
             var userMessage = response.SingleOrDefault(x => x.Message == "IT Test Message 1");
             Assert.That(userMessage.MessageType, Is.EqualTo(RoomMessageType.UserMessage));
         }
@@ -235,7 +243,9 @@ namespace LibHipChat.Proxy.Tests
         public void should_set_proper_message_type_for_api_message ()
         {
             var roomId = "52400";
-            var response = _proxy.GetRecentRoomHistory(roomId);
+
+            var response = _proxy.GetRoomHistory(roomId, new DateTime(2012, 08, 05));
+
             var apiMessage = response.SingleOrDefault(x => x.Message.Contains("[should_be_able_to_send_mention_message] Run At: 8/5/2012 1:09:30 AM"));
             Assert.That(apiMessage.MessageType, Is.EqualTo(RoomMessageType.ApiMessage));
         }

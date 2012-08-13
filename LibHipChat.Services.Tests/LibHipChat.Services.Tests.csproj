@@ -38,6 +38,7 @@
       <HintPath>..\lib\Rhino.Mocks.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -50,6 +51,10 @@
     <Compile Include="RoomListenerTests.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\LibHipChat.Proxy\LibHipChat.Proxy.csproj">
+      <Project>{2E3F02F7-C1B3-4F0F-A59D-72DB4CBD8889}</Project>
+      <Name>LibHipChat.Proxy</Name>
+    </ProjectReference>
     <ProjectReference Include="..\LibHipChat.Services\LibHipChat.Services.csproj">
       <Project>{4BF06A8B-72C2-45A9-B433-CB90756CA9C2}</Project>
       <Name>LibHipChat.Services</Name>
@@ -60,6 +65,9 @@
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>copy $(ProjectDir)..\LibHipChat.Proxy.Tests\bin\Debug\LibHipChat.Proxy.Tests.dll.config $(TargetDir)\$(ProjectName).dll.config</PostBuildEvent>
+  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
