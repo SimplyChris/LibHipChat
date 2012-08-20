@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Configuration;
+using HipChatMessageProcessor.Processors;
 using LibHipChat.Domain;
 using LibHipChat.Domain.Contracts;
 using LibHipChat.Domain.Entities;
@@ -34,8 +36,8 @@ namespace LibHipChat.Services.Tests
         [SetUp]
         public void Setup ()
         {
-            _roomListener = new RoomListener();
-            _roomListener.SetHipChatProxy(new HipChatProxy(new HipChatConnectionFactory(new HipChatConnectionSettings(apiKey, apiUrl))));           
+            _roomListener = new RoomListener(new HipChatProxy(new HipChatConnectionFactory(new HipChatConnectionSettings(apiUrl, apiKey))));            
+            _roomListener.GetHipChatProxy().MessageRoom("52403", "api", "Room Listener Test Message");
         }
 
         [Test]
@@ -62,12 +64,46 @@ namespace LibHipChat.Services.Tests
 
         [Test, Ignore]
         public void should_process_new_message ()
-        {            
-            _roomListener.SetHipChatProxy(_proxy);
-            _roomListener.RetrieveRecentMessages();
+        {
+            var roomId = "52403";          
+            _roomListener.SetRoomId(roomId);
+            var recentMessages = _roomListener.GetNewMessages();
+
+
             _messageProcessor = _mockRepository.StrictMock<IMessageProcessor>();
+
+            _messageProcessor.Expect(x => x.IsRegisteredMessageType(Arg<RoomMessageType>.Is.Anything)).IgnoreArguments().Return(true).
+                Repeat.Any();
+
+
+
+            //_messageProcessor.Stub(x => x.IsRegisteredMessageType(Arg<RoomMessageType>.Is.Anything)).Return(true);
             _roomListener.AddProcessor(_messageProcessor);
-                      
+
+            //_mockRepository.ReplayAll();
+
+            _roomListener.ProcessNewMessages();
+            //_messageProcessor.AssertWasCalled(x=>x.ProcessMessage(Arg<RoomMessage>.Is.Anything));
+
+            _messageProcessor.VerifyAllExpectations();
+        }
+
+        [Test]
+        public void should_get_only_new_messages ()
+        {
+            var roomId = "52403";
+            _roomListener.SetRoomId(roomId);
+
+            _roomListener.ProcessNewMessages();
+            var echoProcessor = new EchoProcessor();
+            echoProcessor.SetMessageTypeFilter(new List<RoomMessageType>(){RoomMessageType.ApiMessage});
+            _roomListener.AddProcessor(echoProcessor);
+            
+            _roomListener.GetHipChatProxy().MessageRoom(roomId, "api", "New Message");
+            _roomListener.ProcessNewMessages();
+            
+
+            //Assert.That(newMessages.Count,Is.EqualTo(1));
         }
     }    
 }

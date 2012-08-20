@@ -9,11 +9,11 @@ namespace LibHipChat.Services.Interfaces
     {
         IList<IMessageProcessor> MessageProcessors { get; set; }
 
-        void SetRoomId(string roomId);
-        void SetHipChatProxy(IHipChatProxy proxy);
-        IList<RoomMessage> RetrieveRecentMessages();
-        void AddProcessor (IMessageProcessor dispatcher);
-        bool RemoveProcessor(IMessageProcessor dispatcherToRemove);
-        void DispatchMessage(RoomMessage message, IMessageProcessor processor);
+        void SetRoomId(string roomId);        
+        IHipChatProxy GetHipChatProxy();        
+        IList<RoomMessage> GetNewMessages();
+        void ProcessNewMessages();
+        void AddProcessor (IMessageProcessor processor);
+        bool RemoveProcessor(IMessageProcessor processorToRemove);        
     }
 }

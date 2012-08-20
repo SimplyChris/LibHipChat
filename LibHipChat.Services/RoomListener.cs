@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using LibHipChat.Domain.Contracts;
 using LibHipChat.Domain.Entities;
+using LibHipChat.Proxy;
 using LibHipChat.Proxy.Contracts;
 using LibHipChat.Services.Interfaces;
 
@@ -11,21 +12,20 @@ namespace LibHipChat.Services
 
         private string _roomId;
         private IHipChatProxy _proxy;
-        private IList<RoomMessage> _previousRoomMessages; 
-        private IList<RoomMessage> _roomMessages; 
+        private IList<RoomMessage> _previousRoomMessages;
+        private bool _process_history = false;
 
 
-
-        
         public IList<IMessageProcessor> MessageProcessors { get; set; }
 
-        public RoomListener ()
+        public RoomListener (IHipChatProxy hipChatProxy)
         {
             MessageProcessors = new List<IMessageProcessor>();
+            _proxy = hipChatProxy;
         }
 
         public RoomListener(List<IMessageProcessor> processors)
-        {
+        {            
             MessageProcessors = processors;
         }
 
@@ -39,11 +39,52 @@ namespace LibHipChat.Services
             _proxy = proxy;            
         }
 
-        public IList<RoomMessage> RetrieveRecentMessages()
+        public IHipChatProxy GetHipChatProxy()
         {
-            _previousRoomMessages = _roomMessages;
-            _roomMessages = _proxy.GetRecentRoomHistory(_roomId);
+            return _proxy;  
+        }
+
+        public IList<RoomMessage> RetrieveRecentMessages()
+        {            
+            var _roomMessages = _proxy.GetRecentRoomHistory(_roomId);
             return _roomMessages;
+        }
+
+        public void ProcessNewMessages ()
+        {
+            if (_previousRoomMessages == null)
+            {
+                _previousRoomMessages = RetrieveRecentMessages();
+                if (_process_history)
+                {
+                    DispatchMessages(_previousRoomMessages, MessageProcessors);
+                }
+            }
+
+            var newMessages  = GetNewMessages();
+
+            DispatchMessages(newMessages, MessageProcessors);
+        }
+
+        public IList<RoomMessage> GetNewMessages()
+        {
+            var newRoomMessages = RetrieveRecentMessages();
+
+            var newMessageArray = new RoomMessage[newRoomMessages.Count];
+            newRoomMessages.CopyTo(newMessageArray,0);
+
+
+            var messagesToRemove = _previousRoomMessages ?? new List<RoomMessage>();
+
+
+
+            _previousRoomMessages = newMessageArray;
+            foreach (var messageToRemove in messagesToRemove)
+            {
+                newRoomMessages.Remove(messageToRemove);
+            }
+            
+            return newRoomMessages;
         }
 
         public void AddProcessor(IMessageProcessor processor)
@@ -51,14 +92,28 @@ namespace LibHipChat.Services
             MessageProcessors.Add(processor);
         }
 
-        public bool RemoveProcessor(IMessageProcessor dispatcherToRemove)
+        public bool RemoveProcessor(IMessageProcessor processorToRemove)
         {
             throw new System.NotImplementedException();
         }
 
-        public void DispatchMessage(RoomMessage message, IMessageProcessor processor)
+        public void DispatchMessages (IList<RoomMessage> messages, IList<IMessageProcessor> processors )
         {
-            processor.ProcessMessage(message);
+            foreach (var messageProcessor in processors )
+            {
+                ProcessMessages(messages, messageProcessor);
+            }
+        }
+
+        private void ProcessMessages(IList<RoomMessage> messages, IMessageProcessor processor)
+        {
+            foreach (var message in messages)
+            {
+                if (processor.IsRegisteredMessageType(message.MessageType))
+                {
+                    processor.ProcessMessage(message, new RepsonseClient(_roomId, _proxy));
+                }
+            }
         }
     }
 }

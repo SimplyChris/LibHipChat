@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibHipChat.Services", "LibH
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibHipChat.Services.Tests", "LibHipChat.Services.Tests\LibHipChat.Services.Tests.csproj", "{ABD93B14-9971-443E-BCEE-028A98B78E91}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HipChatMessageProcessorTests", "HipChatMessageProcessorTests\HipChatMessageProcessorTests.csproj", "{CC4C98E9-CEE7-453E-9CC6-64A899B2EEE4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -95,6 +97,16 @@ Global
 		{ABD93B14-9971-443E-BCEE-028A98B78E91}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{ABD93B14-9971-443E-BCEE-028A98B78E91}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{ABD93B14-9971-443E-BCEE-028A98B78E91}.Release|x86.ActiveCfg = Release|Any CPU
+		{CC4C98E9-CEE7-453E-9CC6-64A899B2EEE4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CC4C98E9-CEE7-453E-9CC6-64A899B2EEE4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CC4C98E9-CEE7-453E-9CC6-64A899B2EEE4}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{CC4C98E9-CEE7-453E-9CC6-64A899B2EEE4}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{CC4C98E9-CEE7-453E-9CC6-64A899B2EEE4}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{CC4C98E9-CEE7-453E-9CC6-64A899B2EEE4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CC4C98E9-CEE7-453E-9CC6-64A899B2EEE4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CC4C98E9-CEE7-453E-9CC6-64A899B2EEE4}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{CC4C98E9-CEE7-453E-9CC6-64A899B2EEE4}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{CC4C98E9-CEE7-453E-9CC6-64A899B2EEE4}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

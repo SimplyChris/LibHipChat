@@ -54,5 +54,13 @@ namespace LibHipChat.Domain.Entities
 
             return outDateTime;
         }
+
+        public override bool Equals(object obj)
+        {
+            var message = (RoomMessage) obj;
+
+            return (message.Message == Message && message.TimeStamp == TimeStamp && message.MessageType == MessageType &&
+                    message.User.UserId == User.UserId);
+        }
     }
 }

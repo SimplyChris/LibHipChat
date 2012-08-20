@@ -51,6 +51,10 @@
     <Compile Include="RoomListenerTests.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\HipChatMessageProcessor\HipChatMessageProcessor.csproj">
+      <Project>{93E599C5-B1F5-49E0-ABD7-F6E9538EC7B7}</Project>
+      <Name>HipChatMessageProcessor</Name>
+    </ProjectReference>
     <ProjectReference Include="..\LibHipChat.Proxy\LibHipChat.Proxy.csproj">
       <Project>{2E3F02F7-C1B3-4F0F-A59D-72DB4CBD8889}</Project>
       <Name>LibHipChat.Proxy</Name>
