@@ -19,6 +19,7 @@ namespace LibHipChat.Proxy.Tests
         private string apiKey;
         private string apiUrl;
         private IHipChatProxy _proxy;
+        private DateTime _historyStartDate = DateTime.Now - new TimeSpan(15, 0, 0, 0);
         [SetUp]
         public void Setup ()
         {
@@ -92,19 +93,18 @@ namespace LibHipChat.Proxy.Tests
         }
 
         [Test]
-        public void should_get_proper_repsonse_for_delete_of_invalid_user ()
+        public void should_throw_hip_chat_exception_for_delete_of_invalid_user ()
         {
-            var response = _proxy.DeleteUser("invalid_user@losmorgans.com");
-            Assert.That(response.WasDeleted, Is.EqualTo(false));
+            Assert.Throws<HipChatException>(() => _proxy.DeleteUser("invalid_user@losmorgans.com"));           
         }
 
         [Test]
-        public void should_set_proper_error_model_when_creating_a_duplicate_user ()
+        public void should_throw_hip_chat_exception_on_duplicate_user ()
         {
             try
             {
                 CreateDuplicateUser();
-                CreateDuplicateUser();
+                Assert.Throws<HipChatException>(CreateDuplicateUser);
                                 
                 Assert.That(_proxy.LastError.ErrorResult, Is.EqualTo(ResultCode.BadRequest));
                 Assert.That(_proxy.LastError.Message, Is.EqualTo("Email already in use"));
@@ -170,13 +170,6 @@ namespace LibHipChat.Proxy.Tests
         }
 
         [Test]
-        public void test_api_user ()
-        {
-            var user = _proxy.GetUser("api");
-            Assert.Pass();
-        }
-
-        [Test]
         public void should_get_recent_room_history ()
         {
             var roomId = "52403";
@@ -188,19 +181,11 @@ namespace LibHipChat.Proxy.Tests
         }
 
         [Test]
-        public void should_set_proper_date_on_room_messages ()
-        {
-            var roomId = "52403";
-            var response = _proxy.GetRoomHistory(roomId, new DateTime(2012, 8, 5));
-            Assert.That(response[0].TimeStamp, Is.EqualTo(new DateTime(2012, 8, 5,5,6,0)));
-        }
-
-        [Test]
         public void should_get_room_history_by_date ()
         {
             var roomId = "52400";
 
-            var response = _proxy.GetRoomHistory(roomId, new DateTime(2012, 8, 5));
+            var response = _proxy.GetRoomHistory(roomId,new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day) );
 
             Assert.That(response.Count, Is.GreaterThan(0));
         }
@@ -210,11 +195,11 @@ namespace LibHipChat.Proxy.Tests
         {
             var roomId = "52403";
 
-            var response = _proxy.GetRoomHistory(roomId, new DateTime(2012, 08, 05));
-            var fileUploadMessage = response.SingleOrDefault(x => x.Message == "File Upload 1");
+            var response = _proxy.GetRecentRoomHistory(roomId);
+            var fileUploadMessage = response.SingleOrDefault(x => x.Message == "Test File Upload");
 
-            Assert.That(fileUploadMessage.Message == "File Upload 1", Is.True);
-            Assert.That(fileUploadMessage.UploadInformation.Name, Is.EqualTo("UML Quick Reference 2.pdf"));           
+            Assert.That(fileUploadMessage.Message == "Test File Upload", Is.True);
+            Assert.That(fileUploadMessage.UploadInformation.Name, Is.EqualTo("Test File Upload.txt"));           
         }
 
         [Test]
@@ -223,7 +208,7 @@ namespace LibHipChat.Proxy.Tests
             var roomId = "52400";
 
 
-            var response = _proxy.GetRoomHistory(roomId, new DateTime(2012, 08, 05));
+            var response = _proxy.GetRecentRoomHistory(roomId);
             var fileUploadMessage = response.SingleOrDefault(x => x.Message == "IT Test Upload 1");
             
             Assert.That(fileUploadMessage.MessageType, Is.EqualTo(RoomMessageType.FileUpload));
@@ -234,7 +219,7 @@ namespace LibHipChat.Proxy.Tests
         {
             var roomId = "52400";
 
-            var response = _proxy.GetRoomHistory(roomId, new DateTime(2012,08, 05));
+            var response = _proxy.GetRecentRoomHistory(roomId);
             var userMessage = response.SingleOrDefault(x => x.Message == "IT Test Message 1");
             Assert.That(userMessage.MessageType, Is.EqualTo(RoomMessageType.UserMessage));
         }
@@ -244,10 +229,11 @@ namespace LibHipChat.Proxy.Tests
         {
             var roomId = "52400";
 
-            var response = _proxy.GetRoomHistory(roomId, new DateTime(2012, 08, 05));
+            var response = _proxy.GetRoomHistory(roomId, DateTime.Now);
 
-            var apiMessage = response.SingleOrDefault(x => x.Message.Contains("[should_be_able_to_send_mention_message] Run At: 8/5/2012 1:09:30 AM"));
-            Assert.That(apiMessage.MessageType, Is.EqualTo(RoomMessageType.ApiMessage));
+            var apiMessage =
+                response.Where(x => x.Message.Contains("[should_be_able_to_send_mention_message] Run At:")).ToArray();
+            Assert.That(apiMessage[0].MessageType, Is.EqualTo(RoomMessageType.ApiMessage));
         }
 
 

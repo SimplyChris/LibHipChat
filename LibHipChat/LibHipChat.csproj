@@ -82,6 +82,7 @@
     <Compile Include="Domain\HipChatConnectionFactory.cs" />
     <Compile Include="Domain\HipChatConnectionSettings.cs" />
     <Compile Include="Domain\HipChatContext.cs" />
+    <Compile Include="Domain\HipChatException.cs" />
     <Compile Include="Domain\HipChatResponse.cs" />
     <Compile Include="Domain\HipChatResponseFormat.cs" />
     <Compile Include="Domain\Proxy\ErrorModel.cs" />

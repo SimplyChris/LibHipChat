@@ -54,7 +54,7 @@ namespace LibHipChat.Proxy
            
             try
             {
-                var response = _executor.Execute(_connection, actionParms);
+                var response = ExecuteCall(_connection, actionParms);
                 var deserializer = new JsonModelDeserializer<HipChatDeleteResponse>();                
                 var model = deserializer.Deserialize(response.ResponseString);                
                 return model;
@@ -82,7 +82,7 @@ namespace LibHipChat.Proxy
                       
             try
             {
-                var response = _executor.Execute(connection, actionParms);
+                var response = ExecuteCall(connection, actionParms);
                 var deserializer = new JsonModelDeserializer<JsonUserModel>();
                 var model = deserializer.Deserialize(response.ResponseString);
 
@@ -122,7 +122,7 @@ namespace LibHipChat.Proxy
 
             try
             {
-                var response = _executor.Execute(_connection, actionParms);
+                var response = ExecuteCall(_connection, actionParms);
 
                 var deserializer = new JsonModelDeserializer<JsonUserModel>();
 
@@ -144,9 +144,10 @@ namespace LibHipChat.Proxy
         {
             ResultCode resultCode;
 
-            ResultCode.TryParse(_connection.ResponseCode, out resultCode);
-
-            if (resultCode == ResultCode.BadRequest)
+            Enum.TryParse(_connection.ResponseCode, out resultCode);
+            LastError = null;
+            
+            if (_connection.ErrorStream != null)
             {
                 var responseString = new StreamReader(_connection.ErrorStream).ReadToEnd();
                 var deserializer = new JsonModelDeserializer<JsonErrorModel>();
@@ -175,7 +176,7 @@ namespace LibHipChat.Proxy
 
             
 
-            var response = _executor.Execute(connection, actionParms);
+            var response = ExecuteCall(connection, actionParms);
 
             var deserializer = new JsonModelDeserializer<HipChatStatus>();
 
@@ -188,7 +189,7 @@ namespace LibHipChat.Proxy
         {
             var connection = _factory.Create(ActionKey.ListUsers);                       
 
-            var response = _executor.Execute(connection, null);
+            var response = ExecuteCall(connection, null);
 
             var deserializer = new JsonModelDeserializer <JsonUsersModel>();
 
@@ -204,7 +205,7 @@ namespace LibHipChat.Proxy
             var connection = _factory.Create(ActionKey.ListRooms);
             
 
-            var response = _executor.Execute(connection,null);
+            var response = ExecuteCall(connection,null);
 
             var deserializer = new JsonModelDeserializer<JsonRoomsModel>();
 
@@ -221,7 +222,7 @@ namespace LibHipChat.Proxy
 
             var connection = _factory.Create(ActionKey.ShowRoom,actionParms);            
 
-            var response = _executor.Execute(connection, actionParms);
+            var response = ExecuteCall(connection, actionParms);
 
             var deserializer = new JsonModelDeserializer<JsonRoomDetailModel>();
             var model = deserializer.Deserialize(response.ResponseString);
@@ -246,7 +247,7 @@ namespace LibHipChat.Proxy
         {
             var actionParms = new Dictionary<string, string>() { { "room_id", roomid }, { "date", rangeSpecification } };
             var connection = _factory.Create(ActionKey.GetRoomHistory, actionParms);
-            var response = _executor.Execute(connection, actionParms);
+            var response = ExecuteCall(connection, actionParms);
 
             var deserializer = new JsonModelDeserializer<JsonRoomHistoryModel>();
             var model = deserializer.Deserialize(response.ResponseString);
@@ -257,6 +258,22 @@ namespace LibHipChat.Proxy
                 message.MessageType = RoomMessageTypeIdentifier.GetMessageType(message);
             }
             return model.Model;
+        }
+
+        public HipChatResponse ExecuteCall (HipChatConnection connection, Dictionary<string, string>actionParms )
+        {
+
+            HipChatResponse response;
+            try
+            {
+                response = _executor.Execute(connection, actionParms);
+            }
+            catch (Exception ex)
+            {
+                var error = GetError(connection) ?? new ErrorModel();
+                throw new HipChatException(error, ex);                
+            }
+            return response;
         }
     }
 }
