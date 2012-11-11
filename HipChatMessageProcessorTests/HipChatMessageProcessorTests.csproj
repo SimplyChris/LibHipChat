@@ -60,12 +60,12 @@
       <Name>LibHipChat.Proxy</Name>
     </ProjectReference>
     <ProjectReference Include="..\LibHipChat.Services\LibHipChat.Services.csproj">
-      <Project>{4BF06A8B-72C2-45A9-B433-CB90756CA9C2}</Project>
+      <Project>{93399D63-694C-4945-8035-97D0D47F07C7}</Project>
       <Name>LibHipChat.Services</Name>
     </ProjectReference>
-    <ProjectReference Include="..\LibHipChat\LibHipChat.Domain.csproj">
-      <Project>{D0CE025C-BB76-4ED2-98CC-9E47098301E6}</Project>
-      <Name>LibHipChat.Domain</Name>
+    <ProjectReference Include="..\LibHipChat\LibHipChat.csproj">
+      <Project>{7DC627B0-C332-4DA3-AA62-72828220FE8C}</Project>
+      <Name>LibHipChat</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

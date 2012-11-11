@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
-using LibHipChat.Domain.Contracts;
 using LibHipChat.Domain.Entities;
+using LibHipChat.Domain.Services.Interfaces;
 using LibHipChat.Proxy;
 using LibHipChat.Proxy.Contracts;
-using LibHipChat.Services.Interfaces;
+using LibHipChat.Services.Contracts;
 
-namespace LibHipChat.Services
+namespace LibHipChat.Domain.Services
 {
     public class RoomListener : IRoomListener
     {

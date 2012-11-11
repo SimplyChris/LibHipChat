@@ -52,9 +52,9 @@
       <Project>{2E3F02F7-C1B3-4F0F-A59D-72DB4CBD8889}</Project>
       <Name>LibHipChat.Proxy</Name>
     </ProjectReference>
-    <ProjectReference Include="..\LibHipChat\LibHipChat.Domain.csproj">
-      <Project>{D0CE025C-BB76-4ED2-98CC-9E47098301E6}</Project>
-      <Name>LibHipChat.Domain</Name>
+    <ProjectReference Include="..\LibHipChat\LibHipChat.csproj">
+      <Project>{7DC627B0-C332-4DA3-AA62-72828220FE8C}</Project>
+      <Name>LibHipChat</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

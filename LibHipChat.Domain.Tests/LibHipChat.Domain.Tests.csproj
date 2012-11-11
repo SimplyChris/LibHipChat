@@ -31,9 +31,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\packages\Newtonsoft.Json.4.0.8\lib\net40\Newtonsoft.Json.dll</HintPath>
-    </Reference>
     <Reference Include="nunit.framework">
       <HintPath>..\lib\nunit.framework.dll</HintPath>
     </Reference>
@@ -53,19 +50,24 @@
     <Compile Include="HipChatConnectionFactoryTests.cs" />
     <Compile Include="HipChatContextTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RoomListenerTests.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\HipChatMessageProcessor\HipChatMessageProcessor.csproj">
+      <Project>{93E599C5-B1F5-49E0-ABD7-F6E9538EC7B7}</Project>
+      <Name>HipChatMessageProcessor</Name>
+    </ProjectReference>
     <ProjectReference Include="..\LibHipChat.Proxy\LibHipChat.Proxy.csproj">
       <Project>{2E3F02F7-C1B3-4F0F-A59D-72DB4CBD8889}</Project>
       <Name>LibHipChat.Proxy</Name>
     </ProjectReference>
     <ProjectReference Include="..\LibHipChat.Services\LibHipChat.Services.csproj">
-      <Project>{4BF06A8B-72C2-45A9-B433-CB90756CA9C2}</Project>
+      <Project>{93399D63-694C-4945-8035-97D0D47F07C7}</Project>
       <Name>LibHipChat.Services</Name>
     </ProjectReference>
-    <ProjectReference Include="..\LibHipChat\LibHipChat.Domain.csproj">
-      <Project>{D0CE025C-BB76-4ED2-98CC-9E47098301E6}</Project>
-      <Name>LibHipChat.Domain</Name>
+    <ProjectReference Include="..\LibHipChat\LibHipChat.csproj">
+      <Project>{7DC627B0-C332-4DA3-AA62-72828220FE8C}</Project>
+      <Name>LibHipChat</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

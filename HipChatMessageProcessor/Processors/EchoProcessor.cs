@@ -4,8 +4,9 @@ using System.Diagnostics;
 using LibHipChat.Domain.Contracts;
 using LibHipChat.Domain.Entities;
 using LibHipChat.Domain;
+using LibHipChat.Domain.Services.Interfaces;
 using LibHipChat.Proxy.Contracts;
-using LibHipChat.Services.Interfaces;
+using LibHipChat.Services.Contracts;
 
 
 namespace HipChatMessageProcessor.Processors

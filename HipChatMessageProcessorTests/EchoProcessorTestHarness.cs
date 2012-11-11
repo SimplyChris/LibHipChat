@@ -7,10 +7,11 @@ using System.Threading;
 using HipChatMessageProcessor.Processors;
 using LibHipChat.Domain;
 using LibHipChat.Domain.Contracts;
+using LibHipChat.Domain.Services;
+using LibHipChat.Domain.Services.Interfaces;
 using LibHipChat.Proxy;
 using LibHipChat.Proxy.Contracts;
-using LibHipChat.Services;
-using LibHipChat.Services.Interfaces;
+using LibHipChat.Services.Contracts;
 using NUnit.Framework;
 using Rhino.Mocks;
 
@@ -43,7 +44,7 @@ namespace HipChatMessageProcessorTests
             _roomListener.SetRoomId(_roomId);
             _roomListener.GetHipChatProxy().MessageRoom(_roomId, "api", "Echo Processor Test harness Starting");
         }
-
+        
 
         [Test,Ignore]
         public void echo_processor_message_loop ()

@@ -45,13 +45,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Contracts\IHipChatProxy.cs" />
+    <Compile Include="Contracts\IRepsonseClient.cs" />
     <Compile Include="HipChatProxy.cs" />
+    <Compile Include="MessageFormat.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RepsonseClient.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\LibHipChat\LibHipChat.Domain.csproj">
-      <Project>{D0CE025C-BB76-4ED2-98CC-9E47098301E6}</Project>
-      <Name>LibHipChat.Domain</Name>
+    <ProjectReference Include="..\LibHipChat\LibHipChat.csproj">
+      <Project>{7DC627B0-C332-4DA3-AA62-72828220FE8C}</Project>
+      <Name>LibHipChat</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
