@@ -1,7 +1,10 @@
-﻿namespace LibHipChat.WindowsService
+﻿using System;
+
+namespace LibHipChat.WindowsService
 {
-    public class ProcessorService 
+    public class ProcessorService
     {
+        
 
         public ProcessorService ()
         {
