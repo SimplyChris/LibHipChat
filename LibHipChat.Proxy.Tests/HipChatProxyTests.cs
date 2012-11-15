@@ -143,6 +143,19 @@ namespace LibHipChat.Proxy.Tests
         }
 
         [Test]
+        public void should_be_able_set_room_topic ()
+        {
+            var roomId = "52403";
+            var newtopic = "new room topic";
+            _proxy.SetRoomTopic(roomId, newtopic);
+
+            var roomInfo = _proxy.GetRoomInfo(roomId);
+
+            Assert.That(roomInfo.Topic, Is.EqualTo(newtopic));
+        
+        }
+
+        [Test]
         public void should_be_able_to_get_user ()
         {            
             var expectedEmail = "testing@losmorgans.com";            

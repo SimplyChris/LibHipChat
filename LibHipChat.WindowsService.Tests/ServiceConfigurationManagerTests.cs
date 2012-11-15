@@ -2,7 +2,7 @@
 using LibHipChat.WindowsService.Configuration;
 using NUnit.Framework;
 
-namespace LipHipChat.WindowsService.Tests
+namespace LibHipChat.WindowsService.Tests
 {
     [TestFixture]
     public class ServiceConfigurationManagerTests

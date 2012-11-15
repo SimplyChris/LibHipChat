@@ -7,7 +7,10 @@ using LibHipChat.Domain.Proxy;
 namespace LibHipChat.Proxy.Contracts
 {
     public interface IHipChatProxy
-    {        
+    {
+        ErrorModel LastError { get; set; }
+        Int32 ApiCallsRemaining { get; }
+
         HipChatDeleteResponse DeleteUser(string userId);
         NewUser CreateUser(string email, string name, string title, string is_group_admin);
         User GetUser (string userId);
@@ -17,9 +20,8 @@ namespace LibHipChat.Proxy.Contracts
         RoomDetail GetRoomInfo(string roomId);
         IList<RoomMessage> GetRecentRoomHistory(string roomid);
         IList<RoomMessage> GetRoomHistory(string roomid, DateTime date);
-        ErrorModel LastError { get; set; }
-        Int32 ApiCallsRemaining { get; }
         String GetUserId(string email);
+        void SetRoomTopic(string roomid, string newtopic);
     }
 
 }

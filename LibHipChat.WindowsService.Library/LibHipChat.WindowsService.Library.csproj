@@ -31,6 +31,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="StructureMap">
+      <HintPath>..\packages\structuremap.2.6.4.1\lib\net40\StructureMap.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
@@ -43,13 +46,24 @@
   <ItemGroup>
     <Compile Include="Configuration\ProcessorConfiguration.cs" />
     <Compile Include="Configuration\ServiceConfigurationManager.cs" />
+    <Compile Include="Contracts\IRoomContext.cs" />
     <Compile Include="ProcessorService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RoomWatcher.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="ProcessorConfiguration.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\LibHipChat.Services\LibHipChat.Services.csproj">
+      <Project>{93399D63-694C-4945-8035-97D0D47F07C7}</Project>
+      <Name>LibHipChat.Services</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

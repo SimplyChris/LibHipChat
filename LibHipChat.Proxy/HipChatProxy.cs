@@ -37,6 +37,11 @@ namespace LibHipChat.Proxy
             return user != null ? list.SingleOrDefault(x => x.Email == email).UserId : "";
         }
 
+        public void SetRoomTopic(string roomid, string newtopic)
+        {
+            throw new NotImplementedException();
+        }
+
         public HipChatProxy (HipChatConnectionFactory factory)
         {
             _factory = factory;
