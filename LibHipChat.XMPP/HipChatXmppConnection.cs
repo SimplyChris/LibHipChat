@@ -7,9 +7,12 @@ using agsXMPP.protocol.Base;
 
 namespace LibHipChat.XMPP
 {
+    public delegate void ConnectEventHandler(object sender, EventArgs e);
+
     public class HipChatXMPPConnection
     {
         private HipChatXmppConnectionSettings ConnectionSettings { get; set; }
+
         private XmppClientConnection _clientConnection;
 
         public HipChatXMPPConnection (HipChatXmppConnectionSettings settings)
@@ -20,7 +23,7 @@ namespace LibHipChat.XMPP
 
         public void OpenConnection ()
         {
-            _clientConnection.Open(ConnectionSettings.UserName, ConnectionSettings.Password);                        
+            _clientConnection.Open(ConnectionSettings.UserName, ConnectionSettings.Password);                       
         }
 
         public void CloseConnection ()
@@ -28,12 +31,6 @@ namespace LibHipChat.XMPP
             _clientConnection.Close();
         }
      
-        public void GetRoster ()
-        {
-            _clientConnection.OnRosterItem += AddRosterItem;
-            _clientConnection.RequestRoster();
-        }
-
         private void AddRosterItem (object source, RosterItem rosterItem )
         {
             
