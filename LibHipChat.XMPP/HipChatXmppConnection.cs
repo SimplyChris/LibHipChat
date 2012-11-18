@@ -13,22 +13,36 @@ namespace LibHipChat.XMPP
     {
         private HipChatXmppConnectionSettings ConnectionSettings { get; set; }
 
-        private XmppClientConnection _clientConnection;
+        public XmppClientConnection ClientConnection { get; set; }
 
         public HipChatXMPPConnection (HipChatXmppConnectionSettings settings)
         {
             ConnectionSettings = settings;
-            _clientConnection = new XmppClientConnection(settings.Server);
+            ClientConnection = new XmppClientConnection(settings.Server);
+            ClientConnection.OnError += ReportError;
         }
 
-        public void OpenConnection ()
+        public void OpenConnection (string RoomId)
         {
-            _clientConnection.Open(ConnectionSettings.UserName, ConnectionSettings.Password);                       
+            ClientConnection.Open(ConnectionSettings.UserName, ConnectionSettings.Password);            
+            ClientConnection.OnLogin += AutoJoinRoom;
+
+        }
+
+        public void AutoJoinRoom(object sender)
+        {
+            
+        }
+
+        public void ReportError(object sender, Exception ex)
+        {
+            Console.WriteLine("XMPP Exception of type {0}. ", ex.GetType());
+            Console.WriteLine(ex.Message);
         }
 
         public void CloseConnection ()
         {
-            _clientConnection.Close();
+            ClientConnection.Close();
         }
      
         private void AddRosterItem (object source, RosterItem rosterItem )
