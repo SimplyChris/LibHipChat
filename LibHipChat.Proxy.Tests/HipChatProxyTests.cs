@@ -137,7 +137,7 @@ namespace LibHipChat.Proxy.Tests
             var expectedName = "Notifications";
             var expectedTopic = "new room topic";
             
-            var result = _proxy.GetRoomInfo(roomId);
+            var result = _proxy.GetRoomInfo(roomId);    
 
             Assert.That(result.Name, Is.EqualTo(expectedName));            
             Assert.That(result.Topic.Contains(expectedTopic),Is.True);            

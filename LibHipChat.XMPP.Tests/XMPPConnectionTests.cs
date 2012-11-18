@@ -46,7 +46,7 @@ namespace LibHipChat.XMPP.Tests
             _xmppConnection.ClientConnection.OnLogin += ConnectOpenEvent;
             Console.WriteLine("Opening Connection");
             _xmppConnection.OpenConnection(testRoomId);
-            Thread.Sleep(1000);
+            Thread.Sleep(2000);
             Assert.That(LogonEventWasCalled, Is.EqualTo(true));
         }
 
