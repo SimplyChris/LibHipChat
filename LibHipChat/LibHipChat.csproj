@@ -102,12 +102,18 @@
     <Compile Include="IoC\IocContainer.cs" />
     <Compile Include="IoC\LibHipChatRegistry.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Interfaces\ILogConfiguration.cs" />
+    <Compile Include="Interfaces\ILogLocationProvider.cs" />
     <Compile Include="Services\Log4NetLogger.cs" />
+    <Compile Include="Services\LogConfiguration.cs" />
+    <Compile Include="Services\LogLocationProvider.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Logging\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

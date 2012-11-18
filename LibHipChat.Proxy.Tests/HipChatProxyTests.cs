@@ -215,7 +215,7 @@ namespace LibHipChat.Proxy.Tests
             Assert.That(response.Count, Is.GreaterThan(0));
         }
 
-        [Test]
+        [Test,Ignore("Until added a upload message type prior is automated")]
         public void should_get_file_information_from_upload_message_type ()
         {
             var roomId = "52403";

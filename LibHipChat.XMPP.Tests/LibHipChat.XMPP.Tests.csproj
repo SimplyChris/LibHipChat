@@ -59,6 +59,10 @@
       <Project>{07D332C2-F476-4938-BB95-19EE4568127A}</Project>
       <Name>LibHipChat.XMPP</Name>
     </ProjectReference>
+    <ProjectReference Include="..\LibHipChat\LibHipChat.csproj">
+      <Project>{7DC627B0-C332-4DA3-AA62-72828220FE8C}</Project>
+      <Name>LibHipChat</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

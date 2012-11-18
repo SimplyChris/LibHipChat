@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading;
+using LibHipChat.Interfaces;
+using LibHipChat.IoC;
+using LibHipChat.Services;
 using NUnit.Framework;
 using agsXMPP.Xml.Dom;
 using agsXMPP.protocol.client;
@@ -15,12 +18,16 @@ namespace LibHipChat.XMPP.Tests
         private HipChatXMPPConnection _xmppConnection;
         private bool LogonEventWasCalled = false;
         private readonly string testRoomId = "18167_zencode";
-
+        private ILogger<XMPPConnectionTests> _logger;
         [TestFixtureSetUp]
         public void Setup ()
         {
+            IocContainer.Configure();
+            _logger = IocContainer.GetInstance<ILogger<XMPPConnectionTests>>();
+            
             _xmppConnection = new HipChatXMPPConnection(new HipChatXmppConnectionSettings() { UserName = "18167_192253", Password = "botuser123", Server = "chat.hipchat.com" });            
             SetupEvents();
+            
         }
 
 
@@ -34,10 +41,8 @@ namespace LibHipChat.XMPP.Tests
 
         [Test]
         public void should_not_throw_exception_when_opening_connection ()
-        {
-           
-            Assert.DoesNotThrow(()=>_xmppConnection.OpenConnection(testRoomId));            
-            Thread.Sleep(10000);            
+        {           
+            Assert.DoesNotThrow(()=>_xmppConnection.OpenConnection(testRoomId));                                    
         }
 
         [Test]
@@ -46,7 +51,7 @@ namespace LibHipChat.XMPP.Tests
             _xmppConnection.ClientConnection.OnLogin += ConnectOpenEvent;
             Console.WriteLine("Opening Connection");
             _xmppConnection.OpenConnection(testRoomId);
-            Thread.Sleep(2000);
+            Thread.Sleep(5000);
             Assert.That(LogonEventWasCalled, Is.EqualTo(true));
         }
 
@@ -60,6 +65,7 @@ namespace LibHipChat.XMPP.Tests
         public void ConnectOpenEvent(object sender)
         {
             Console.WriteLine("Connection Open Event Fired");
+            _logger.Debug("Test Event");
         }
     }
 

@@ -15,5 +15,10 @@ namespace LibHipChat.IoC
         {
            Container.Configure(init=>init.AddRegistry<LibHipChatRegistry>());
         }
+        
+        public static T GetInstance<T>()
+        {
+            return Container.GetInstance<T>();
+        }
     }
 }

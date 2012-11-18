@@ -61,33 +61,6 @@ namespace LibHipChat.Domain.Tests
             Assert.That(outDate, Is.EqualTo(expectedDateTime));                        
         }
 
-
-        [Test, Ignore]
-        public void should_process_new_message ()
-        {
-            var roomId = "52403";          
-            _roomListener.SetRoomId(roomId);
-            var recentMessages = _roomListener.GetNewMessages();
-
-
-            _messageProcessor = _mockRepository.StrictMock<IMessageProcessor>();
-
-            _messageProcessor.Expect(x => x.IsRegisteredMessageType(Arg<RoomMessageType>.Is.Anything)).IgnoreArguments().Return(true).
-                Repeat.Any();
-
-
-
-            //_messageProcessor.Stub(x => x.IsRegisteredMessageType(Arg<RoomMessageType>.Is.Anything)).Return(true);
-            _roomListener.AddProcessor(_messageProcessor);
-
-            //_mockRepository.ReplayAll();
-
-            _roomListener.ProcessNewMessages();
-            //_messageProcessor.AssertWasCalled(x=>x.ProcessMessage(Arg<RoomMessage>.Is.Anything));
-
-            _messageProcessor.VerifyAllExpectations();
-        }
-
         [Test]
         public void should_get_only_new_messages ()
         {
