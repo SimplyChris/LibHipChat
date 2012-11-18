@@ -98,7 +98,11 @@
     <Compile Include="Domain\Proxy\JsonModelDeserializer.cs" />
     <Compile Include="Domain\ResultCode.cs" />
     <Compile Include="Domain\RoomMessageType.cs" />
+    <Compile Include="Interfaces\ILogger.cs" />
+    <Compile Include="IoC\IocContainer.cs" />
+    <Compile Include="IoC\LibHipChatRegistry.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\Log4NetLogger.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
