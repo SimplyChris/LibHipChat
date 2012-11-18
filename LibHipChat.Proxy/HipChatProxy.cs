@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Runtime.Serialization;
 using System.Text;
+using System.Web;
 using LibHipChat.Domain;
 using LibHipChat.Domain.Entities;
 using LibHipChat.Domain.Helpers;
@@ -37,9 +38,27 @@ namespace LibHipChat.Proxy
             return user != null ? list.SingleOrDefault(x => x.Email == email).UserId : "";
         }
 
-        public void SetRoomTopic(string roomid, string newtopic)
+        public HttpCallResponse SetRoomTopic(string roomid, string newtopic)
         {
-            throw new NotImplementedException();
+
+            var encodedTopic = HttpUtility.HtmlEncode(newtopic);
+            var actionParms = new Dictionary<string, string>
+                                  {
+                                      {"room_id", roomid},
+                                      {"topic", encodedTopic}
+                                  };
+
+            try
+            {
+                var response = _executor.Execute(_factory.Create(ActionKey.SetTopic),actionParms);
+                var callResponse = new JsonModelDeserializer<HttpCallResponse>().Deserialize(response.ResponseString);
+                return callResponse;
+            }
+            catch (Exception ex)
+            {
+
+                return new HttpCallResponse() {Status = ex.Message};
+            }
         }
 
         public HipChatProxy (HipChatConnectionFactory factory)

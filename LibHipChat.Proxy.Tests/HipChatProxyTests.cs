@@ -4,6 +4,7 @@ using System.Configuration;
 using System.Diagnostics;
 using System.Linq;
 using System.Net;
+using System.Threading;
 using LibHipChat.Domain;
 using LibHipChat.Domain.Helpers;
 using LibHipChat.Proxy;
@@ -134,25 +135,36 @@ namespace LibHipChat.Proxy.Tests
         {
             var roomId = "52403";
             var expectedName = "Notifications";
-            var expectedTopic = "Room For Test Notifications";
+            var expectedTopic = "new room topic";
             
             var result = _proxy.GetRoomInfo(roomId);
 
             Assert.That(result.Name, Is.EqualTo(expectedName));            
-            Assert.That(result.Topic, Is.EqualTo(expectedTopic));            
+            Assert.That(result.Topic.Contains(expectedTopic),Is.True);            
         }
 
         [Test]
-        public void should_be_able_set_room_topic ()
+        public void set_room_topic_should_return_proper_model ()
         {
             var roomId = "52403";
             var newtopic = "new room topic";
-            _proxy.SetRoomTopic(roomId, newtopic);
+            var response = _proxy.SetRoomTopic(roomId, newtopic);
 
+            Assert.That(response.Status, Is.EqualTo("ok"));        
+        }
+
+
+        [Test]
+        public void should_set_room_topic()
+        {
+            var roomId = "52403";
+            var newtopic = "new room topic set at " + DateTime.Now.ToString();
+            var response = _proxy.SetRoomTopic(roomId, newtopic);
+
+            Thread.Sleep(1000);
             var roomInfo = _proxy.GetRoomInfo(roomId);
 
             Assert.That(roomInfo.Topic, Is.EqualTo(newtopic));
-        
         }
 
         [Test]

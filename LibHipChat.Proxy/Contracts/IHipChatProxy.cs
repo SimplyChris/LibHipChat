@@ -21,7 +21,7 @@ namespace LibHipChat.Proxy.Contracts
         IList<RoomMessage> GetRecentRoomHistory(string roomid);
         IList<RoomMessage> GetRoomHistory(string roomid, DateTime date);
         String GetUserId(string email);
-        void SetRoomTopic(string roomid, string newtopic);
+        HttpCallResponse SetRoomTopic(string roomid, string newtopic);
     }
 
 }

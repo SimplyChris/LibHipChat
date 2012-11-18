@@ -5,7 +5,7 @@ using Newtonsoft.Json;
 
 namespace LibHipChat.Domain.Entities
 {
-    public class JsonErrorModel : IJsonModel <IDictionary<string, string>>
+    public class JsonErrorModel 
     {
         [JsonProperty("error")]
         public IDictionary<string, string> Data { get; set; }

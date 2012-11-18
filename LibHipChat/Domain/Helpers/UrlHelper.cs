@@ -55,6 +55,10 @@ namespace LibHipChat.Domain.Helpers
                     actionUrl = "users/update";
                     break;
 
+                case ActionKey.SetTopic:
+                    actionUrl = "rooms/topic";
+                    break;
+
                     
                 //TODO: Create a custom HipChapException Type                
                 default:
@@ -80,6 +84,7 @@ namespace LibHipChat.Domain.Helpers
                 case ActionKey.DeleteUser:
                 case ActionKey.CreateUser:
                 case ActionKey.MessageRoom:
+                case ActionKey.SetTopic:
                     actionMethod = "POST";
                     break;
 

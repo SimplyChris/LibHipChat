@@ -19,6 +19,8 @@ namespace LibHipChat.XMPP
         {
             ConnectionSettings = settings;
             ClientConnection = new XmppClientConnection(settings.Server);
+            ClientConnection.UseSSL = true;
+            ClientConnection.UseStartTLS = true;
             ClientConnection.OnError += ReportError;
         }
 

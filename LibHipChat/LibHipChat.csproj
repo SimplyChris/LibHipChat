@@ -39,6 +39,9 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="log4net">
+      <HintPath>..\packages\log4net.2.0.0\lib\net40-full\log4net.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\packages\Newtonsoft.Json.4.5.10\lib\net40\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -67,6 +70,7 @@
     <Compile Include="Domain\Entities\JsonRoomDetailModel.cs" />
     <Compile Include="Domain\Entities\JsonRoomHistoryModel.cs" />
     <Compile Include="Domain\Entities\JsonRoomsModel.cs" />
+    <Compile Include="Domain\Entities\HttpCallResponse.cs" />
     <Compile Include="Domain\Entities\JsonUserModel.cs" />
     <Compile Include="Domain\Entities\JsonUsersModel.cs" />
     <Compile Include="Domain\Entities\NewUser.cs" />

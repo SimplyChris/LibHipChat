@@ -13,6 +13,7 @@ namespace LibHipChat.Domain
         GetRoomHistory,        
         DeleteRoom,
         ShowUser,
-        UpdateUser
+        UpdateUser,
+        SetTopic
     }
 }
