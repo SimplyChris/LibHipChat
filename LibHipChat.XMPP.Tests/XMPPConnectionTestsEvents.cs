@@ -19,12 +19,20 @@ namespace LibHipChat.XMPP.Tests
             _xmppConnection.ClientConnection.OnStreamError += ClientConnectionOnOnStreamError;
             _xmppConnection.ClientConnection.OnClose += ClientConnectionOnOnClose;
             _xmppConnection.ClientConnection.OnIq += ClientConnectionOnOnIq;
-            _xmppConnection.ClientConnection.OnMessage += ClientConnectionOnOnMessage;
+            //_xmppConnection.ClientConnection.OnMessage += ClientConnectionOnOnMessage;
+            _xmppConnection.OnMessageReceived += XmppConnectionOnOnMessageReceived;
         }
-        private void ClientConnectionOnOnMessage(object sender, Message msg)
+
+        private void XmppConnectionOnOnMessageReceived(object sender, Message msg)
         {
             Console.WriteLine("OnMessessage Called -- From {0} Message: {1}", msg.From, msg.Body);
+            _logger.DebugFormat("Message Received: {0} {1}", msg.From, msg.Body);
         }
+
+//        private void ClientConnectionOnOnMessage(object sender, Message msg)
+//        {
+//
+//        }
 
         private void ClientConnectionOnOnIq(object sender, IQ iq)
         {

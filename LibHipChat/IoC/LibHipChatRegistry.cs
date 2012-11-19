@@ -11,7 +11,7 @@ namespace LibHipChat.IoC
         public LibHipChatRegistry()
         {
             For(typeof (ILogger<>)).Use(typeof (Log4NetLogger<>));
-            For(typeof (ILogConfiguration)).Use(typeof (LogConfiguration));
+            For(typeof (ILogConfigurator)).Use(typeof (LogConfigurator));
             For(typeof (ILogLocationProvider)).Use(typeof (LogLocationProvider));
         }
     }

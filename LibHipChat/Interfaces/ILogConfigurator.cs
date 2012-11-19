@@ -2,8 +2,8 @@
 
 namespace LibHipChat.Services
 {
-    public interface ILogConfiguration
+    public interface ILogConfigurator
     {        
-        void Configurate();
+        void Configure();
     }
 }

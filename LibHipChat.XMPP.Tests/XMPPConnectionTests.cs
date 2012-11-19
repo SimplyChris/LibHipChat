@@ -42,7 +42,7 @@ namespace LibHipChat.XMPP.Tests
         [Test]
         public void should_not_throw_exception_when_opening_connection ()
         {           
-            Assert.DoesNotThrow(()=>_xmppConnection.OpenConnection(testRoomId));                                    
+            Assert.DoesNotThrow(()=>_xmppConnection.OpenConnection(new List<HipChatRoom>()));                                    
         }
 
         [Test]
@@ -50,11 +50,17 @@ namespace LibHipChat.XMPP.Tests
         {
             _xmppConnection.ClientConnection.OnLogin += ConnectOpenEvent;
             Console.WriteLine("Opening Connection");
-            _xmppConnection.OpenConnection(testRoomId);
+            _xmppConnection.OpenConnection(new List<HipChatRoom>());
             Thread.Sleep(5000);
             Assert.That(LogonEventWasCalled, Is.EqualTo(true));
         }
 
+        [Test]
+        public void should_auto_join_room()
+        {
+            _xmppConnection.OpenConnection(new List<HipChatRoom>() { new HipChatRoom() { Id="18167_zencode", NickName = "ZenCode"} });
+            Thread.Sleep(10000);
+        }
 
         [Test]
         public void call_tests ()

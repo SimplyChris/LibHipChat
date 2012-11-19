@@ -49,12 +49,25 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="HipChatRoom.cs" />
     <Compile Include="HipChatXmppConnection.cs" />
     <Compile Include="HipChatXmppConnectionSettings.cs" />
+    <Compile Include="Interfaces\IXMPPMessageProcessor.cs" />
+    <Compile Include="Interfaces\IXMPPChannelResponder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="XMPPMessageContext.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\LibHipChat\LibHipChat.csproj">
+      <Project>{7DC627B0-C332-4DA3-AA62-72828220FE8C}</Project>
+      <Name>LibHipChat</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="NewFolder1\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -6,16 +6,16 @@ using log4net.Repository.Hierarchy;
 
 namespace LibHipChat.Services
 {
-    public class LogConfiguration : ILogConfiguration
+    public class LogConfigurator : ILogConfigurator
     {
         private ILogLocationProvider _locationProvider;
         
-        public LogConfiguration(ILogLocationProvider locationProvider)
+        public LogConfigurator(ILogLocationProvider locationProvider)
         {
             _locationProvider = locationProvider;
         }
 
-        public void Configurate()
+        public void Configure()
         {
             Hierarchy hierarchy = (Hierarchy)LogManager.GetRepository();
             hierarchy.Root.RemoveAllAppenders(); /*Remove any other appenders*/
@@ -30,7 +30,13 @@ namespace LibHipChat.Services
             fileAppender.Layout = pl;
             fileAppender.ActivateOptions();
 
-            log4net.Config.BasicConfigurator.Configure(fileAppender);
+            ConsoleAppender consoleAppender = new ConsoleAppender();
+            consoleAppender.Layout = pl;
+            consoleAppender.ActivateOptions();
+
+//            log4net.Config.BasicConfigurator.Configure(fileAppender);
+            IAppender[] appenders = {fileAppender, consoleAppender};
+            log4net.Config.BasicConfigurator.Configure(appenders);
             var log = LogManager.GetLogger(GetType());
             log.Debug("Logging Configured");
         }

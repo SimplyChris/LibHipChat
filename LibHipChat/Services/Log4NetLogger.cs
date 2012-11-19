@@ -9,12 +9,12 @@ namespace LibHipChat.Services
     public class Log4NetLogger <T> : ILogger <T>
     {
         private ILog _logger;
-        private ILogConfiguration _logConfiguration;
+        private ILogConfigurator _logConfigurator;
 
-        public Log4NetLogger(ILogConfiguration configuration)
+        public Log4NetLogger(ILogConfigurator configurator)
         {
-            _logConfiguration = configuration;
-            _logConfiguration.Configurate();
+            _logConfigurator = configurator;
+            _logConfigurator.Configure();
             _logger = LogManager.GetLogger(typeof(T));
         }
 
