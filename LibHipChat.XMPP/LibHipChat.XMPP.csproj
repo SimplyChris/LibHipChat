@@ -52,6 +52,7 @@
     <Compile Include="HipChatRoom.cs" />
     <Compile Include="HipChatXmppConnection.cs" />
     <Compile Include="HipChatXmppConnectionSettings.cs" />
+    <Compile Include="Interfaces\IXMPPConnectionSettingsProvider.cs" />
     <Compile Include="Interfaces\IXMPPMessageProcessor.cs" />
     <Compile Include="Interfaces\IXMPPChannelResponder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

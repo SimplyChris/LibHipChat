@@ -19,6 +19,8 @@ namespace LibHipChat.XMPP.Tests
         private bool LogonEventWasCalled = false;
         private readonly string testRoomId = "18167_zencode";
         private ILogger<XMPPConnectionTests> _logger;
+
+
         [TestFixtureSetUp]
         public void Setup ()
         {
@@ -42,7 +44,7 @@ namespace LibHipChat.XMPP.Tests
         [Test]
         public void should_not_throw_exception_when_opening_connection ()
         {           
-            Assert.DoesNotThrow(()=>_xmppConnection.OpenConnection(new List<HipChatRoom>()));                                    
+            Assert.DoesNotThrow(()=>_xmppConnection.OpenConnection());                                    
         }
 
         [Test]
@@ -50,15 +52,21 @@ namespace LibHipChat.XMPP.Tests
         {
             _xmppConnection.ClientConnection.OnLogin += ConnectOpenEvent;
             Console.WriteLine("Opening Connection");
-            _xmppConnection.OpenConnection(new List<HipChatRoom>());
+            _xmppConnection.OpenConnection();
             Thread.Sleep(5000);
             Assert.That(LogonEventWasCalled, Is.EqualTo(true));
         }
 
         [Test]
+        public void should_throw_exception_when_reconnection_without_disconnecting()
+        {
+            
+        }
+
+        [Test]
         public void should_auto_join_room()
         {
-            _xmppConnection.OpenConnection(new List<HipChatRoom>() { new HipChatRoom() { Id="18167_zencode", NickName = "ZenCode"} });
+            _xmppConnection.OpenConnection();
             Thread.Sleep(10000);
         }
 

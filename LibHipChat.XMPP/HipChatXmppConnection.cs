@@ -14,7 +14,7 @@ namespace LibHipChat.XMPP
     public delegate void ConnectEventHandler(object sender, EventArgs e);
     public delegate void MessageReceivedEventHandler(object sender, Message message);
     
-    public class HipChatXMPPConnection
+    public class HipChatXMPPConnection 
     {
         private HipChatXmppConnectionSettings ConnectionSettings { get; set; }
         private LibHipChat.Interfaces.ILogger<HipChatXMPPConnection> _logger;
@@ -35,16 +35,18 @@ namespace LibHipChat.XMPP
             ClientConnection = new XmppClientConnection(settings.Server);
             ClientConnection.UseSSL = true;
             ClientConnection.UseStartTLS = true;
-            ClientConnection.OnError += ReportError;
+            ClientConnection.OnError += ReportError;            
+            _roomList = new List<HipChatRoom>();
         }
 
-        public void OpenConnection (IList<HipChatRoom> roomList = null)
-        {
-            _roomList = roomList;
-            ClientConnection.Open(ConnectionSettings.UserName, ConnectionSettings.Password);            
+        public void OpenConnection ()
+        {                        
+            ClientConnection.Open(ConnectionSettings.UserName, ConnectionSettings.Password);      
+            
             ClientConnection.OnLogin += OnLoginEventHandler;
             ClientConnection.OnMessage += ClientConnectionOnOnMessage;
         }
+
 
         private void ClientConnectionOnOnMessage(object sender, Message msg)
         {
