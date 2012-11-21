@@ -14,13 +14,14 @@ namespace LibHipChat.XMPP
     public delegate void ConnectEventHandler(object sender, EventArgs e);
     public delegate void MessageReceivedEventHandler(object sender, Message message);
     
-    public class HipChatXMPPConnection 
+    public class HipChatXMPPConnection : XmppClientConnection
     {
+        public bool Connected { get; set; }
         private HipChatXmppConnectionSettings ConnectionSettings { get; set; }
         private LibHipChat.Interfaces.ILogger<HipChatXMPPConnection> _logger;
 
         private MucManager _mucManager;
-        public XmppClientConnection ClientConnection { get; set; }
+        //public XmppClientConnection ClientConnection { get; set; }
 
         public IList<HipChatRoom> RoomList { get { return _roomList; } }
 
@@ -28,25 +29,22 @@ namespace LibHipChat.XMPP
 
         public event MessageReceivedEventHandler OnMessageReceived;
 
-        public HipChatXMPPConnection (HipChatXmppConnectionSettings settings)
+        public HipChatXMPPConnection (HipChatXmppConnectionSettings settings) : base (settings.Server)
         {
             _logger = IoC.IocContainer.GetInstance<ILogger<HipChatXMPPConnection>>();
-            ConnectionSettings = settings;
-            ClientConnection = new XmppClientConnection(settings.Server);
-            ClientConnection.UseSSL = true;
-            ClientConnection.UseStartTLS = true;
-            ClientConnection.OnError += ReportError;            
+            ConnectionSettings = settings;            
+            UseSSL = true;
+            UseStartTLS = true;
+            OnError += ReportError;            
             _roomList = new List<HipChatRoom>();
         }
 
         public void OpenConnection ()
         {                        
-            ClientConnection.Open(ConnectionSettings.UserName, ConnectionSettings.Password);      
-            
-            ClientConnection.OnLogin += OnLoginEventHandler;
-            ClientConnection.OnMessage += ClientConnectionOnOnMessage;
+            base.Open(ConnectionSettings.UserName, ConnectionSettings.Password);                  
+            base.OnLogin += OnLoginEventHandler;
+            base.OnMessage += ClientConnectionOnOnMessage;
         }
-
 
         private void ClientConnectionOnOnMessage(object sender, Message msg)
         {
@@ -60,7 +58,7 @@ namespace LibHipChat.XMPP
         public void OnLoginEventHandler(object sender)
         {
             _logger.DebugFormat("   OnLoginEventHandler Called");
-            _mucManager = new MucManager(ClientConnection);
+            _mucManager = new MucManager(this);
             
             foreach (HipChatRoom hipChatRoom in RoomList)
             {
@@ -79,12 +77,24 @@ namespace LibHipChat.XMPP
 
         public void CloseConnection ()
         {
-            ClientConnection.Close();
+            base.Close();
         }
      
         private void AddRosterItem (object source, RosterItem rosterItem )
         {
             
+        }
+
+        public override void SocketOnConnect(object sender)
+        {
+            Connected = true;
+            base.SocketOnConnect(sender);
+        }
+
+        public override void SocketOnDisconnect(object sender)
+        {
+            Connected = false;
+            base.SocketOnDisconnect(sender);
         }
     }
 }

@@ -50,7 +50,7 @@ namespace LibHipChat.XMPP.Tests
         [Test]
         public void should_call_logon_event_event_handler_after_connection_opened()
         {
-            _xmppConnection.ClientConnection.OnLogin += ConnectOpenEvent;
+            _xmppConnection.OnLogin += ConnectOpenEvent;
             Console.WriteLine("Opening Connection");
             _xmppConnection.OpenConnection();
             Thread.Sleep(5000);

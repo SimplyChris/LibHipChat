@@ -9,16 +9,16 @@ namespace LibHipChat.XMPP.Tests
 
         public void SetupEvents()
         {
-            _xmppConnection.ClientConnection.OnError += ClientConnectionOnOnError;
-            _xmppConnection.ClientConnection.OnAuthError += ClientConnectionOnOnAuthError;
-            _xmppConnection.ClientConnection.OnLogin += ClientConnectionOnOnLogin;
-            _xmppConnection.ClientConnection.OnSocketError += ClientConnectionOnOnSocketError;
-            _xmppConnection.ClientConnection.OnBinded += ClientConnectionOnOnBinded;
-            _xmppConnection.ClientConnection.OnRegistered += ClientConnectionOnOnRegistered;
-            _xmppConnection.ClientConnection.OnRegisterError += ClientConnectionOnOnRegisterError;
-            _xmppConnection.ClientConnection.OnStreamError += ClientConnectionOnOnStreamError;
-            _xmppConnection.ClientConnection.OnClose += ClientConnectionOnOnClose;
-            _xmppConnection.ClientConnection.OnIq += ClientConnectionOnOnIq;
+            _xmppConnection.OnError += ClientConnectionOnOnError;
+            _xmppConnection.OnAuthError += ClientConnectionOnOnAuthError;
+            _xmppConnection.OnLogin += ClientConnectionOnOnLogin;
+            _xmppConnection.OnSocketError += ClientConnectionOnOnSocketError;
+            _xmppConnection.OnBinded += ClientConnectionOnOnBinded;
+            _xmppConnection.OnRegistered += ClientConnectionOnOnRegistered;
+            _xmppConnection.OnRegisterError += ClientConnectionOnOnRegisterError;
+            _xmppConnection.OnStreamError += ClientConnectionOnOnStreamError;
+            _xmppConnection.OnClose += ClientConnectionOnOnClose;
+            _xmppConnection.OnIq += ClientConnectionOnOnIq;
             //_xmppConnection.ClientConnection.OnMessage += ClientConnectionOnOnMessage;
             _xmppConnection.OnMessageReceived += XmppConnectionOnOnMessageReceived;
         }

@@ -32,17 +32,18 @@ namespace ZWinformTestApp.Controls
 
         private void bnConnect_Click(object sender, EventArgs e)
         {
-            _xmppConnection.OpenConnection();            
+            if (!_xmppConnection.Connected)
+                _xmppConnection.OpenConnection();            
         }
 
         public void SetupEvents()
         {
-            _xmppConnection.ClientConnection.OnLogin += delegate { SetMessageText("On Login Called"); };
-            _xmppConnection.ClientConnection.OnError += delegate(object sender, Exception exception)
+            _xmppConnection.OnLogin += delegate { SetMessageText("On Login Called"); };
+            _xmppConnection.OnError += delegate(object sender, Exception exception)
                                                             {
                                                                 SetMessageText(String.Format("On Error Called: {0}",                                                                                               exception.Message));
                                                             };
-            _xmppConnection.ClientConnection.OnAuthError += delegate(object sender, Element element)
+            _xmppConnection.OnAuthError += delegate(object sender, Element element)
                                                                 {
                                                                     SetMessageText(
                                                                         String.Format("On Auth Error Called: {0}",
