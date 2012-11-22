@@ -227,7 +227,7 @@ namespace LibHipChat.Proxy.Tests
             Assert.That(fileUploadMessage.UploadInformation.Name, Is.EqualTo("Test File Upload.txt"));           
         }
 
-        [Test]
+        [Test, Ignore]
         public void should_set_proper_message_type_for_file_upload ()
         {
             var roomId = "52400";
@@ -239,7 +239,7 @@ namespace LibHipChat.Proxy.Tests
             Assert.That(fileUploadMessage.MessageType, Is.EqualTo(RoomMessageType.FileUpload));
         }
 
-        [Test]
+        [Test, Ignore]
         public void should_set_proper_message_type_user_message ()
         {
             var roomId = "52400";

@@ -44,17 +44,7 @@ namespace LibHipChat.XMPP.Tests
         [Test]
         public void should_not_throw_exception_when_opening_connection ()
         {           
-            Assert.DoesNotThrow(()=>_xmppConnection.OpenConnection());                                    
-        }
-
-        [Test]
-        public void should_call_logon_event_event_handler_after_connection_opened()
-        {
-            _xmppConnection.OnLogin += ConnectOpenEvent;
-            Console.WriteLine("Opening Connection");
-            _xmppConnection.OpenConnection();
-            Thread.Sleep(5000);
-            Assert.That(LogonEventWasCalled, Is.EqualTo(true));
+            Assert.DoesNotThrow(()=>_xmppConnection.OpenConnection());                                                
         }
 
         [Test]
@@ -63,25 +53,7 @@ namespace LibHipChat.XMPP.Tests
             _xmppConnection.OpenConnection();
             Thread.Sleep(5000);
             Assert.Throws<Exception>(() => _xmppConnection.OpenConnection());
-        }
-
-        [Test]
-        public void should_call_direct_message_event_handler()
-        {
-            Assert.Fail();
-        }
-
-        [Test]
-        public void should_call_room_message_event_handler()
-        {
-            Assert.Fail();
-        }
-
-        [Test]
-        public void should_auto_join_room()
-        {
-            _xmppConnection.OpenConnection();
-            Thread.Sleep(10000);
+            _xmppConnection.CloseConnection();
         }
 
         [Test]
