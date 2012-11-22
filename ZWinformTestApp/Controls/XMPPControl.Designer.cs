@@ -34,12 +34,18 @@
             this.bnConnect = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.tbOutput = new System.Windows.Forms.TextBox();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.tbRoomToJoin = new System.Windows.Forms.TextBox();
+            this.bnJoinRoom = new System.Windows.Forms.Button();
+            this.bnLeaveRoom = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -51,6 +57,7 @@
             // 
             // splitContainer1.Panel1
             // 
+            this.splitContainer1.Panel1.Controls.Add(this.groupBox3);
             this.splitContainer1.Panel1.Controls.Add(this.groupBox1);
             // 
             // splitContainer1.Panel2
@@ -66,14 +73,14 @@
             this.groupBox1.Controls.Add(this.bnConnect);
             this.groupBox1.Location = new System.Drawing.Point(3, 3);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(188, 54);
+            this.groupBox1.Size = new System.Drawing.Size(194, 54);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Connection";
             // 
             // bnDisconnect
             // 
-            this.bnDisconnect.Location = new System.Drawing.Point(97, 20);
+            this.bnDisconnect.Location = new System.Drawing.Point(104, 20);
             this.bnDisconnect.Name = "bnDisconnect";
             this.bnDisconnect.Size = new System.Drawing.Size(75, 23);
             this.bnDisconnect.TabIndex = 1;
@@ -105,12 +112,62 @@
             // tbOutput
             // 
             this.tbOutput.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tbOutput.Enabled = false;
             this.tbOutput.Location = new System.Drawing.Point(3, 16);
             this.tbOutput.Multiline = true;
             this.tbOutput.Name = "tbOutput";
+            this.tbOutput.ReadOnly = true;
+            this.tbOutput.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.tbOutput.Size = new System.Drawing.Size(625, 210);
             this.tbOutput.TabIndex = 0;
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.bnLeaveRoom);
+            this.groupBox3.Controls.Add(this.bnJoinRoom);
+            this.groupBox3.Controls.Add(this.tbRoomToJoin);
+            this.groupBox3.Controls.Add(this.label1);
+            this.groupBox3.Location = new System.Drawing.Point(3, 63);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(194, 84);
+            this.groupBox3.TabIndex = 1;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Room Managment";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(2, 26);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(73, 13);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Room To Join";
+            // 
+            // tbRoomToJoin
+            // 
+            this.tbRoomToJoin.Location = new System.Drawing.Point(81, 23);
+            this.tbRoomToJoin.Name = "tbRoomToJoin";
+            this.tbRoomToJoin.Size = new System.Drawing.Size(100, 20);
+            this.tbRoomToJoin.TabIndex = 1;
+            // 
+            // bnJoinRoom
+            // 
+            this.bnJoinRoom.Location = new System.Drawing.Point(6, 55);
+            this.bnJoinRoom.Name = "bnJoinRoom";
+            this.bnJoinRoom.Size = new System.Drawing.Size(85, 23);
+            this.bnJoinRoom.TabIndex = 2;
+            this.bnJoinRoom.Text = "Join Room";
+            this.bnJoinRoom.UseVisualStyleBackColor = true;
+            this.bnJoinRoom.Click += new System.EventHandler(this.bnJoinRoom_Click);
+            // 
+            // bnLeaveRoom
+            // 
+            this.bnLeaveRoom.Location = new System.Drawing.Point(97, 55);
+            this.bnLeaveRoom.Name = "bnLeaveRoom";
+            this.bnLeaveRoom.Size = new System.Drawing.Size(82, 23);
+            this.bnLeaveRoom.TabIndex = 3;
+            this.bnLeaveRoom.Text = "Leave Room";
+            this.bnLeaveRoom.UseVisualStyleBackColor = true;
+            this.bnLeaveRoom.Click += new System.EventHandler(this.bnLeaveRoom_Click);
             // 
             // XMPPControl
             // 
@@ -126,6 +183,8 @@
             this.groupBox1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -138,6 +197,11 @@
         private System.Windows.Forms.Button bnConnect;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.TextBox tbOutput;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.Button bnJoinRoom;
+        private System.Windows.Forms.TextBox tbRoomToJoin;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button bnLeaveRoom;
 
     }
 }

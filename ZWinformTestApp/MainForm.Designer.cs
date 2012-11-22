@@ -35,14 +35,14 @@
             // 
             this.xmppControl1.Location = new System.Drawing.Point(12, 12);
             this.xmppControl1.Name = "xmppControl1";
-            this.xmppControl1.Size = new System.Drawing.Size(554, 322);
+            this.xmppControl1.Size = new System.Drawing.Size(650, 322);
             this.xmppControl1.TabIndex = 0;
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(578, 346);
+            this.ClientSize = new System.Drawing.Size(674, 346);
             this.Controls.Add(this.xmppControl1);
             this.Name = "MainForm";
             this.Text = "MainForm";

@@ -50,6 +50,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="HipChatXmppUtilityTests.cs" />
     <Compile Include="XMPPConnectionTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="XMPPConnectionTestsEvents.cs" />

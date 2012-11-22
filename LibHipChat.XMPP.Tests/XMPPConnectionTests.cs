@@ -60,7 +60,21 @@ namespace LibHipChat.XMPP.Tests
         [Test]
         public void should_throw_exception_when_reconnection_without_disconnecting()
         {
-            
+            _xmppConnection.OpenConnection();
+            Thread.Sleep(5000);
+            Assert.Throws<Exception>(() => _xmppConnection.OpenConnection());
+        }
+
+        [Test]
+        public void should_call_direct_message_event_handler()
+        {
+            Assert.Fail();
+        }
+
+        [Test]
+        public void should_call_room_message_event_handler()
+        {
+            Assert.Fail();
         }
 
         [Test]

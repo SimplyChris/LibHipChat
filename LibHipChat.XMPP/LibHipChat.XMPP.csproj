@@ -37,6 +37,10 @@
     <Reference Include="log4net">
       <HintPath>..\packages\log4net.2.0.0\lib\net40-full\log4net.dll</HintPath>
     </Reference>
+    <Reference Include="nunit.framework, Version=2.5.7.10213, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\LibHipChat.Domain.Tests\bin\Debug\nunit.framework.dll</HintPath>
+    </Reference>
     <Reference Include="StructureMap">
       <HintPath>..\packages\structuremap.2.6.4.1\lib\net40\StructureMap.dll</HintPath>
     </Reference>
@@ -52,11 +56,17 @@
     <Compile Include="HipChatRoom.cs" />
     <Compile Include="HipChatXmppConnection.cs" />
     <Compile Include="HipChatXmppConnectionSettings.cs" />
+    <Compile Include="HipChatXmppEntity.cs" />
+    <Compile Include="HipChatXmppUtilityTests.cs" />
     <Compile Include="Interfaces\IXMPPConnectionSettingsProvider.cs" />
+    <Compile Include="Utility\XmppMessageFactory.cs" />
+    <Compile Include="XmppMessage.cs" />
     <Compile Include="Interfaces\IXMPPMessageProcessor.cs" />
     <Compile Include="Interfaces\IXMPPChannelResponder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="XMPPMessageContext.cs" />
+    <Compile Include="HipChatXMPPRoomManager.cs" />
+    <Compile Include="XmppMessageType.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
