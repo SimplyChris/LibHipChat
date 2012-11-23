@@ -57,7 +57,6 @@
     <Compile Include="HipChatXmppConnection.cs" />
     <Compile Include="HipChatXmppConnectionSettings.cs" />
     <Compile Include="HipChatXmppEntity.cs" />
-    <Compile Include="HipChatXmppUtilityTests.cs" />
     <Compile Include="Interfaces\IXMPPConnectionSettingsProvider.cs" />
     <Compile Include="Utility\XmppMessageFactory.cs" />
     <Compile Include="XmppMessage.cs" />

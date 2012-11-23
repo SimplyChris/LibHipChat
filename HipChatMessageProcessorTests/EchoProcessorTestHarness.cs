@@ -46,7 +46,7 @@ namespace HipChatMessageProcessorTests
         }
         
 
-        [Test,Ignore]
+        [Test,Ignore ("This is just a test harness that loops")]
         public void echo_processor_message_loop ()
         {
             var sleep_delay = 3000;
