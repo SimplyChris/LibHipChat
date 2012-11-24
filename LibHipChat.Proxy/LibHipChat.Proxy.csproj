@@ -51,12 +51,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Contracts\IHipChatProxy.cs" />
-    <Compile Include="Contracts\IRepsonseClient.cs" />
-    <Compile Include="HipChatProxy.cs" />
-    <Compile Include="MessageFormat.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RepsonseClient.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\LibHipChat\LibHipChat.csproj">

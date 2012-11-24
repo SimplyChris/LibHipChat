@@ -7,8 +7,9 @@ using System.Net;
 using System.Threading;
 using LibHipChat.Domain;
 using LibHipChat.Domain.Helpers;
+using LibHipChat.Interfaces;
+using LibHipChat.IoC;
 using LibHipChat.Proxy;
-using LibHipChat.Proxy.Contracts;
 using NUnit.Framework;
 
 namespace LibHipChat.Proxy.Tests
@@ -37,8 +38,10 @@ namespace LibHipChat.Proxy.Tests
             testRoomName= ConfigurationManager.AppSettings["TestRoomName"];
             testUserId = ConfigurationManager.AppSettings["TestUserId"];
             testUserEmail = ConfigurationManager.AppSettings["TestUserEmail"];
+            IocContainer.Configure();
             _connectionFactory = new HipChatConnectionFactory(new HipChatConnectionSettings(apiUrl, apiKey));
-            _proxy = new HipChatProxy(_connectionFactory);            
+            
+            _proxy = new HipChatProxy(_connectionFactory,new HipChatApiExecutor());
         }
 
         [Test]
@@ -168,10 +171,10 @@ namespace LibHipChat.Proxy.Tests
             var newtopic = "API Development new room topic set at " + DateTime.Now.ToString();
             var response = _proxy.SetRoomTopic(testRoomId, newtopic);
 
-            Thread.Sleep(1000);
+            Thread.Sleep(2000);
             var roomInfo = _proxy.GetRoomInfo(testRoomId);
 
-            Assert.That(roomInfo.Topic, Is.EqualTo(newtopic));
+            Assert.That(roomInfo.Topic.Contains("API Development new room topic set at"), Is.EqualTo(true));
         }
 
         [Test]

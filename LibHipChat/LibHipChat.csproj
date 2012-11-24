@@ -98,12 +98,17 @@
     <Compile Include="Domain\Proxy\JsonModelDeserializer.cs" />
     <Compile Include="Domain\ResultCode.cs" />
     <Compile Include="Domain\RoomMessageType.cs" />
+    <Compile Include="Interfaces\IHipChatProxy.cs" />
     <Compile Include="Interfaces\ILogger.cs" />
+    <Compile Include="Interfaces\IRepsonseClient.cs" />
     <Compile Include="IoC\IocContainer.cs" />
     <Compile Include="IoC\LibHipChatRegistry.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Interfaces\ILogConfigurator.cs" />
     <Compile Include="Interfaces\ILogLocationProvider.cs" />
+    <Compile Include="HipChatProxy.cs" />
+    <Compile Include="MessageFormat.cs" />
+    <Compile Include="RepsonseClient.cs" />
     <Compile Include="Services\Log4NetLogger.cs" />
     <Compile Include="Services\LogConfigurator.cs" />
     <Compile Include="Services\LogLocationProvider.cs" />

@@ -54,10 +54,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\LibHipChat.Proxy\LibHipChat.Proxy.csproj">
-      <Project>{2E3F02F7-C1B3-4F0F-A59D-72DB4CBD8889}</Project>
-      <Name>LibHipChat.Proxy</Name>
-    </ProjectReference>
     <ProjectReference Include="..\LibHipChat\LibHipChat.csproj">
       <Project>{7DC627B0-C332-4DA3-AA62-72828220FE8C}</Project>
       <Name>LibHipChat</Name>

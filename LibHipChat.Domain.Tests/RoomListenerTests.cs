@@ -5,8 +5,7 @@ using HipChatMessageProcessor.Processors;
 using LibHipChat.Domain.Entities;
 using LibHipChat.Domain.Services;
 using LibHipChat.Domain.Services.Interfaces;
-using LibHipChat.Proxy;
-using LibHipChat.Proxy.Contracts;
+using LibHipChat.Interfaces;
 using LibHipChat.Services.Contracts;
 using NUnit.Framework;
 using Rhino.Mocks;
@@ -36,7 +35,7 @@ namespace LibHipChat.Domain.Tests
         [SetUp]
         public void Setup ()
         {
-            _roomListener = new RoomListener(new HipChatProxy(new HipChatConnectionFactory(new HipChatConnectionSettings(apiUrl, apiKey))));            
+            _roomListener = new RoomListener(new HipChatProxy(new HipChatConnectionFactory(new HipChatConnectionSettings(apiUrl, apiKey)), new HipChatApiExecutor()));            
             _roomListener.GetHipChatProxy().MessageRoom("52403", "api", "Room Listener Test Message");
         }
 

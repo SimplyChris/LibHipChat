@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using LibHipChat;
 using LibHipChat.Domain.Contracts;
 using LibHipChat.Domain.Entities;
 using LibHipChat.Domain;
 using LibHipChat.Domain.Services.Interfaces;
-using LibHipChat.Proxy.Contracts;
+using LibHipChat.Interfaces;
 using LibHipChat.Services.Contracts;
 
 

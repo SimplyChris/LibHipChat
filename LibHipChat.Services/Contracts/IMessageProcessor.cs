@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using LibHipChat.Domain;
 using LibHipChat.Domain.Entities;
-using LibHipChat.Proxy.Contracts;
+using LibHipChat.Interfaces;
 
 namespace LibHipChat.Services.Contracts
 {

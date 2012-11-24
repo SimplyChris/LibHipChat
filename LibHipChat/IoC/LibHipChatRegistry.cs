@@ -13,6 +13,8 @@ namespace LibHipChat.IoC
             For(typeof (ILogger<>)).Use(typeof (Log4NetLogger<>));
             For(typeof (ILogConfigurator)).Use(typeof (LogConfigurator));
             For(typeof (ILogLocationProvider)).Use(typeof (LogLocationProvider));
+            For<IHipChatProxy>().Use<HipChatProxy>();             
+
         }
     }
 }
