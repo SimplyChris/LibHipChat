@@ -26,8 +26,8 @@ namespace LibHipChat.XMPP
         public void JoinRoom(HipChatRoom room)
         {
             _logger.DebugFormat("   JoinRoom: Id: [{0}] Nickname: [{1}]", room.Id, room.NickName);
-            var jid = new Jid(room.Id);
-            _mucManager.AcceptDefaultConfiguration(jid);
+            var jid = new Jid(room.Id);            
+            _mucManager.AcceptDefaultConfiguration(jid);            
             _mucManager.JoinRoom(jid, room.NickName, true);            
         }
 

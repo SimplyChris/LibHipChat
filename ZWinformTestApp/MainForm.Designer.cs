@@ -37,6 +37,7 @@
             this.xmppControl1.Name = "xmppControl1";
             this.xmppControl1.Size = new System.Drawing.Size(650, 322);
             this.xmppControl1.TabIndex = 0;
+            this.xmppControl1.Load += new System.EventHandler(this.xmppControl1_Load);
             // 
             // MainForm
             // 
@@ -45,7 +46,7 @@
             this.ClientSize = new System.Drawing.Size(674, 346);
             this.Controls.Add(this.xmppControl1);
             this.Name = "MainForm";
-            this.Text = "MainForm";
+            this.Text = "HipChat Bot Test Harness";
             this.ResumeLayout(false);
 
         }

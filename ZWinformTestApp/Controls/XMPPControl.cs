@@ -41,7 +41,7 @@ namespace ZWinformTestApp.Controls
         }
 
         public void SetupEvents()
-        {
+        {            
             _xmppConnection.OnLogin += delegate { SetMessageText("On Login Called"); };
             _xmppConnection.OnError += delegate(object sender, Exception exception)
                                                             {
@@ -52,7 +52,7 @@ namespace ZWinformTestApp.Controls
                                                                     SetMessageText("On Auth Error Called: {0}",
                                                                                       element.ToString());
                                                                 };
-            _xmppConnection.OnRosterStart += delegate(object sender) { SetMessageText("Roster List Start"); };
+            _xmppConnection.OnRosterStart += delegate(object sender) { SetMessageText("Roster List Start"); };            
             _xmppConnection.OnRosterItem += delegate(object sender, RosterItem item) { SetMessageText("Roster Item: {0}", item.Name); };
             _xmppConnection.OnRosterEnd += delegate(object sender) { SetMessageText("Roster List End"); };
             _xmppConnection.OnDirectMessageReceived += delegate(object sender, XmppMessage message) { SetMessageText("Direct Message - ReplyTo: [{0}] Message: [{1}]", message.ReplyEntity.ReplyTo, message.Body); };

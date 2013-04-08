@@ -18,5 +18,10 @@ namespace ZWinformTestApp
          
             InitializeComponent();
         }
+
+        private void xmppControl1_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -7,6 +7,7 @@ namespace ZWinformTestApp.Services
     {
         public HipChatXmppConnectionSettings GetConnectionSettings()
         {
+            //TODO: Read from configuration
             return new HipChatXmppConnectionSettings()
                        {
                            UserName = "18167_192253",
