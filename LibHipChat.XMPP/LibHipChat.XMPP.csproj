@@ -54,12 +54,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="HipChatRoom.cs" />
+    <Compile Include="Containers\HipChatXmppCallBackContainer.cs" />
     <Compile Include="HipChatXmppConnection.cs" />
     <Compile Include="HipChatXmppConnectionSettings.cs" />
     <Compile Include="HipChatXmppEntity.cs" />
     <Compile Include="Interfaces\IXMPPConnectionSettingsProvider.cs" />
     <Compile Include="Utility\XmppMessageFactory.cs" />
-    <Compile Include="XmppMessage.cs" />
+    <Compile Include="HipChatMessage.cs" />
     <Compile Include="Interfaces\IXMPPMessageProcessor.cs" />
     <Compile Include="Interfaces\IXMPPChannelResponder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -76,9 +77,7 @@
       <Name>LibHipChat</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="NewFolder1\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

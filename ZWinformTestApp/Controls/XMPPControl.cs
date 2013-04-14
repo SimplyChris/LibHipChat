@@ -7,9 +7,12 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using LibHipChat.XMPP;
+using LibHipChat.XMPP.Containers;
 using StructureMap;
 using ZWinformTestApp.Services;
+using agsXMPP;
 using agsXMPP.Xml.Dom;
+using agsXMPP.protocol.client;
 using agsXMPP.protocol.iq.roster;
 using Message = agsXMPP.protocol.client.Message;
 
@@ -28,10 +31,10 @@ namespace ZWinformTestApp.Controls
             if (LicenseManager.UsageMode != LicenseUsageMode.Designtime)
             {
                 _xmppConnection = new HipChatXMPPConnection(new XMPPConnectionSettingsProvider().GetConnectionSettings());
-                SetupEvents();                
-            }
+                _xmppRoomManager = new HipChatXMPPRoomManager(_xmppConnection, new HipChatXmppCallBackContainer(){MessageCallBack = MessageCallBack, PresenceCallBack = PresenceCallBack});
+                SetupEvents();                                                           
+            } 
             
-
         }
 
         private void bnConnect_Click(object sender, EventArgs e)
@@ -52,11 +55,11 @@ namespace ZWinformTestApp.Controls
                                                                     SetMessageText("On Auth Error Called: {0}",
                                                                                       element.ToString());
                                                                 };
-            _xmppConnection.OnRosterStart += delegate(object sender) { SetMessageText("Roster List Start"); };            
+            _xmppConnection.OnRosterStart += delegate { SetMessageText("Roster List Start"); };            
             _xmppConnection.OnRosterItem += delegate(object sender, RosterItem item) { SetMessageText("Roster Item: {0}", item.Name); };
-            _xmppConnection.OnRosterEnd += delegate(object sender) { SetMessageText("Roster List End"); };
-            _xmppConnection.OnDirectMessageReceived += delegate(object sender, XmppMessage message) { SetMessageText("Direct Message - ReplyTo: [{0}] Message: [{1}]", message.ReplyEntity.ReplyTo, message.Body); };
-            _xmppConnection.OnRoomMessageReceived += delegate(object sender, XmppMessage message){SetMessageText("Room Message - Reply To: [{0}] Display User: [{1}] Message: [{2}]", message.ReplyEntity.ReplyTo, message.ReplyEntity.FromUser ,message.Body);};
+            _xmppConnection.OnRosterEnd += delegate { SetMessageText("Roster List End"); };
+            _xmppConnection.OnDirectMessageReceived += delegate(object sender, HipChatMessage message) { SetMessageText("Direct Message - ReplyTo: [{0}] Message: [{1}]", message.ReplyEntity.ReplyTo, message.Body); };
+            _xmppConnection.OnRoomMessageReceived += delegate(object sender, HipChatMessage message){SetMessageText("Room Message - Reply To: [{0}] Display User: [{1}] Message: [{2}]", message.ReplyEntity.ReplyTo, message.ReplyEntity.FromUser ,message.Body);};
             _xmppConnection.OnMessageReceived +=
                 delegate(object sender, Message msg)
                     { SetMessageText("Message - From: {0} Body: {1}", msg.From, msg.Body); };                    
@@ -69,7 +72,7 @@ namespace ZWinformTestApp.Controls
 
         private void SetMessageText(string format, params object[] parameters)
         {
-            if (this.tbOutput.InvokeRequired)
+            if (tbOutput.InvokeRequired)
             {
                 SetTextCallback d = SetMessageText;
                 Invoke(d, format, parameters);
@@ -84,8 +87,7 @@ namespace ZWinformTestApp.Controls
         }
 
         private void bnJoinRoom_Click(object sender, EventArgs e)
-        {
-            _xmppRoomManager = new HipChatXMPPRoomManager(_xmppConnection);
+        {            
             _xmppRoomManager.JoinRoom(new HipChatRoom() { Id = tbRoomToJoin.Text, NickName = "bot user" });            
         }
 
@@ -93,6 +95,17 @@ namespace ZWinformTestApp.Controls
         {
             _xmppRoomManager = new HipChatXMPPRoomManager(_xmppConnection);
             _xmppRoomManager.LeaveRoom(new HipChatRoom() { Id = tbRoomToJoin.Text, NickName = "bot user" });            
+        }
+
+        private void MessageCallBack (object sender, Message message, object data)
+        {
+            SetMessageText("Message On Callback: {0} From: {1}", message.Body, message.From);
+        }
+        
+        private void PresenceCallBack (object sender, Presence presence, object data )
+        {
+            SetMessageText("Presence On Callback: {0} From: {1}", presence.Nickname, presence.Status);
+            
         }
     }
 }
