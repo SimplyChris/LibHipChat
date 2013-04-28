@@ -1,5 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
-<configuration>
-  <processor processor.type="EchoProcessor" room="1221" buffer.time.seconds="60"/>
-  <processor processor.type="EchoProcessor" room="111221" buffer.time.seconds="120"/>
-</configuration>

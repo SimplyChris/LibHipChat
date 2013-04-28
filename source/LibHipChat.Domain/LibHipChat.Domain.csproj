@@ -1,0 +1,134 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{7DC627B0-C332-4DA3-AA62-72828220FE8C}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>LibHipChat.Domain</RootNamespace>
+    <AssemblyName>LibHipChat.Domain</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="log4net">
+      <HintPath>..\packages\log4net.2.0.0\lib\net40-full\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.4.5.10\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="StructureMap">
+      <HintPath>..\packages\structuremap.2.6.4.1\lib\net40\StructureMap.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Web">
+      <HintPath>..\..\..\..\Windows\Microsoft.NET\assembly\GAC_32\System.Web\v4.0_4.0.0.0__b03f5f7f11d50a3a\System.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Constants\ActionKey.cs" />
+    <Compile Include="Interfaces\IHipChatModel.cs" />
+    <Compile Include="Interfaces\IJsonDeserializer.cs" />
+    <Compile Include="Interfaces\IJsonModel.cs" />
+    <Compile Include="Entities\FileUploadInformation.cs" />
+    <Compile Include="Entities\HipChatModel.cs" />
+    <Compile Include="Entities\JsonErrorModel.cs" />
+    <Compile Include="Entities\JsonRoomDetailModel.cs" />
+    <Compile Include="Entities\JsonRoomHistoryModel.cs" />
+    <Compile Include="Entities\JsonRoomsModel.cs" />
+    <Compile Include="Entities\HttpCallResponse.cs" />
+    <Compile Include="Entities\JsonUserModel.cs" />
+    <Compile Include="Entities\JsonUsersModel.cs" />
+    <Compile Include="Entities\NewUser.cs" />
+    <Compile Include="Entities\Room.cs" />
+    <Compile Include="Entities\RoomAction.cs" />
+    <Compile Include="Entities\RoomDetail.cs" />
+    <Compile Include="Entities\RoomMessage.cs" />
+    <Compile Include="Entities\RoomMessages.cs" />
+    <Compile Include="Entities\User.cs" />
+    <Compile Include="Entities\UserMessage.cs" />
+    <Compile Include="Helpers\QueryStringHelper.cs" />
+    <Compile Include="Helpers\RoomMessageTypeIdentifier.cs" />
+    <Compile Include="Helpers\UrlHelper.cs" />
+    <Compile Include="Interfaces\IMessageDispatcher.cs" />
+    <Compile Include="Interfaces\IMessageProcessor.cs" />
+    <Compile Include="Interfaces\IRoomListener.cs" />
+    <Compile Include="Services\HipChatApiExecutor.cs" />
+    <Compile Include="HipChatConnection.cs" />
+    <Compile Include="HipChatConnectionFactory.cs" />
+    <Compile Include="HipChatConnectionSettings.cs" />
+    <Compile Include="HipChatContext.cs" />
+    <Compile Include="HipChatException.cs" />
+    <Compile Include="HipChatResponse.cs" />
+    <Compile Include="HipChatResponseFormat.cs" />
+    <Compile Include="Entities\ErrorModel.cs" />
+    <Compile Include="Entities\HipChatDeleteResponse.cs" />
+    <Compile Include="Entities\HipChatStatus.cs" />
+    <Compile Include="Services\JsonModelDeserializer.cs" />
+    <Compile Include="ResultCode.cs" />
+    <Compile Include="RoomMessageType.cs" />
+    <Compile Include="Interfaces\IHipChatProxy.cs" />
+    <Compile Include="Interfaces\ILogger.cs" />
+    <Compile Include="Interfaces\IRepsonseClient.cs" />
+    <Compile Include="IoC\IocContainer.cs" />
+    <Compile Include="IoC\LibHipChatRegistry.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Interfaces\ILogConfigurator.cs" />
+    <Compile Include="Interfaces\ILogLocationProvider.cs" />
+    <Compile Include="HipChatProxy.cs" />
+    <Compile Include="Constants\MessageFormat.cs" />
+    <Compile Include="RepsonseClient.cs" />
+    <Compile Include="Services\Log4NetLogger.cs" />
+    <Compile Include="Services\LogConfigurator.cs" />
+    <Compile Include="Services\LogLocationProvider.cs" />
+    <Compile Include="Services\RoomListener.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Logging\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
