@@ -1,6 +1,6 @@
 ﻿namespace LibHipChat.XMPP
 {
-    public class Message
+    public class HipChatMessage
     {
         public MessageType MessageType { get; set; }
         public string Body { get; set; }

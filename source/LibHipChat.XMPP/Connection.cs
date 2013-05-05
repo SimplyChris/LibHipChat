@@ -15,8 +15,8 @@ namespace LibHipChat.XMPP
 {
     public delegate void ConnectEventHandler(object sender, EventArgs e);
     public delegate void MessageReceivedEventHandler(object sender, agsXMPP.protocol.client.Message message);
-    public delegate void DirectMessageReceivedEventHandler(object sender, Message message);
-    public delegate void RoomMessageReceivedEventHandler(object sender, Message message);
+    public delegate void DirectMessageReceivedEventHandler(object sender, HipChatMessage hipChatMessage);
+    public delegate void RoomMessageReceivedEventHandler(object sender, HipChatMessage hipChatMessage);
 
     public class Connection : XmppClientConnection
     {
@@ -116,16 +116,16 @@ namespace LibHipChat.XMPP
         }
 
 
-        protected virtual void InvokeRoomMessageReceived(Message message)
+        protected virtual void InvokeRoomMessageReceived(HipChatMessage hipChatMessage)
         {
             DirectMessageReceivedEventHandler handler = OnRoomMessageReceived;
-            if (handler != null) handler(this, message);
+            if (handler != null) handler(this, hipChatMessage);
         }
 
-        protected virtual void InvokeDirectMessageReceived(Message message)
+        protected virtual void InvokeDirectMessageReceived(HipChatMessage hipChatMessage)
         {
             DirectMessageReceivedEventHandler handler = OnDirectMessageReceived;
-            if (handler != null) handler(this, message);
+            if (handler != null) handler(this, hipChatMessage);
         }
     }
 }

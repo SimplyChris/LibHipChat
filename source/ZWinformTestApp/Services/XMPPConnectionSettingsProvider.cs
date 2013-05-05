@@ -3,7 +3,7 @@ using LibHipChat.XMPP.Interfaces;
 
 namespace ZWinformTestApp.Services
 {
-    public class XMPPConnectionSettingsProvider : IXMPPConnectionSettingsProvider 
+    public class XMPPConnectionSettingsProvider : IConnectionSettingsProvider 
     {
         public HipChatXmppConnectionSettings GetConnectionSettings()
         {

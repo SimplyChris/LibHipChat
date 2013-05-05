@@ -20,8 +20,8 @@ namespace ZWinformTestApp.Controls
 {     
     public partial class XMPPControl : UserControl
     {
-        private HipChatXMPPConnection _xmppConnection;
-        private HipChatXMPPRoomManager _xmppRoomManager;
+        private Connection _xmppConnection;
+        private RoomManager _xmppRoomManager;
 
         private delegate void SetTextCallback(string text, params object [] parameters);
         public XMPPControl()
@@ -30,8 +30,8 @@ namespace ZWinformTestApp.Controls
 
             if (LicenseManager.UsageMode != LicenseUsageMode.Designtime)
             {
-                _xmppConnection = new HipChatXMPPConnection(new XMPPConnectionSettingsProvider().GetConnectionSettings());
-                _xmppRoomManager = new HipChatXMPPRoomManager(_xmppConnection, new HipChatXmppCallBackContainer(){MessageCallBack = MessageCallBack, PresenceCallBack = PresenceCallBack});
+                _xmppConnection = new Connection(new XMPPConnectionSettingsProvider().GetConnectionSettings());
+                _xmppRoomManager = new RoomManager(_xmppConnection, new CallBackContainer(){MessageCallBack = MessageCallBack, PresenceCallBack = PresenceCallBack});
                 SetupEvents();                                                           
             } 
             
@@ -58,7 +58,7 @@ namespace ZWinformTestApp.Controls
             _xmppConnection.OnRosterStart += delegate { SetMessageText("Roster List Start"); };            
             _xmppConnection.OnRosterItem += delegate(object sender, RosterItem item) { SetMessageText("Roster Item: {0}", item.Name); };
             _xmppConnection.OnRosterEnd += delegate { SetMessageText("Roster List End"); };
-            _xmppConnection.OnDirectMessageReceived += delegate(object sender, HipChatMessage message) { SetMessageText("Direct Message - ReplyTo: [{0}] Message: [{1}]", message.ReplyEntity.ReplyTo, message.Body); };
+            _xmppConnection.OnDirectMessageReceived += delegate(object sender, LibHipChat.XMPP.HipChatMessage message) { SetMessageText("Direct Message - ReplyTo: [{0}] Message: [{1}]", message.ReplyEntity.ReplyTo, message.Body); };
             _xmppConnection.OnRoomMessageReceived += delegate(object sender, HipChatMessage message){SetMessageText("Room Message - Reply To: [{0}] Display User: [{1}] Message: [{2}]", message.ReplyEntity.ReplyTo, message.ReplyEntity.FromUser ,message.Body);};
             _xmppConnection.OnMessageReceived +=
                 delegate(object sender, Message msg)
@@ -88,13 +88,13 @@ namespace ZWinformTestApp.Controls
 
         private void bnJoinRoom_Click(object sender, EventArgs e)
         {            
-            _xmppRoomManager.JoinRoom(new HipChatRoom() { Id = tbRoomToJoin.Text, NickName = "bot user" });            
+            _xmppRoomManager.JoinRoom(new Room() { Id = tbRoomToJoin.Text, NickName = "bot user" });            
         }
 
         private void bnLeaveRoom_Click(object sender, EventArgs e)
         {
-            _xmppRoomManager = new HipChatXMPPRoomManager(_xmppConnection);
-            _xmppRoomManager.LeaveRoom(new HipChatRoom() { Id = tbRoomToJoin.Text, NickName = "bot user" });            
+            _xmppRoomManager = new RoomManager(_xmppConnection);
+            _xmppRoomManager.LeaveRoom(new Room() { Id = tbRoomToJoin.Text, NickName = "bot user" });            
         }
 
         private void MessageCallBack (object sender, Message message, object data)

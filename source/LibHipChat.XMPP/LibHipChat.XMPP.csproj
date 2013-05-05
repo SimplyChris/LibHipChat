@@ -60,7 +60,7 @@
     <Compile Include="Entity.cs" />
     <Compile Include="Interfaces\IConnectionSettingsProvider.cs" />
     <Compile Include="Utility\MessageFactory.cs" />
-    <Compile Include="Message.cs" />
+    <Compile Include="HipChatMessage.cs" />
     <Compile Include="Interfaces\IMessageProcessor.cs" />
     <Compile Include="Interfaces\IChannelResponder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

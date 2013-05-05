@@ -5,9 +5,9 @@ namespace LibHipChat.XMPP.Utility
 {
     public static class MessageFactory
     {
-        public static Message Create (agsXMPP.protocol.client.Message message)
+        public static HipChatMessage Create (agsXMPP.protocol.client.Message message)
         {
-            var xmppMessage = new Message {ReplyEntity = new Entity()};
+            var xmppMessage = new HipChatMessage {ReplyEntity = new Entity()};
 
             xmppMessage.ReplyEntity.ReplyTo = ExtractReplyTo(message);
 
@@ -26,13 +26,13 @@ namespace LibHipChat.XMPP.Utility
             return xmppMessage;
         }
         
-        private static string ExtractReplyTo (agsXMPP.protocol.client.Message message)
+        private static string ExtractReplyTo (Message message)
         {
             var messageParts = message.From.ToString().Split(new[] { '/' });
             return messageParts[0];          
         }
 
-        private static string ExtractFromUser(agsXMPP.protocol.client.Message message)
+        private static string ExtractFromUser(Message message)
         {
             var messageParts = message.From.ToString().Split(new[] { '/' });
             return messageParts[1];
