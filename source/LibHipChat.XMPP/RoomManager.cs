@@ -6,32 +6,32 @@ using agsXMPP.protocol.x.muc;
 
 namespace LibHipChat.XMPP
 {
-    public class HipChatXMPPRoomManager
+    public class RoomManager
     {
-        private ILogger<HipChatXMPPRoomManager> _logger; 
+        private ILogger<RoomManager> _logger; 
         private MucManager _mucManager;
-        private HipChatXMPPConnection _hipChatXmppConnection;        
+        private Connection _connection;        
         private MessageGrabber _messageGrabber;
         private PresenceGrabber _presenceGrabber;
-        private HipChatXmppCallBackContainer _callBackContainer;
+        private CallBackContainer _callBackContainer;
         private readonly string _roomDomainSuffix = "@conf.hipchat.com";
 
-        public HipChatXMPPRoomManager(HipChatXMPPConnection connection)
+        public RoomManager(Connection connection)
         {                        
-            _logger = ObjectFactory.GetInstance<ILogger<HipChatXMPPRoomManager>>();            
-            _hipChatXmppConnection = connection;
-            _mucManager  = new MucManager (_hipChatXmppConnection);
+            _logger = ObjectFactory.GetInstance<ILogger<RoomManager>>();            
+            _connection = connection;
+            _mucManager  = new MucManager (_connection);
             _messageGrabber = new MessageGrabber(connection);
             _presenceGrabber = new PresenceGrabber(connection);
-            _callBackContainer = new HipChatXmppCallBackContainer();
+            _callBackContainer = new CallBackContainer();
         }
 
-        public HipChatXMPPRoomManager (HipChatXMPPConnection connection, HipChatXmppCallBackContainer callBackContainer) : this(connection)
+        public RoomManager (Connection connection, CallBackContainer callBackContainer) : this(connection)
         {
             _callBackContainer = callBackContainer;
         }
 
-        public void JoinRoom(HipChatRoom room)
+        public void JoinRoom(Room room)
         {
             _logger.DebugFormat("   JoinRoom: Id: [{0}] Nickname: [{1}]", room.Id, room.NickName);
             
@@ -43,7 +43,7 @@ namespace LibHipChat.XMPP
             AddRoomToGrabbers(jid, null); 
         }
 
-        public void LeaveRoom(HipChatRoom room)
+        public void LeaveRoom(Room room)
         {
             _logger.DebugFormat("   LeaveRoom: Id: [{0}] Nickname: [{1}]", room.Id, room.NickName);
             var jid = new Jid(room.Id);            

@@ -23,7 +23,7 @@ namespace LibHipChat.XMPP.Tests
             _xmppConnection.OnMessageReceived += XmppConnectionOnOnMessageReceived;
         }
 
-        private void XmppConnectionOnOnMessageReceived(object sender, Message msg)
+        private void XmppConnectionOnOnMessageReceived(object sender, agsXMPP.protocol.client.Message msg)
         {
             Console.WriteLine("OnMessessage Called -- From {0} Message: {1}", msg.From, msg.Body);
             _logger.DebugFormat("Message Received: {0} {1}", msg.From, msg.Body);

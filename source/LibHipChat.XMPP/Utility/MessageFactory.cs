@@ -3,36 +3,36 @@ using agsXMPP.protocol.client;
 
 namespace LibHipChat.XMPP.Utility
 {
-    public static class XmppMessageFactory
+    public static class MessageFactory
     {
-        public static HipChatMessage Create (Message message)
+        public static Message Create (agsXMPP.protocol.client.Message message)
         {
-            var xmppMessage = new HipChatMessage {ReplyEntity = new HipChatXmppEntity()};
+            var xmppMessage = new Message {ReplyEntity = new Entity()};
 
             xmppMessage.ReplyEntity.ReplyTo = ExtractReplyTo(message);
 
             if (message.From.ToString().Contains("conf.hipchat.com"))
             {
-                xmppMessage.MessageType = XmppMessageType.RoomMessage;
+                xmppMessage.MessageType = MessageType.RoomMessage;
                 xmppMessage.ReplyEntity.FromUser = ExtractFromUser(message);
             }
             
             else if (message.From.ToString().Contains("chat.hipchat.com"))
-                xmppMessage.MessageType = XmppMessageType.DirectMessage;
+                xmppMessage.MessageType = MessageType.DirectMessage;
             else
-                xmppMessage.MessageType = XmppMessageType.UnKnown;
+                xmppMessage.MessageType = MessageType.UnKnown;
 
             xmppMessage.Body = message.Body;            
             return xmppMessage;
         }
         
-        private static string ExtractReplyTo (Message message)
+        private static string ExtractReplyTo (agsXMPP.protocol.client.Message message)
         {
             var messageParts = message.From.ToString().Split(new[] { '/' });
             return messageParts[0];          
         }
 
-        private static string ExtractFromUser(Message message)
+        private static string ExtractFromUser(agsXMPP.protocol.client.Message message)
         {
             var messageParts = message.From.ToString().Split(new[] { '/' });
             return messageParts[1];

@@ -32,17 +32,17 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="agsXMPP">
-      <HintPath>..\packages\agsXMPP.1.1.1.0\lib\agsXMPP.dll</HintPath>
+      <HintPath>..\..\packages\agsXMPP.1.1.1.0\lib\agsXMPP.dll</HintPath>
     </Reference>
     <Reference Include="log4net">
-      <HintPath>..\packages\log4net.2.0.0\lib\net40-full\log4net.dll</HintPath>
+      <HintPath>..\..\packages\log4net.2.0.0\lib\net40-full\log4net.dll</HintPath>
     </Reference>
     <Reference Include="nunit.framework, Version=2.5.7.10213, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\LibHipChat.Domain.Tests\bin\Debug\nunit.framework.dll</HintPath>
     </Reference>
     <Reference Include="StructureMap">
-      <HintPath>..\packages\structuremap.2.6.4.1\lib\net40\StructureMap.dll</HintPath>
+      <HintPath>..\..\packages\structuremap.2.6.4.1\lib\net40\StructureMap.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -53,22 +53,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="HipChatRoom.cs" />
-    <Compile Include="Containers\HipChatXmppCallBackContainer.cs" />
-    <Compile Include="HipChatXmppConnection.cs" />
+    <Compile Include="Room.cs" />
+    <Compile Include="Containers\CallBackContainer.cs" />
+    <Compile Include="Connection.cs" />
     <Compile Include="HipChatXmppConnectionSettings.cs" />
-    <Compile Include="HipChatXmppEntity.cs" />
-    <Compile Include="Interfaces\IXMPPConnectionSettingsProvider.cs" />
-    <Compile Include="Utility\XmppMessageFactory.cs" />
-    <Compile Include="HipChatMessage.cs" />
-    <Compile Include="Interfaces\IXMPPMessageProcessor.cs" />
-    <Compile Include="Interfaces\IXMPPChannelResponder.cs" />
+    <Compile Include="Entity.cs" />
+    <Compile Include="Interfaces\IConnectionSettingsProvider.cs" />
+    <Compile Include="Utility\MessageFactory.cs" />
+    <Compile Include="Message.cs" />
+    <Compile Include="Interfaces\IMessageProcessor.cs" />
+    <Compile Include="Interfaces\IChannelResponder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="XMPPMessageContext.cs" />
-    <Compile Include="HipChatXMPPRoomManager.cs" />
-    <Compile Include="XmppMessageType.cs" />
+    <Compile Include="MessageContext.cs" />
+    <Compile Include="RoomManager.cs" />
+    <Compile Include="MessageType.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Diagrams\XmppDomain.cd" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

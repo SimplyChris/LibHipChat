@@ -1,6 +1,6 @@
 ﻿namespace LibHipChat.XMPP
 {
-    public class HipChatXmppEntity
+    public class Entity
     {
         public string ReplyTo { get; set; }
         public string FromUser { get; set; }

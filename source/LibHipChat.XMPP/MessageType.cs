@@ -1,6 +1,6 @@
 ﻿namespace LibHipChat.XMPP
 {
-    public enum XmppMessageType
+    public enum MessageType
     {
         RoomMessage,
         DirectMessage,

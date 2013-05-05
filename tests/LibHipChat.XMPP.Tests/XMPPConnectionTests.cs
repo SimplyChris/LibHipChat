@@ -14,7 +14,7 @@ namespace LibHipChat.XMPP.Tests
     [TestFixture]
     public partial class XMPPConnectionTests
     {
-        private HipChatXMPPConnection _xmppConnection;
+        private Connection _xmppConnection;
         private bool LogonEventWasCalled = false;
         private readonly string testRoomId = "18167_zencode";
         private ILogger<XMPPConnectionTests> _logger;
@@ -26,7 +26,7 @@ namespace LibHipChat.XMPP.Tests
             IocContainer.Configure();
             _logger = IocContainer.GetInstance<ILogger<XMPPConnectionTests>>();
             
-            _xmppConnection = new HipChatXMPPConnection(new HipChatXmppConnectionSettings() { UserName = "18167_192253", Password = "botuser123", Server = "chat.hipchat.com" });            
+            _xmppConnection = new Connection(new HipChatXmppConnectionSettings() { UserName = "18167_192253", Password = "botuser123", Server = "chat.hipchat.com" });            
             SetupEvents();
             
         }

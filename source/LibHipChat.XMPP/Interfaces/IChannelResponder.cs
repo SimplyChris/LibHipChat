@@ -1,6 +1,6 @@
 ﻿namespace LibHipChat.XMPP.Interfaces
 {
-    public interface IXMPPChannelResponder
+    public interface IChannelResponder
     {
         void Respond(string message);
     }

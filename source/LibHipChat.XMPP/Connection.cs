@@ -14,34 +14,34 @@ using agsXMPP.protocol.x.muc;
 namespace LibHipChat.XMPP
 {
     public delegate void ConnectEventHandler(object sender, EventArgs e);
-    public delegate void MessageReceivedEventHandler(object sender, Message message);
-    public delegate void DirectMessageReceivedEventHandler(object sender, HipChatMessage message);
-    public delegate void RoomMessageReceivedEventHandler(object sender, HipChatMessage message);
+    public delegate void MessageReceivedEventHandler(object sender, agsXMPP.protocol.client.Message message);
+    public delegate void DirectMessageReceivedEventHandler(object sender, Message message);
+    public delegate void RoomMessageReceivedEventHandler(object sender, Message message);
 
-    public class HipChatXMPPConnection : XmppClientConnection
+    public class Connection : XmppClientConnection
     {
         public event DirectMessageReceivedEventHandler OnDirectMessageReceived;
         public event DirectMessageReceivedEventHandler OnRoomMessageReceived;
 
         public bool Connected { get; set; }
         private HipChatXmppConnectionSettings ConnectionSettings { get; set; }
-        private ILogger<HipChatXMPPConnection> _logger;        
+        private ILogger<Connection> _logger;        
 
-        public IList<HipChatRoom> RoomList { get { return _roomList; } }
+        public IList<Room> RoomList { get { return _roomList; } }
 
-        private IList<HipChatRoom> _roomList; 
+        private IList<Room> _roomList; 
 
         public event MessageReceivedEventHandler OnMessageReceived;
 
-        public HipChatXMPPConnection (HipChatXmppConnectionSettings settings) : base (settings.Server)
+        public Connection (HipChatXmppConnectionSettings settings) : base (settings.Server)
         {
-            _logger = IocContainer.GetInstance<ILogger<HipChatXMPPConnection>>();
+            _logger = IocContainer.GetInstance<ILogger<Connection>>();
             ConnectionSettings = settings;            
             UseSSL = true;
             UseStartTLS = true;
             AutoRoster = true;
             OnError += ReportError;            
-            _roomList = new List<HipChatRoom>();               
+            _roomList = new List<Room>();               
         }
 
         public void OpenConnection ()
@@ -53,24 +53,24 @@ namespace LibHipChat.XMPP
             base.OnMessage += ClientConnectionOnOnMessage;
         }
 
-        private void ClientConnectionOnOnMessage(object sender, Message msg)
+        private void ClientConnectionOnOnMessage(object sender, agsXMPP.protocol.client.Message msg)
         {
             if (String.IsNullOrWhiteSpace(msg.Body))
                 return;
 
-            var xmppMessage = XmppMessageFactory.Create(msg);
+            var xmppMessage = MessageFactory.Create(msg);
 
             switch (xmppMessage.MessageType)
             {
-                case XmppMessageType.DirectMessage:
+                case MessageType.DirectMessage:
                     InvokeDirectMessageReceived(xmppMessage);
                     break;
 
-                case XmppMessageType.RoomMessage:
+                case MessageType.RoomMessage:
                     InvokeRoomMessageReceived(xmppMessage);
                     break;
 
-                case XmppMessageType.UnKnown:
+                case MessageType.UnKnown:
                     throw new NotImplementedException();
                     break;
 
@@ -84,7 +84,7 @@ namespace LibHipChat.XMPP
         {
             _logger.DebugFormat("   OnLoginEventHandler Called");            
             
-            foreach (HipChatRoom hipChatRoom in RoomList)
+            foreach (Room hipChatRoom in RoomList)
             {
             }
 
@@ -116,13 +116,13 @@ namespace LibHipChat.XMPP
         }
 
 
-        protected virtual void InvokeRoomMessageReceived(HipChatMessage message)
+        protected virtual void InvokeRoomMessageReceived(Message message)
         {
             DirectMessageReceivedEventHandler handler = OnRoomMessageReceived;
             if (handler != null) handler(this, message);
         }
 
-        protected virtual void InvokeDirectMessageReceived(HipChatMessage message)
+        protected virtual void InvokeDirectMessageReceived(Message message)
         {
             DirectMessageReceivedEventHandler handler = OnDirectMessageReceived;
             if (handler != null) handler(this, message);

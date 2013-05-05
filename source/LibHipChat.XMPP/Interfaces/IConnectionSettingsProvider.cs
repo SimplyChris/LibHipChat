@@ -1,6 +1,6 @@
 ﻿namespace LibHipChat.XMPP.Interfaces
 {
-    public interface IXMPPConnectionSettingsProvider
+    public interface IConnectionSettingsProvider
     {
         HipChatXmppConnectionSettings GetConnectionSettings();
     }
